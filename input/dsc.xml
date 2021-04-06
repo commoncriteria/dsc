@@ -686,6 +686,128 @@ users of the same system.
 			<audit-event/>		
 		</f-component>
 		
+		<f-component cc-id="fcs_ckm_ext.5" name="Cryptographic Key Derivation">
+			<f-element id="fcs-ckm-ext-5e1">
+				<title>The TSF shall generate cryptographic keys with 
+					<selectables>
+						<selectable>identifier as chosen from Key Derivation Functions table</selectable>
+					</selectables> using [<h:i>input parameters as chosen from Key
+					Derivation Functions table for corresponding key types</h:i>], key derivation algorithm 
+					<assignable>key derivation algorithms as chosen from Key Derivation Functions table for corresponding key
+					types</assignable>, and specified cryptographic key sizes [<h:i>key sizes as chosen from Key Derivation Functions
+					table for corresponding key types</h:i>] that meet the following: 
+					[<h:i>standards as chosen from Key Derivation Functions table for corresponding key types</h:i>].
+					<h:b><ctr ctr-type='Table' id="fcs-ckm-ext-sels">: Key Derivation Functions</ctr></h:b><h:br/>	
+					<h:table>
+						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Input Parameters</h:td>
+						<h:td>Key Derivation Algorithm</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
+
+						<h:tr><h:td>KeyDrv1</h:td>
+						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
+						<h:td>KDF in Counter Mode using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
+							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>NIST SP 800-108 (Section 5.1) (KDF in Counter Mode)<h:p/>
+							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+		
+						<h:tr><h:td>KeyDrv2</h:td>
+						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
+						<h:td>KDF in Feedback Mode using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
+							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>NIST SP 800-108 (Section 5.2) (KDF in Feedback Mode)<h:p/>
+							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+		
+						<h:tr><h:td>KeyDrv3</h:td>
+						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
+						<h:td>KDF in Double Pipeline Iteration Mode using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
+							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>NIST SP 800-108 (Section 5.3) (KDF in n Double Pipeline Iteration Mode)<h:p/>
+							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+
+						<h:tr><h:td>KeyDrv4</h:td>
+						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td>Intermediary keys</h:td>
+						<h:td>[selection: exclusive OR (XOR); SHA256; SHA-512]</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>[selection: ISO-HASH; FIPSSHA]</h:td></h:tr>
+		
+						<h:tr><h:td>KeyDrv5</h:td>
+						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td>Concatenated keys</h:td>
+						<h:td>KDF in [selection: Counter Mode, Feedback Mode, Double-Pipeline Iteration Mode] using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
+							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>NIST SP 800-108 [selection: (Section 5.1) (KDF in Counter Mode);<h:p/>
+							(Section 5.2) (KDF in Feedback Mode);<h:p/>
+							(Section 5.3) (KDF in Double-Pipeline Iteration Mode)]<h:p/>
+							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+
+						<h:tr><h:td>KeyDrv6</h:td>
+						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td>Two keys</h:td>
+						<h:td>[selection: AESCCM, AES-GCM, AES-CBC, AESKWP, AES-KW, CAM-CBC, CAMCCM, CAM-GCM] from FCS_COP.1/SKC Symmetric Key table</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>[selection: see List of Standards in FCS_COP.1/SKC Symmetric Key table]</h:td></h:tr>
+
+						<h:tr><h:td>KeyDrv7</h:td>
+						<h:td>[selection: symmetric key, secret IV, seed]</h:td>
+						<h:td>Shared secret, salt, output length, fixed information</h:td>
+						<h:td>[selection: hash function from FCS_COP.1/Hash, keyed hash from FCS_COP.1/HMAC]</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>(NIST-KDRV) sec 4<h:p/>[selection: see List of Standards in FCS_COP.1/Hash and FCS_COP.1/HMAC]</h:td></h:tr>
+
+						<h:tr><h:td>KeyDrv8</h:td>
+						<h:td>[selection: symmetric key, secret IV, seed]</h:td>
+						<h:td>Shared secret, salt, IV, output length, fixed information</h:td>
+						<h:td>[selection: keyed hash from FCS_COP.1/HMAC]</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>(NIST-KDRV) sec 5<h:p/>[selection: see List of Standards in FCS_COP.1/HMAC]</h:td></h:tr>
+					</h:table>
+				</title>
+				<note role="application">
+					Note that Camellia algorithms do not support 192-bit key sizes.<h:p/>
+					The interface referenced in the requirement could take different forms, the most likely of which is
+					an application programming interface to an OS kernel. There may be various levels of abstraction.
+					For Authorization Factor Submasks, the key size to be used in the HMAC falls into a range between
+					L1 and L2 defined in ISO/IEC 10118 for the appropriate hash function (for example for SHA-256
+					L1 = 512, L2 =256) where L2 ≤ k ≤ L1.<h:p/>
+					General note: in order to use a NIST SP 800-108 conformant method of key derivation, the TOE
+					is permitted to implement this with keys as derived as indicated in Key Derivation Functions table
+					above, and with the algorithms as indicated in the same table.<h:p/>
+					NIST SP 800-131A Rev 1 allows the use of SHA-1 in these use cases.<h:p/>
+					KeyDrv5, KeyDrv6, and the XOR option in KeyDrv4 will create an “inverted key hierarchy” in
+					which the TSF will combine two or more keys to create a third key. These same KDFs may also
+					use a submask key as input, which could be an authorization factor or derived from a PBKDF. In
+					these cases the ST author must explicitly declare this option and should present a reasonable
+					argument that the entropy of the inputs to the KDFs will result in full entropy of the expected
+					output.<h:p/>
+					If keys are combined, the ST author shall describe which method of combination is used in order
+					to justify that the effective entropy of each factor is preserved.<h:p/>
+					The documentation of the product’s encryption key management should be detailed enough that,
+					after reading, the evaluator will thoroughly understand the product’s key management and how it
+					meets the requirements to ensure the keys are adequately protected. This documentation should
+					include an essay and diagrams. This documentation is not required to be part of the TSS; it can be
+					submitted as a separate document and marked as developer proprietary.<h:p/>
+					SP 800-56C specifies a two-step key derivation procedure that employs an extraction-thenexpansion technique for deriving keying material from a shared secret generated during a key
+					establishment scheme. The Randomness Extraction step as described in Section 5 of SP 800-56C
+					is followed by Key Expansion using the key derivation functions defined in SP 800-108.<h:p/>
+					This requirement must be claimed by the TOE if at least one of FCS_CKM.1/KEK,
+					FCS_CKM.1/SK, or FCS_COP.1/KeyEnc chooses a selection related to key derivation.<h:p/>
+					If at least one of KeyDrv4, KeyDrv5, or KeyDrv6 is selected AND password-based key derivation
+					is used to create at least one of the inputs, the selection-based SFR FCS_COP.1/PBKDF must also
+					be claimed.<h:p/>
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+		
 		<f-component cc-id="fcs_cop.1" iteration="Hash" name="Cryptographic Operation (Hashing)">
 <!--			<exportable id="inf-dsc-cop-hash"/>  -->
 			<f-element id="fcs-cop-1e1-hash">
