@@ -499,7 +499,7 @@ users of the same system.
 		<f-component cc-id="fcs_ckm.1" iteration="AK" name="Cryptographic Key Generation (Asymmetric Keys)">
 <!--			<exportable id="inf-dsc-fcs-ckm-ak"/>  -->
 			<f-element id="fcs-ckm-1e1-ak">
-				<title>The TSF shall generate asymmetric cryptographic keys
+				<title>The TSF shall generate <h:b>asymmetric</h:b> cryptographic keys
 					<!-- [selection: identifier from Supported Methods for Asymmetric Key Generation table] --> 
 					<selectables>
 						<selectable>AK1</selectable>
@@ -511,8 +511,8 @@ users of the same system.
 					and specified cryptographic key sizes [<h:i>key sizes as chosen from Supported Methods for
 					Asymmetric Key Generation table for corresponding key types</h:i>] that meet the following: 
 					[<h:i>standards	as chosen from Supported Methods for Asymmetric Key Generation table for 
-					corresponding key types</h:i>].
-					<h:b><ctr ctr-type='Table' id="fcs-ckm-1-sk-sels">: Supported Methods for Asymmetric Key Generation</ctr></h:b><h:br/>	
+					corresponding key types</h:i>].<h:p/>
+					<h:b><ctr ctr-type='Table' id="fcs-ckm-1-ak-sels">: Supported Methods for Asymmetric Key Generation</ctr></h:b><h:br/>	
 					<h:table>
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
@@ -569,7 +569,74 @@ users of the same system.
 			</f-element>
 		</f-component>
 	  
-	  
+		<f-component cc-id="fcs_ckm.1" iteration="SK" name="Cryptographic Key Generation (Symmetric Encryption Key)">
+<!--			<exportablle id="inf-dsc-fcs-cop-sk"> -->
+			<f-element id="fcs-ckm-1e1-sk">
+				<title>The TSF shall generate <h:b>symmetric</h:b> cryptographic keys 
+				<!-- [selection: identifier from Supported Methods for Symmetric Encryption Key Generation table] -->
+					<selectables>
+						<selectable>RSK</selectable>
+						<selectable>DSK</selectable>
+						<selectable>PBK</selectable>
+					</selectables> in accordance with a specified cryptographic key generation algorithm 
+					[<h:i>key type from Supported Methods for Symmetric Encryption Key Generation table</h:i>]
+					and specified cryptographic key sizes [<h:i>key sizes from Supported Methods for
+					Symmetric Encryption Key Generation table</h:i>] that meet the following: [<h:i>list of
+					standards from Supported Methods for Symmetric Encryption Key Generation table</h:i>].<h:p/>
+					<h:b><ctr ctr-type='Table' id="fcs-ckm-1-sk-sels">: Supported Methods for Symmetric Key Generation</ctr></h:b><h:br/>	
+					<h:table>
+						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td>
+							<h:td>Cryptographic Key Generation Algorithm</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
+
+						<h:tr><h:td>RSK</h:td>
+						<h:td>[selection:symmetric key,submask,authorization value]</h:td>
+						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1</h:td>
+						<h:td>[selection: 128, 192, 256, 512] bits]</h:td>
+						<h:td>NIST SP 800-133 (Section 7.1) with ISO 18031 as an approved RBG in addition
+							to those in NIST SP 800-133 (Section 5).</h:td></h:tr>
+							
+						<h:tr><h:td>DSK [selection: identifier from Table 16: Key Derivation Functions]</h:td>
+						<h:td>[selection: Key Type from Table 16: Key Derivation Functions]</h:td>
+						<h:td>Derived from a Key Derivation Function as specified in FCS_CKM_EXT.5 
+							[selection: Key Derivation Algorithm from Table 16: Key Derivation Functions]</h:td>
+						<h:td>[selection: key sizes from Table 16: Key Derivation Functions]</h:td>
+						<h:td>[selection: List of Standards from Table 16: Key Derivation Functions]</h:td></h:tr>
+						
+						<h:tr><h:td>PBK</h:td>
+						<h:td>[selection: submask, authentication token, authorization value]</h:td>
+						<h:td>Derived from a Password Based Key Derivation Function as specified in FCS_COP.1/PBKDF</h:td>
+						<h:td>[selection: key sizes as specified in FCS_COP.1/PBKDF]</h:td>
+						<h:td>[selection: standards as specified in FCS_COP.1/PBKDF]</h:td></h:tr>
+					</h:table>
+				</title>
+				<note role="application">
+					The intent of this requirement is to ensure that attackers cannot recover SKs with less than a full
+					exhaust of the key space. This requirement explains SK generation regardless of how the DSC uses
+					it or when it generates it. The encryption of user data that is not keying material, authentication
+					tokens, or authorization values is outside the scope of this cPP. This cPP assumes that the DSC
+					lacks the required resources to perform bulk encryption/decryption services at a suitable rate for
+					users. The host may use the SK for encrypting user data outside the boundaries of the DSC. On
+					the other hand, the DSC may use the SK on behalf of the user to perform keyed hashes. In this
+					case, all the requirements for generating, controlling access and use, and destroying the key while
+					under the protection of the DSC apply.<h:p/>
+					The selection of key size 512 bits is for the case of XTS-AES using AES-256. In the case of XTSAES
+					for both AES-128 and AES-256, the developer is expected to ensure that the full key is
+					generated using direct generation from the RBG as in NIST SP 800-133 section.<h:p/>
+					The ST author selects at least one algorithm from the RSK row if the ST supports creating keys
+					directly from the output of the RBG without further conditioning, at least one algorithm from the
+					DSK row should be selected if the ST supports key derivation functions which are usually seeded
+					from RBG and then further conditioned to the appropriate key size, and at least one algorithm
+					from the PBK row should be selected if the ST supports keys derived from passwords.<h:p/>
+					If DSK is selected, the selection-based SFR FCS_CKM_EXT.5 must be claimed by the TOE.<h:p/>
+					If PBK is selected, the selection-based SFR FCS_COP.1/PBKDF must be claimed by the TOE.<h:p/>
+					This requirement must be claimed by the TOE if at least one of FCS_CKM.1 or FCS_CKM.1/KEK
+					chooses a selection related to generation of symmetric keys.<h:p/>
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
 	  
 		<!-- FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)  -->
 		<f-component cc-id="fcs_ckm.1" iteration="KEK" name="Cryptographic Key Generation (Key Encryption Key)">
