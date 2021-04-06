@@ -570,7 +570,7 @@ users of the same system.
 		</f-component>
 	  
 		<f-component cc-id="fcs_ckm.1" iteration="SK" name="Cryptographic Key Generation (Symmetric Encryption Key)">
-<!--			<exportablle id="inf-dsc-fcs-cop-sk"> -->
+<!--			<exportable id="inf-dsc-fcs-cop-sk"/> -->
 			<f-element id="fcs-ckm-1e1-sk">
 				<title>The TSF shall generate <h:b>symmetric</h:b> cryptographic keys 
 				<!-- [selection: identifier from Supported Methods for Symmetric Encryption Key Generation table] -->
@@ -589,24 +589,41 @@ users of the same system.
 							<h:td>Cryptographic Key Generation Algorithm</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
 						<h:tr><h:td>RSK</h:td>
-						<h:td>[selection:symmetric key,submask,authorization value]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>submask</selectable>
+							<selectable>authorization value</selectable></selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1</h:td>
-						<h:td>[selection: 128, 192, 256, 512] bits]</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							<selectable>512</selectable></selectables> bits</h:td>
 						<h:td>NIST SP 800-133 (Section 7.1) with ISO 18031 as an approved RBG in addition
 							to those in NIST SP 800-133 (Section 5).</h:td></h:tr>
 							
-						<h:tr><h:td>DSK [selection: identifier from Table 16: Key Derivation Functions]</h:td>
-						<h:td>[selection: Key Type from Table 16: Key Derivation Functions]</h:td>
+						<h:tr><h:td>DSK <selectables> 
+							<selectable>identifier from Table 16: Key Derivation Functions</selectable></selectables></h:td>
+						<h:td><selectables>
+							<selectable>Key Type from Table 16: Key Derivation Functions</selectable></selectables></h:td>
 						<h:td>Derived from a Key Derivation Function as specified in FCS_CKM_EXT.5 
-							[selection: Key Derivation Algorithm from Table 16: Key Derivation Functions]</h:td>
-						<h:td>[selection: key sizes from Table 16: Key Derivation Functions]</h:td>
-						<h:td>[selection: List of Standards from Table 16: Key Derivation Functions]</h:td></h:tr>
+							<selectables>
+								<selectable>Key Derivation Algorithm from Table 16: Key Derivation Function</selectable></selectables></h:td>
+						<h:td><selectables>
+							<selectable>key sizes from Table 16: Key Derivation Functions</selectable></selectables></h:td>
+						<h:td><selectables>
+							<selectable>List of Standards from Table 16: Key Derivation Functions</selectable></selectables></h:td></h:tr>
 						
 						<h:tr><h:td>PBK</h:td>
-						<h:td>[selection: submask, authentication token, authorization value]</h:td>
+						<h:td><selectables>
+							<selectable>submask</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable></selectables></h:td>
 						<h:td>Derived from a Password Based Key Derivation Function as specified in FCS_COP.1/PBKDF</h:td>
-						<h:td>[selection: key sizes as specified in FCS_COP.1/PBKDF]</h:td>
-						<h:td>[selection: standards as specified in FCS_COP.1/PBKDF]</h:td></h:tr>
+						<h:td><selectables>
+							<selectable>key sizes as specified in FCS_COP.1/PBKDF</selectable></selectables></h:td>
+						<h:td><selectables>
+							<selectable>standards as specified in FCS_COP.1/PBKDF</selectable></selectables></h:td></h:tr>
 					</h:table>
 				</title>
 				<note role="application">
