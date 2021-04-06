@@ -494,10 +494,86 @@ users of the same system.
   <sec:Security_Requirements>
     <sec:SFRs title="Security Functional Requirements">
 	  
-		<section title="Cryptographic Support (FCS)" id="fcs">
+	  <section title="Cryptographic Support (FCS)" id="fcs">
+	  
+		<f-component cc-id="fcs_ckm.1" iteration="AK" name="Cryptographic Key Generation (Asymmetric Keys)">
+<!--			<exportable id="inf-dsc-fcs-ckm-ak"/>  -->
+			<f-element id="fcs-ckm-1e1-ak">
+				<title>The TSF shall generate asymmetric cryptographic keys
+					<!-- [selection: identifier from Supported Methods for Asymmetric Key Generation table] --> 
+					<selectables>
+						<selectable>AK1</selectable>
+						<selectable>AK2</selectable>
+						<selectable>AK3</selectable>
+						<selectable>AK4</selectable>
+						<selectable>AK5</selectable>
+					</selectables>
+					and specified cryptographic key sizes [<h:i>key sizes as chosen from Supported Methods for
+					Asymmetric Key Generation table for corresponding key types</h:i>] that meet the following: 
+					[<h:i>standards	as chosen from Supported Methods for Asymmetric Key Generation table for 
+					corresponding key types</h:i>].
+					<h:b><ctr ctr-type='Table' id="fcs-ckm-1-sk-sels">: Supported Methods for Asymmetric Key Generation</ctr></h:b><h:br/>	
+					<h:table>
+						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
+
+						<h:tr><h:td>AK1</h:td>
+						<h:td>RSA</h:td>
+						<h:td><selectables>
+							<selectable>2048 bit</selectable>
+							<selectable>3072-bit</selectable></selectables></h:td>
+						<h:td>FIPS PUB 186-4 (Section B.3)</h:td></h:tr>
+						
+						<h:tr><h:td>AK2</h:td>
+						<h:td>ECC-N</h:td>
+						<h:td><selectables>
+							<selectable>256 (P-256)</selectable>
+							<selectable>384 (P-384)</selectable>
+							<selectable>521 (P521)</selectable></selectables></h:td>
+						<h:td>FIPS PUB 186-4 (Section B.4 & D.1.2)</h:td></h:tr>
+
+						<h:tr><h:td>AK3</h:td>
+						<h:td>ECC-B</h:td>
+						<h:td><selectables>
+							<selectable>256 (brainpoolP256r1)</selectable>
+							<selectable>384 (brainpoolP384r1)</selectable>
+							<selectable>512 (brainpoolP512r1)</selectable></selectables></h:td>
+						<h:td>RFC5639 (Section 3) (Brainpool Curves)</h:td></h:tr>
+
+						<h:tr><h:td>AK4</h:td>
+						<h:td>DSA</h:td>
+						<h:td>DSA Bit lengths of p and q respectively (L, N) 
+							<selectables>
+								<selectable>(1024, 160)</selectable>
+								<selectable>(2048, 224)</selectable>
+								<selectable>(2048, 256)</selectable>
+								<selectable>(3027, 256)</selectable></selectables></h:td>
+						<h:td>FIPS 186-4 Appendix B.1</h:td></h:tr>
+
+						<h:tr><h:td>AK5</h:td>
+						<h:td>Curve25519</h:td>
+						<h:td>256 bits</h:td>
+						<h:td>RFC 7748</h:td></h:tr>
+					</h:table>
+				</title>
+				<note role="application">					
+					This requirement is included for the purposes of encryption and decryption operations only. To
+					support ITE protected communications requirement for the transfer of encrypted data, this 
+					requirement mandates implementation compliance to FIPS 186-4 only. Implementations
+					according to FIPS 186-2 or FIPS 186-3 will not be accepted.<h:p/>
+					This requirement must be claimed by the TOE if at least one of FCS_CKM.1 or FCS_CKM.1/KEK
+					chooses a selection related to generation of asymmetric keys.
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+	  
+	  
 	  
 		<!-- FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)  -->
 		<f-component cc-id="fcs_ckm.1" iteration="KEK" name="Cryptographic Key Generation (Key Encryption Key)">
+<!--			<exportable id="inf-dsc-fcs-ckm-kek"/>  -->
 			<f-element id="fcs-ckm-1e1-kek">
 				<title>The TSF shall generate key encryption keys in accordance with a specified
 					cryptographic key generation algorithm corresponding to 
@@ -527,6 +603,7 @@ users of the same system.
 		</f-component>
 		
 		<f-component cc-id="fcs_cop.1" iteration="Hash" name="Cryptographic Operation (Hashing)">
+<!--			<exportable id="inf-dsc-cop-hash"/>  -->
 			<f-element id="fcs-cop-1e1-hash">
 				<title>The TSF shall perform [<h:i>cryptographic hashing</h:i>] in accordance with a
 					specified cryptographic algorithm 
@@ -563,6 +640,7 @@ users of the same system.
 		</f-component>
 		
 		<f-component cc-id="fcs_cop.1" iteration="HMAC" name="Cryptographic Operation (Keyed Hash)">
+<!--			<exportable id="inf-dsc-fcs-cop-hmac"/> -->
 			<f-element id="fcs-cop-1e1-hmac">
 				<title>The TSF shall perform [<h:i>keyed hash message authentication</h:i>] in accordance
 					with a specified cryptographic algorithm 
