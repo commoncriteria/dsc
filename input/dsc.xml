@@ -686,7 +686,59 @@ users of the same system.
 			<audit-event/>		
 		</f-component>
 		
+		<f-component cc-id="fcs_ckm.2" name="Cryptographic Key Establishment">
+<!--			<exportable id="inf-dsc-fcs-ckm-est"/>   -->
+			<f-element id="fcs-ckm-2e1">
+				<title>The TSF shall establish cryptographic keys in accordance with a specified
+					cryptographic key establishment method: 
+					<selectables linebreak="yes">
+						<selectable>RSA-based key establishment schemes that meet the following: NIST Special
+							Publication 800-56B Revision 2, “Recommendation for Pair-Wise Key Establishment
+							Schemes Using Integer Factorization Cryptography”</selectable>
+						<selectable>RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5
+							as specified in Section 7.2 of RFC 8017, “Public-Key Cryptography Standards
+							(PKCS) #1: RSA Cryptography Specifications Version 2.2”</selectable>
+						<selectable>Elliptic curve-based key establishment schemes that meet the following: 
+							<selectables linebreak="yes">
+								<selectable>NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise
+									Key Establishment Schemes Using Discrete Logarithm Cryptography”</selectable>
+								<selectable>RFC 7748, “Elliptic Curves for Security”</selectable>
+							</selectables></selectable>
+						<selectable>Finite field-based key establishment schemes that meet the following: NIST Special
+							Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment
+							Schemes Using Discrete Logarithm Cryptography”</selectable>
+						<selectable>Elliptic Curve Integrated Encryption Scheme (ECIES) that meets the following:
+							<selectables linebreak="yes">
+								<selectable>ANSI X9.63 - Public Key Cryptography for the Financial Services Industry
+									Key Agreement and Key Transport Using Elliptic Curve Cryptography</selectable>
+								<selectable>IEEE 1363a - Standard Specification for Public-Key Cryptography -
+									Amendment 1: Additional Techniques</selectables>
+								<selectable>ISO/IEC 18033-2 - Information Technology - Security Techniques -
+									Encryption Algorithms - Part 2: Asymmetric Ciphers</selectable>
+								<selectable>SECG SEC1 - Standards for Efficient Cryptography Group Elliptic Curve
+									Cryptography, section 5.1 Elliptic Curve Integrated Encryption Scheme</selectable>
+							</selectables></selectable>
+					</selectables> <h:s>that meets the following: [<h:i>assignment: list of standards</h:i>]</h:s>.
+				</title>
+				<note role="application">
+					This is a refinement of the SFR FCS_CKM.2 to deal with key establishment rather than key
+					distribution.<h:p/>
+					The ST author selects all key establishment schemes used for the selected cryptographic protocols.<h:p/>
+					The RSA-based key establishment schemes are described in Section 8 of NIST SP 800-56B Revision
+					2 [NIST-RSA]; however, Section 8 relies on implementation of other sections in SP 800-56B Revision 2.<h:p/>
+					The elliptic curves used for the key establishment scheme correlate with the curves specified in
+					FCS_CKM.1/AK.<h:p/>
+					The selections in this SFR must be consistent with those for FCS_COP.1/KAT.<h:p/>
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+		
+		
 		<f-component cc-id="fcs_ckm_ext.5" name="Cryptographic Key Derivation">
+		<!-- <exportable id="inf-dsc=fcs-ckm-derv"/> -->
 			<f-element id="fcs-ckm-ext-5e1">
 				<title>The TSF shall generate cryptographic keys with 
 					<selectables>
@@ -873,6 +925,95 @@ users of the same system.
 				</aactivity>
 			</f-element>
 		</f-component>
+		
+		<f-component cc-id="fcs_cop.1" iteration="KeyEnc" name="Cryptographic Operation (Key Encryption)">
+			<f-element id="fcs-cop-1e1-keyenc">
+				<title>
+					The TSF shall perform [<h:i>key encryption and decryption</h:i>] using 
+					<selectables>
+						<selectable>identifier from Supported Methods for Key Encryption Operation table</selectable>
+					</selectables> in accordance with a specified cryptographic algorithm [<h:i>cryptographic algorithms 
+					as chosen from Supported Methods for Key Encryption Operation table for corresponding identifiers</h:i>] 
+					and cryptographic key size [<h:i>key sizes as chosen from Supported Methods for Key Encryption Operation 
+					table for corresponding identifiers</h:i>] that meet the following: 
+					[<h:i>standards as chosen from Supported Methods for Key Encryption Operation table for corresponding 
+					identifiers</h:i>].<h:p/>
+					<h:b><ctr ctr-type='Table' id="fcs-cop-keyenc-sels">: Supported Methods for Key Encryption Operation</ctr></h:b><h:br/>	
+					<h:table>
+						<h:tr class="header"><h:td>Identifier</h:td><h:td>Cryptographic Algorithm</h:td>
+						<h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
+
+						<h:tr><h:td>SE1</h:td>
+						<h:td>Symmetric [selection: AESCCM, AES-GCM, AES-CBC, AES-CTR, AES-KWP, AESKW]</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>See FCS_COP.1/SKC</h:td>
+					
+						<h:tr><h:td>AE1</h:td>
+						<h:td>Asymmetric KTS-OAEP</h:td>
+						<h:td>[selection: 2048, 3072] bits</h:td>
+						<h:td>See FCS_COP.1/SKC</h:td>
+		
+						<h:tr><h:td>SE2</h:td>
+						<h:td>Symmetric [CAM-CBC, CAM-CCM, CAM-GCM]</h:td>
+						<h:td>[selection: 128, 256] bits</h:td>
+						<h:td>See FCS_COP.1/KAT</h:td>
+						
+						<h:tr><h:td>XOR</h:td>
+						<h:td>Exclusive OR operation</h:td>
+						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>See FCS_CKM_EXT.5</h:td>
+					</h:table>
+				</title>
+				<note role="application">
+					A TOE will use this requirement to specify how the Key Encryption Key (KEK) wraps a
+					symmetric encryption key. A TOE will always need this requirement in order to capture the last
+					stage of the key chain in which the Key Encryption Key (KEK) wraps the symmetric encryption
+					key.<h:p/>
+					If XOR is selected, the selection-based SFR FCS_CKM_EXT.5 must be claimed by the TOE.<h:p/>
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+		
+		<f-component cc-id="fcs_rbg_ext.1" name="Random Bit Generation">
+			<f-element id="fcs-rbg-ext-1e1">
+				<title>The TSF shall perform all deterministic random bit generation services in
+					accordance with ISO/IEC 18031:2011 using 
+					<selectables>
+						<selectable>Hash_DRBG (any)</selectable>
+						<selectable>HMAC_DRBG (any)</selectable>
+						<selectable>CTR_DRBG (AES)</selectable>
+					</selectables>.
+				</title>
+			</f-element>
+			<f-element id="fcs-rbg-ext-1e2">
+				<title>The deterministic RBG shall be seeded by at least one entropy source in
+					accordance with NIST SP 800-90B that accumulates entropy from 
+					<selectables>
+						<selectable><assignable>number of software-based sources</assignable>
+							software-based noise source</selectable>
+						<selectable><assignable>number of hardware-based sources</assignable>
+							hardware-based noise source</selectable>
+					</selectables> with a minimum of 
+					<selectables>
+						<selectable>128</selectable>
+						<selectable>192</selectable>
+						<selectable>256</selectable>
+					</selectables> bits of entropy at least equal to the greatest security strength, 
+					according to ISO/IEC 18031:2011, of the keys and CSPs that it will generate.
+				</title>
+				<note role="application">
+					ISO/IEC 18031:2011 contains three different methods of generating random numbers. Each of
+					these in turn depends on underlying cryptographic primitives (hash functions/ciphers). This cPP
+					allows SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512 for Hash_DRBG or HMAC_DRBG
+					and only AES-based implementations for CTR_DRBG. 		
+				</note>
+			</f-element>
+		</f-component>
+	
+		
        </section>
     </sec:SFRs>
 	
