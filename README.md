@@ -1,11 +1,11 @@
 
-Collaborative Protection Profile for Dedicated Security Component
+collaborative Protection Profile for Dedicated Security Component
 ===============
 [![build pp document](https://github.com/commoncriteria/dsc/workflows/build%20pp%20document/badge.svg)](https://github.com/commoncriteria/dsc/actions)
 [![GitHub issues Open](https://img.shields.io/github/issues/commoncriteria/dsc.svg?maxAge=2592000)](https://github.com/commoncriteria/dsc/issues) 
 ![license](https://img.shields.io/badge/license-Unlicensed-blue.svg)
 
-This repository hosts the draft version of the Protection Profile for QQQQ based on the 
+This repository hosts the draft version of the collaborative Protection Profile for Dedicated Security Component based on the 
 [Essential Security Requirements (ESR)](https://commoncriteria.github.io/pp/dsc/dsc-esr.html) for this technology class of 
 products. This repository is used to facilitate collaboration and development on the draft document. 
 See the [release](#Release-Version) section if you are looking for the officially released version for evaluations. 
@@ -13,11 +13,11 @@ A list of products that have passed evaluation against this Protection Profile c
 
 ## Draft Version
 
-* [Collaborative Protection Profile for Dedicated Security Component](https://commoncriteria.github.io/pp/dsc/dsc-release.html) (html)
-* [Collaborative Protection Profile for Dedicated Security Component](https://commoncriteria.github.io/pp/dsc/dsc-release.pdf) (pdf)
+* [collaborative Protection Profile for Dedicated Security Component](https://commoncriteria.github.io/pp/dsc/dsc-release.html) (html)
+* [collaborative Protection Profile for Dedicated Security Component](https://commoncriteria.github.io/pp/dsc/dsc-release.pdf) (pdf)
 
 ## Release Version
-* [Collaborative Protection Profile for Dedicated Security Component](https://www.niap-ccevs.org/MMO/PP/cpp_dsc_v1.0.pdf)
+* [collaborative Protection Profile for Dedicated Security Component](https://www.niap-ccevs.org/MMO/PP/cpp_dsc_v1.0.pdf)
 
 ## Contributing
 
