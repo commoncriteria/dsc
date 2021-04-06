@@ -712,7 +712,7 @@ users of the same system.
 								<selectable>ANSI X9.63 - Public Key Cryptography for the Financial Services Industry
 									Key Agreement and Key Transport Using Elliptic Curve Cryptography</selectable>
 								<selectable>IEEE 1363a - Standard Specification for Public-Key Cryptography -
-									Amendment 1: Additional Techniques</selectables>
+									Amendment 1: Additional Techniques</selectable>
 								<selectable>ISO/IEC 18033-2 - Information Technology - Security Techniques -
 									Encryption Algorithms - Part 2: Asymmetric Ciphers</selectable>
 								<selectable>SECG SEC1 - Standards for Efficient Cryptography Group Elliptic Curve
@@ -946,22 +946,22 @@ users of the same system.
 						<h:tr><h:td>SE1</h:td>
 						<h:td>Symmetric [selection: AESCCM, AES-GCM, AES-CBC, AES-CTR, AES-KWP, AESKW]</h:td>
 						<h:td>[selection: 128, 192, 256] bits</h:td>
-						<h:td>See FCS_COP.1/SKC</h:td>
+						<h:td>See FCS_COP.1/SKC</h:td></h:tr>
 					
 						<h:tr><h:td>AE1</h:td>
 						<h:td>Asymmetric KTS-OAEP</h:td>
 						<h:td>[selection: 2048, 3072] bits</h:td>
-						<h:td>See FCS_COP.1/SKC</h:td>
+						<h:td>See FCS_COP.1/SKC</h:td></h:tr>
 		
 						<h:tr><h:td>SE2</h:td>
 						<h:td>Symmetric [CAM-CBC, CAM-CCM, CAM-GCM]</h:td>
 						<h:td>[selection: 128, 256] bits</h:td>
-						<h:td>See FCS_COP.1/KAT</h:td>
+						<h:td>See FCS_COP.1/KAT</h:td></h:tr>
 						
 						<h:tr><h:td>XOR</h:td>
 						<h:td>Exclusive OR operation</h:td>
 						<h:td>[selection: 128, 192, 256] bits</h:td>
-						<h:td>See FCS_CKM_EXT.5</h:td>
+						<h:td>See FCS_CKM_EXT.5</h:td></h:tr>
 					</h:table>
 				</title>
 				<note role="application">
