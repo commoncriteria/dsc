@@ -529,7 +529,7 @@ users of the same system.
 							<selectable>256 (P-256)</selectable>
 							<selectable>384 (P-384)</selectable>
 							<selectable>521 (P521)</selectable></selectables></h:td>
-						<h:td>FIPS PUB 186-4 (Section B.4 & D.1.2)</h:td></h:tr>
+						<h:td>FIPS PUB 186-4 (Section B.4 &amp; D.1.2)</h:td></h:tr>
 
 						<h:tr><h:td>AK3</h:td>
 						<h:td>ECC-B</h:td>
