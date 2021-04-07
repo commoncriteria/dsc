@@ -499,8 +499,8 @@ users of the same system.
 		<f-component cc-id="fcs_ckm.1" iteration="AK" name="Cryptographic Key Generation (Asymmetric Keys)">
 <!--			<exportable id="inf-dsc-fcs-ckm-ak"/>  -->
 			<f-element id="fcs-ckm-1e1-ak">
-				<title>The TSF shall generate <h:b>asymmetric</h:b> cryptographic keys using the methods indicated by 
-					the following row identfiers in <xref to="fcs-ckm-1-ak-sels"/>:
+				<title>The TSF shall generate <h:b>asymmetric</h:b> cryptographic keys using the methods defined by 
+					the following row identifiers and selections in <xref to="fcs-ckm-1-ak-sels"/>:
 					<!-- [selection: identifier from Supported Methods for Asymmetric Key Generation table] --> 
 					<selectables>
 						<selectable>AK1</selectable>
@@ -508,11 +508,11 @@ users of the same system.
 						<selectable>AK3</selectable>
 						<selectable>AK4</selectable>
 						<selectable>AK5</selectable>
-					</selectables>
-					and specified cryptographic key sizes [<h:i>key sizes as chosen from Supported Methods for
+					</selectables>.<h:p/>
+<!--					and specified cryptographic key sizes [<h:i>key sizes as chosen from Supported Methods for
 					Asymmetric Key Generation table for corresponding key types</h:i>] that meet the following: 
 					[<h:i>standards	as chosen from Supported Methods for Asymmetric Key Generation table for 
-					corresponding key types</h:i>].<h:p/>
+					corresponding key types</h:i>].<h:p/>  -->
 					<h:b><ctr ctr-type='Table' id="fcs-ckm-1-ak-sels">: Supported Methods for Asymmetric Key Generation</ctr></h:b><h:br/>	
 					<h:table>
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
