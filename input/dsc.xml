@@ -500,7 +500,7 @@ users of the same system.
 <!--			<exportable id="inf-dsc-fcs-ckm-ak"/>  -->
 			<f-element id="fcs-ckm-1e1-ak">
 				<title>The TSF shall generate <h:b>asymmetric</h:b> cryptographic keys using the methods defined by 
-					the following row identifiers and selections in <xref to="fcs-ckm-1-ak-sels"/>:
+					the following rows in <xref to="fcs-ckm-1-ak-sels"/>:
 					<!-- [selection: identifier from Supported Methods for Asymmetric Key Generation table] --> 
 					<selectables>
 						<selectable id="sel-fcs-ckm-ak-ak1">AK1</selectable>
@@ -518,7 +518,7 @@ users of the same system.
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
 						<h:tr><depends on-sel="sel-fcs-ckm-ak-ak1"/>
-						<h:td><xref to="sel-fcs-ckm-ak-ak1"/></h:td>
+						<h:td>AK1</h:td>
 						<h:td>RSA</h:td>
 						<h:td><selectables>
 							<selectable>2048 bit</selectable>
@@ -526,7 +526,7 @@ users of the same system.
 						<h:td>FIPS PUB 186-4 (Section B.3)</h:td></h:tr>
 						
 						<h:tr><depends on-sel="sel-fcs-ckm-ak-ak2"/>
-						<h:td><xref to="sel-fcs-ckm-ak-ak2"/></h:td>
+						<h:td>AK2</h:td>
 						<h:td>ECC-N</h:td>
 						<h:td><selectables>
 							<selectable>256 (P-256)</selectable>
@@ -535,7 +535,7 @@ users of the same system.
 						<h:td>FIPS PUB 186-4 (Section B.4 &amp; D.1.2)</h:td></h:tr>
 
 						<h:tr><depends on-sel="sel-fcs-ckm-ak-ak3"/>
-						<h:td><xref to="sel-fcs-ckm-ak-ak3"/></h:td>
+						<h:td>AK3</h:td>
 						<h:td>ECC-B</h:td>
 						<h:td><selectables>
 							<selectable>256 (brainpoolP256r1)</selectable>
@@ -544,7 +544,7 @@ users of the same system.
 						<h:td>RFC5639 (Section 3) (Brainpool Curves)</h:td></h:tr>
 
 						<h:tr><depends on-sel="sel-fcs-ckm-ak-ak4"/>
-						<h:td><xref to="sel-fcs-ckm-ak-ak4"/></h:td>
+						<h:td>AK4</h:td>
 						<h:td>DSA</h:td>
 						<h:td>DSA Bit lengths of p and q respectively (L, N) 
 							<selectables>
@@ -555,7 +555,7 @@ users of the same system.
 						<h:td>FIPS 186-4 Appendix B.1</h:td></h:tr>
 
 						<h:tr><depends on-sel="sel-fcs-ckm-ak-ak5"/>
-						<h:td><xref to="sel-fcs-ckm-ak-ak5"/></h:td>
+						<h:td>AK5</h:td>
 						<h:td>Curve25519</h:td>
 						<h:td>256 bits</h:td>
 						<h:td>RFC 7748</h:td></h:tr>
