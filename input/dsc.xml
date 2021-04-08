@@ -502,12 +502,12 @@ users of the same system.
 				<title>The TSF shall generate <h:b>asymmetric</h:b> cryptographic keys using the methods defined by 
 					the following row identifiers and selections in <xref to="fcs-ckm-1-ak-sels"/>:
 					<!-- [selection: identifier from Supported Methods for Asymmetric Key Generation table] --> 
-					<selectables>
-						<selectable>AK1</selectable>
-						<selectable>AK2</selectable>
-						<selectable>AK3</selectable>
-						<selectable>AK4</selectable>
-						<selectable>AK5</selectable>
+						<selectables>
+						<selectable id="sel-fcs-ckm-ak-ak1">AK1</selectable>
+						<selectable id="sel-fcs-ckm-ak-ak2">AK2</selectable>
+						<selectable id="sel-fcs-ckm-ak-ak3">AK3</selectable>
+						<selectable id="sel-fcs-ckm-ak-ak4">AK4</selectable>
+						<selectable id="sel-fcs-ckm-ak-ak5">AK5</selectable>
 					</selectables>.<h:p/>
 <!--					and specified cryptographic key sizes [<h:i>key sizes as chosen from Supported Methods for
 					Asymmetric Key Generation table for corresponding key types</h:i>] that meet the following: 
@@ -517,14 +517,14 @@ users of the same system.
 					<h:table>
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
-						<h:tr><h:td>AK1</h:td>
+						<h:tr><h:td><ref-id>sel-fcs-ckm-ak-ak1</ref-id></h:td>
 						<h:td>RSA</h:td>
 						<h:td><selectables>
 							<selectable>2048 bit</selectable>
 							<selectable>3072-bit</selectable></selectables></h:td>
 						<h:td>FIPS PUB 186-4 (Section B.3)</h:td></h:tr>
 						
-						<h:tr><h:td>AK2</h:td>
+						<h:tr><h:td><ref-id>sel-fcs-ckm-ak-ak2</ref-id></h:td>
 						<h:td>ECC-N</h:td>
 						<h:td><selectables>
 							<selectable>256 (P-256)</selectable>
@@ -532,7 +532,7 @@ users of the same system.
 							<selectable>521 (P521)</selectable></selectables></h:td>
 						<h:td>FIPS PUB 186-4 (Section B.4 &amp; D.1.2)</h:td></h:tr>
 
-						<h:tr><h:td>AK3</h:td>
+						<h:tr><h:td><ref-id>sel-fcs-ckm-ak-ak3</ref-id></h:td>
 						<h:td>ECC-B</h:td>
 						<h:td><selectables>
 							<selectable>256 (brainpoolP256r1)</selectable>
@@ -540,7 +540,7 @@ users of the same system.
 							<selectable>512 (brainpoolP512r1)</selectable></selectables></h:td>
 						<h:td>RFC5639 (Section 3) (Brainpool Curves)</h:td></h:tr>
 
-						<h:tr><h:td>AK4</h:td>
+						<h:tr><h:td><ref-id>sel-fcs-ckm-ak-ak4</ref-id></h:td>
 						<h:td>DSA</h:td>
 						<h:td>DSA Bit lengths of p and q respectively (L, N) 
 							<selectables>
@@ -550,7 +550,7 @@ users of the same system.
 								<selectable>(3027, 256)</selectable></selectables></h:td>
 						<h:td>FIPS 186-4 Appendix B.1</h:td></h:tr>
 
-						<h:tr><h:td>AK5</h:td>
+						<h:tr><h:td><ref-id>sel-fcs-ckm-ak-ak5</ref-id></h:td>
 						<h:td>Curve25519</h:td>
 						<h:td>256 bits</h:td>
 						<h:td>RFC 7748</h:td></h:tr>
