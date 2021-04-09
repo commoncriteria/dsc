@@ -578,23 +578,21 @@ users of the same system.
 		<f-component cc-id="fcs_ckm.1" iteration="SK" name="Cryptographic Key Generation (Symmetric Encryption Key)">
 <!--			<exportable id="inf-dsc-fcs-cop-sk"/> -->
 			<f-element id="fcs-ckm-1e1-sk">
-				<title>The TSF shall generate <h:b>symmetric</h:b> cryptographic keys 
+				<title>The TSF shall generate <h:b>symmetric</h:b> cryptographic keys using the methods defined by 
+					the following rows in <xref to="fcs-ckm-1-sk-sels"/>:
 				<!-- [selection: identifier from Supported Methods for Symmetric Encryption Key Generation table] -->
 					<selectables>
-						<selectable>RSK</selectable>
-						<selectable>DSK</selectable>
-						<selectable>PBK</selectable>
-					</selectables> in accordance with a specified cryptographic key generation algorithm 
-					[<h:i>key type from Supported Methods for Symmetric Encryption Key Generation table</h:i>]
-					and specified cryptographic key sizes [<h:i>key sizes from Supported Methods for
-					Symmetric Encryption Key Generation table</h:i>] that meet the following: [<h:i>list of
-					standards from Supported Methods for Symmetric Encryption Key Generation table</h:i>].<h:p/>
+						<selectable id="sel-fcs-ckm-sk-rsk">RSK</selectable>
+						<selectable id="sel-fcs-ckm-sk-dsk">DSK</selectable>
+						<selectable id="sel-fcs-ckm-sk-pbk">PBK</selectable>
+					</selectables>.<h:p/>
 					<h:b><ctr ctr-type='Table' id="fcs-ckm-1-sk-sels">: Supported Methods for Symmetric Key Generation</ctr></h:b><h:br/>	
 					<h:table>
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td>
 							<h:td>Cryptographic Key Generation Algorithm</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
-						<h:tr><h:td>RSK</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-sk-rsk"/>
+							<h:td>RSK</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>submask</selectable>
@@ -608,7 +606,8 @@ users of the same system.
 						<h:td>NIST SP 800-133 (Section 7.1) with ISO 18031 as an approved RBG in addition
 							to those in NIST SP 800-133 (Section 5).</h:td></h:tr>
 							
-						<h:tr><h:td>DSK <selectables> 
+						<h:tr><depends on-sel="sel-fcs-ckm-sk-dsk"/>
+							<h:td>DSK <selectables> 
 							<selectable>identifier from Table 16: Key Derivation Functions</selectable></selectables></h:td>
 						<h:td><selectables>
 							<selectable>Key Type from Table 16: Key Derivation Functions</selectable></selectables></h:td>
@@ -620,7 +619,8 @@ users of the same system.
 						<h:td><selectables>
 							<selectable>List of Standards from Table 16: Key Derivation Functions</selectable></selectables></h:td></h:tr>
 						
-						<h:tr><h:td>PBK</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-sk-pbk"/>
+							<h:td>PBK</h:td>
 						<h:td><selectables>
 							<selectable>submask</selectable>
 							<selectable>authentication token</selectable>
@@ -746,21 +746,25 @@ users of the same system.
 		<f-component cc-id="fcs_ckm_ext.5" name="Cryptographic Key Derivation">
 		<!-- <exportable id="inf-dsc=fcs-ckm-derv"/> -->
 			<f-element id="fcs-ckm-ext-5e1">
-				<title>The TSF shall generate cryptographic keys with 
+				<title>The TSF shall generate cryptographic keys using the Key Derivation Functions defined by the following 
+					rows of <xref to="fcs-ckm-keydrv-sels"/>:
 					<selectables>
-						<selectable>identifier as chosen from Key Derivation Functions table</selectable>
-					</selectables> using [<h:i>input parameters as chosen from Key
-					Derivation Functions table for corresponding key types</h:i>], key derivation algorithm 
-					<assignable>key derivation algorithms as chosen from Key Derivation Functions table for corresponding key
-					types</assignable>, and specified cryptographic key sizes [<h:i>key sizes as chosen from Key Derivation Functions
-					table for corresponding key types</h:i>] that meet the following: 
-					[<h:i>standards as chosen from Key Derivation Functions table for corresponding key types</h:i>].
-					<h:b><ctr ctr-type='Table' id="fcs-ckm-ext-sels">: Key Derivation Functions</ctr></h:b><h:br/>	
+						<selectable id="sel-fcs-ckm-keydrv-1">KeyDrv1</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-2">KeyDrv2</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-3">KeyDrv3</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-4">KeyDrv4</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-5">KeyDrv5</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-6">KeyDrv6</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-7">KeyDrv7</selectable>
+						<selectable id="sel-fcs-ckm-keydrv-8">KeyDrv8</selectable>
+					</selectables>.<h:p/>
+					<h:b><ctr ctr-type='Table' id="fcs-ckm-keydrv-sels">: Key Derivation Functions</ctr></h:b><h:br/>	
 					<h:table>
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Key Type</h:td><h:td>Input Parameters</h:td>
 						<h:td>Key Derivation Algorithm</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
-						<h:tr><h:td>KeyDrv1</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-1"/>
+							<h:td>KeyDrv1</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>initialization vector</selectable>
@@ -795,7 +799,8 @@ users of the same system.
 								</selectables></h:td>
 						</h:tr>
 		
-						<h:tr><h:td>KeyDrv2</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-2"/>
+						<h:td>KeyDrv2</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>initialization vector</selectable>
@@ -806,12 +811,12 @@ users of the same system.
 							</selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
 						<h:td>KDF in Feedback Mode using <selectables>
-								<selecteable>CMAC-AES-128</selectable>
-								<selecteable>CMAC-AES-192</selectable>
-								<selecteable>CMAC-AES-256</selectable>
-								<selecteable>HMAC-SHA-1</selectable>
-								<selecteable>HMAC-SHA-256</selectable>
-								<selecteable>HMAC-SHA-512</selectable>
+								<selectable>CMAC-AES-128</selectable>
+								<selectable>CMAC-AES-192</selectable>
+								<selectable>CMAC-AES-256</selectable>
+								<selectable>HMAC-SHA-1</selectable>
+								<selectable>HMAC-SHA-256</selectable>
+								<selectable>HMAC-SHA-512</selectable>
 							</selectables>as the PRF</h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
@@ -830,7 +835,8 @@ users of the same system.
 								</selectables></h:td>
 						</h:tr>
 		
-						<h:tr><h:td>KeyDrv3</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-3"/>
+						<h:td>KeyDrv3</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>initialization vector</selectable>
@@ -841,12 +847,12 @@ users of the same system.
 							</selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
 						<h:td>KDF in Double Pipeline Iteration Mode using <selectables>
-								<selecteable>CMAC-AES-128</selectable>
-								<selecteable>CMAC-AES-192</selectable>
-								<selecteable>CMAC-AES-256</selectable>
-								<selecteable>HMAC-SHA-1</selectable>
-								<selecteable>HMAC-SHA-256</selectable>
-								<selecteable>HMAC-SHA-512</selectable>
+								<selectable>CMAC-AES-128</selectable>
+								<selectable>CMAC-AES-192</selectable>
+								<selectable>CMAC-AES-256</selectable>
+								<selectable>HMAC-SHA-1</selectable>
+								<selectable>HMAC-SHA-256</selectable>
+								<selectable>HMAC-SHA-512</selectable>
 							</selectables>as the PRF</h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
@@ -865,7 +871,8 @@ users of the same system.
 								</selectables></h:td>
 						</h:tr>
 
-						<h:tr><h:td>KeyDrv4</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-4"/>
+						<h:td>KeyDrv4</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>initialization vector</selectable>
@@ -890,7 +897,8 @@ users of the same system.
 							</selectables></h:td>
 						</h:tr>
 		
-						<h:tr><h:td>KeyDrv5</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-5"/>
+						<h:td>KeyDrv5</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>initialization vector</selectable>
@@ -905,12 +913,12 @@ users of the same system.
 							<selectable>Feedback Mode</selectable>
 							<selectable>Double Pipeline Iteration Mode</selectable>
 							</selectables> using <selectables>
-							<selecteable>CMAC-AES-128</selectable>
-							<selecteable>CMAC-AES-192</selectable>
-							<selecteable>CMAC-AES-256</selectable>
-							<selecteable>HMAC-SHA-1</selectable>
-							<selecteable>HMAC-SHA-256</selectable>
-							<selecteable>HMAC-SHA-512</selectable>
+							<selectable>CMAC-AES-128</selectable>
+							<selectable>CMAC-AES-192</selectable>
+							<selectable>CMAC-AES-256</selectable>
+							<selectable>HMAC-SHA-1</selectable>
+							<selectable>HMAC-SHA-256</selectable>
+							<selectable>HMAC-SHA-512</selectable>
 							</selectables>as the PRF</h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
@@ -931,7 +939,8 @@ users of the same system.
 								</selectables></h:td>
 						</h:tr>
 
-						<h:tr><h:td>KeyDrv6</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-6"/>
+						<h:td>KeyDrv6</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>initialization vector</selectable>
@@ -941,7 +950,15 @@ users of the same system.
 							<selectable>KMAC key</selectable>
 							</selectables></h:td>
 						<h:td>Two keys</h:td>
-						<h:td>[selection: AES-CCM, AES-GCM, AES-CBC, AESKWP, AES-KW, CAM-CBC, CAMCCM, CAM-GCM] from FCS_COP.1/SKC Symmetric Key table</h:td>
+						<h:td><selectables>
+							<selectable>AES-CCM</selectable>
+							<selectable>AES-GCM</selectable>
+							<selectable>AES-CBC</selectable>
+							<selectable>AES-KWP</selectable>
+							<selectable>AES-KW</selectable>
+							<selectable>CAM-CBC</selectable> 
+							<selectable>CAM-CCM</selectable>
+							<selectable>CAM-GCM</selectable></selectables> from FCS_COP.1/SKC Symmetric Key table</h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
 							<selectable>192</selectable>
@@ -949,35 +966,47 @@ users of the same system.
 							</selectables>bits</h:td>
 						<h:td>[selection: see List of Standards in FCS_COP.1/SKC Symmetric Key table]</h:td></h:tr>
 
-						<h:tr><h:td>KeyDrv7</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-7"/>
+						<h:td>KeyDrv7</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>secret IV</selectable>
 							<selectable>seed</selectable>
 							</selectables></h:td>
 						<h:td>Shared secret, salt, output length, fixed information</h:td>
-						<h:td>[selection: hash function from FCS_COP.1/Hash, keyed hash from FCS_COP.1/HMAC]</h:td>
+						<h:td><selectables>
+							<selectable>hash function from FCS_COP.1/Hash</selectable>
+							<selectable>keyed hash from FCS_COP.1/HMAC</selectable>
+							</selectables></h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
 							<selectable>192</selectable>
 							<selectable>256</selectable>
 							</selectables>bits</h:td>
-						<h:td>(NIST-KDRV) sec 4<h:p/>[selection: see List of Standards in FCS_COP.1/Hash and FCS_COP.1/HMAC]</h:td></h:tr>
+						<h:td>(NIST-KDRV) sec 4<h:p/>
+							<selectables>
+								<selectable>see List of Standards in FCS_COP.1/Hash and FCS_COP.1/HMAC</selectable>
+								</selectables></h:td></h:tr>
 
-						<h:tr><h:td>KeyDrv8</h:td>
+						<h:tr><depends on-sel="sel-fcs-ckm-keydrv-8"/>
+						<h:td>KeyDrv8</h:td>
 						<h:td><selectables>
 							<selectable>symmetric key</selectable>
 							<selectable>secret IV</selectable>
 							<selectable>seed</selectable>
 							</selectables></h:td>
 						<h:td>Shared secret, salt, IV, output length, fixed information</h:td>
-						<h:td>[selection: keyed hash from FCS_COP.1/HMAC]</h:td>
+						<h:td><selectables>
+							<selectable>keyed hash from FCS_COP.1/HMAC</selectable></selectables></h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
 							<selectable>192</selectable>
 							<selectable>256</selectable>
 							</selectables>bits</h:td>
-						<h:td>(NIST-KDRV) sec 5<h:p/>[selection: see List of Standards in FCS_COP.1/HMAC]</h:td></h:tr>
+						<h:td>(NIST-KDRV) sec 5<h:p/>
+							<selectables>
+								<selectable>see List of Standards in FCS_COP.1/Hash and FCS_COP.1/HMAC</selectable>
+								</selectables></h:td></h:tr>
 					</h:table>
 				</title>
 				<note role="application">
@@ -986,7 +1015,7 @@ users of the same system.
 					an application programming interface to an OS kernel. There may be various levels of abstraction.
 					For Authorization Factor Submasks, the key size to be used in the HMAC falls into a range between
 					L1 and L2 defined in ISO/IEC 10118 for the appropriate hash function (for example for SHA-256
-					L1 = 512, L2 =256) where L2 ≤ k ≤ L1.<h:p/>
+					L1 = 512, L2 =256) where L2 = k = L1.<h:p/>
 					General note: in order to use a NIST SP 800-108 conformant method of key derivation, the TOE
 					is permitted to implement this with keys as derived as indicated in Key Derivation Functions table
 					above, and with the algorithms as indicated in the same table.<h:p/>
@@ -1018,6 +1047,7 @@ users of the same system.
 				</aactivity>
 			</f-element>
 		</f-component>
+
 		
 		<f-component cc-id="fcs_cop.1" iteration="Hash" name="Cryptographic Operation (Hashing)">
 <!--			<exportable id="inf-dsc-cop-hash"/>  -->
