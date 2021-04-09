@@ -789,12 +789,12 @@ users of the same system.
 							</selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
 						<h:td>KDF in Counter Mode using <selectables>
-								<selecteable>CMAC-AES-128</selectable>
-								<selecteable>CMAC-AES-192</selectable>
-								<selecteable>CMAC-AES-256</selectable>
-								<selecteable>HMAC-SHA-1</selectable>
-								<selecteable>HMAC-SHA-256</selectable>
-								<selecteable>HMAC-SHA-512</selectable>
+								<selectable>CMAC-AES-128</selectable>
+								<selectable>CMAC-AES-192</selectable>
+								<selectable>CMAC-AES-256</selectable>
+								<selectable>HMAC-SHA-1</selectable>
+								<selectable>HMAC-SHA-256</selectable>
+								<selectable>HMAC-SHA-512</selectable>
 							</selectables>as the PRF</h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
