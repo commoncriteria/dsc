@@ -899,7 +899,7 @@ users of the same system.
 						<h:td><selectables>
 							<selectable>exclusive OR (XOR)</selectable>
 							<selectable>SHA256</selectable>
-							<selectable>SHA-512</selectable></h:td>
+							<selectable>SHA-512</selectable></selectables></h:td>
 						<h:td><selectables>
 							<selectable>128</selectable>
 							<selectable>192</selectable>
