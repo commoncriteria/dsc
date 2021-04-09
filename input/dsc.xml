@@ -1118,38 +1118,62 @@ users of the same system.
 		<f-component cc-id="fcs_cop.1" iteration="KeyEnc" name="Cryptographic Operation (Key Encryption)">
 			<f-element id="fcs-cop-1e1-keyenc">
 				<title>
-					The TSF shall perform [<h:i>key encryption and decryption</h:i>] using 
+					The TSF shall perform [<h:i>key encryption and decryption</h:i>] using the methods defined in the
+					following rows of <xref to="fcs-cop-keyenc-sels"/>:
 					<selectables>
-						<selectable>identifier from Supported Methods for Key Encryption Operation table</selectable>
-					</selectables> in accordance with a specified cryptographic algorithm [<h:i>cryptographic algorithms 
-					as chosen from Supported Methods for Key Encryption Operation table for corresponding identifiers</h:i>] 
-					and cryptographic key size [<h:i>key sizes as chosen from Supported Methods for Key Encryption Operation 
-					table for corresponding identifiers</h:i>] that meet the following: 
-					[<h:i>standards as chosen from Supported Methods for Key Encryption Operation table for corresponding 
-					identifiers</h:i>].<h:p/>
+						<selectable id="sel-fcs-cop-keyenc-se1">SE1</selectable>
+						<selectable id="sel-fcs-cop-keyenc-ae1">AE1</selectable>
+						<selectable id="sel-fcs-cop-keyenc-se2">SE2</selectable>
+						<selectable id="sel-fcs-cop-keyenc-xor">XOR</selectable>
+					</selectables><h:p/>
 					<h:b><ctr ctr-type='Table' id="fcs-cop-keyenc-sels">: Supported Methods for Key Encryption Operation</ctr></h:b><h:br/>	
 					<h:table>
 						<h:tr class="header"><h:td>Identifier</h:td><h:td>Cryptographic Algorithm</h:td>
 						<h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
-						<h:tr><h:td>SE1</h:td>
-						<h:td>Symmetric [selection: AESCCM, AES-GCM, AES-CBC, AES-CTR, AES-KWP, AESKW]</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:tr><depends on-sel="sel-fcs-cop-keyenc-se1"/>
+						<h:td>SE1</h:td>
+						<h:td>Symmetric <selectables>
+							<selectable>AES-CCM</selectable>
+							<selectable>AES-GCM</selectable>
+							<selectable>AES-CBC</selectable>
+							<selectable>AES-CTR</selectable>
+							<selectable>AES-KWP</selectable>
+							<selectable>AESKW</selectable>
+							</selectables></h:td>
+							<h:td><selectables>
+								<selectable>128</selectable>
+								<selectable>192</selectable>
+								<selectable>256</selectable></selectables> bits</h:td>
 						<h:td>See FCS_COP.1/SKC</h:td></h:tr>
 					
-						<h:tr><h:td>AE1</h:td>
+						<h:tr><depends on-sel="sel-fcs-cop-keyenc-ae1"/>
+						<h:td>AE1</h:td>
 						<h:td>Asymmetric KTS-OAEP</h:td>
-						<h:td>[selection: 2048, 3072] bits</h:td>
+						<h:td><selectables>
+							<selectable>2048</selectable>
+							<selectable>3072</selectable></selectables> bits</h:td>
 						<h:td>See FCS_COP.1/SKC</h:td></h:tr>
 		
-						<h:tr><h:td>SE2</h:td>
-						<h:td>Symmetric [CAM-CBC, CAM-CCM, CAM-GCM]</h:td>
-						<h:td>[selection: 128, 256] bits</h:td>
+						<h:tr><depends on-sel="sel-fcs-cop-keyenc-se2"/>
+						<h:td>SE2</h:td>
+						<h:td>Symmetric <selectables>
+							<selectable>CAM-CBC</selectable>
+							<selectable>CAM-CCM</selectable>
+							<selectable>CAM-GCM</selectable>
+							</selectables></h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>256</selectable></selectables> bits</h:td>
 						<h:td>See FCS_COP.1/KAT</h:td></h:tr>
 						
-						<h:tr><h:td>XOR</h:td>
+						<h:tr><depends on-sel="sel-fcs-cop-keyenc-xor"/>
+						<h:td>XOR</h:td>
 						<h:td>Exclusive OR operation</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+							<h:td><selectables>
+								<selectable>128</selectable>
+								<selectable>192</selectable>
+								<selectable>256</selectable></selectables> bits</h:td>
 						<h:td>See FCS_CKM_EXT.5</h:td></h:tr>
 					</h:table>
 				</title>
