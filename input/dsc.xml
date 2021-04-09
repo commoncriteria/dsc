@@ -761,69 +761,222 @@ users of the same system.
 						<h:td>Key Derivation Algorithm</h:td><h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
 
 						<h:tr><h:td>KeyDrv1</h:td>
-						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>initialization vector</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable>
+							<selectable>HMAC key</selectable>
+							<selectable>KMAC key</selectable>
+							</selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
-						<h:td>KDF in Counter Mode using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
-							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>KDF in Counter Mode using <selectables>
+								<selecteable>CMAC-AES-128</selectable>
+								<selecteable>CMAC-AES-192</selectable>
+								<selecteable>CMAC-AES-256</selectable>
+								<selecteable>HMAC-SHA-1</selectable>
+								<selecteable>HMAC-SHA-256</selectable>
+								<selecteable>HMAC-SHA-512</selectable>
+							</selectables>as the PRF</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>NIST SP 800-108 (Section 5.1) (KDF in Counter Mode)<h:p/>
-							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+							<selectables>
+								<selectable>ISO-CMAC</selectable>
+								<selectable>NIST-CMAC</selectable>
+								<selectable>ISO-CIPH</selectable>
+								<selectable>ISO-HMAC</selectable> 
+								<selectable>FIPS-HMAC</selectable>
+								<selectable>ISO-HASH</selectable>
+								<selectable>FIPS-SHA</selectable>
+								</selectables></h:td>
+						</h:tr>
 		
 						<h:tr><h:td>KeyDrv2</h:td>
-						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>initialization vector</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable>
+							<selectable>HMAC key</selectable>
+							<selectable>KMAC key</selectable>
+							</selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
-						<h:td>KDF in Feedback Mode using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
-							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>KDF in Feedback Mode using <selectables>
+								<selecteable>CMAC-AES-128</selectable>
+								<selecteable>CMAC-AES-192</selectable>
+								<selecteable>CMAC-AES-256</selectable>
+								<selecteable>HMAC-SHA-1</selectable>
+								<selecteable>HMAC-SHA-256</selectable>
+								<selecteable>HMAC-SHA-512</selectable>
+							</selectables>as the PRF</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>NIST SP 800-108 (Section 5.2) (KDF in Feedback Mode)<h:p/>
-							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+							<selectables>
+								<selectable>ISO-CMAC</selectable>
+								<selectable>NIST-CMAC</selectable>
+								<selectable>ISO-CIPH</selectable>
+								<selectable>ISO-HMAC</selectable> 
+								<selectable>FIPS-HMAC</selectable>
+								<selectable>ISO-HASH</selectable>
+								<selectable>FIPS-SHA</selectable>
+								</selectables></h:td>
+						</h:tr>
 		
 						<h:tr><h:td>KeyDrv3</h:td>
-						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>initialization vector</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable>
+							<selectable>HMAC key</selectable>
+							<selectable>KMAC key</selectable>
+							</selectables></h:td>
 						<h:td>Direct Generation from a Random Bit Generator as specified in FCS_RBG_EXT.1 </h:td>
-						<h:td>KDF in Double Pipeline Iteration Mode using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
-							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>KDF in Double Pipeline Iteration Mode using <selectables>
+								<selecteable>CMAC-AES-128</selectable>
+								<selecteable>CMAC-AES-192</selectable>
+								<selecteable>CMAC-AES-256</selectable>
+								<selecteable>HMAC-SHA-1</selectable>
+								<selecteable>HMAC-SHA-256</selectable>
+								<selecteable>HMAC-SHA-512</selectable>
+							</selectables>as the PRF</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>NIST SP 800-108 (Section 5.3) (KDF in n Double Pipeline Iteration Mode)<h:p/>
-							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+							<selectables>
+								<selectable>ISO-CMAC</selectable>
+								<selectable>NIST-CMAC</selectable>
+								<selectable>ISO-CIPH</selectable>
+								<selectable>ISO-HMAC</selectable> 
+								<selectable>FIPS-HMAC</selectable>
+								<selectable>ISO-HASH</selectable>
+								<selectable>FIPS-SHA</selectable>
+								</selectables></h:td>
+						</h:tr>
 
 						<h:tr><h:td>KeyDrv4</h:td>
-						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>initialization vector</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable>
+							<selectable>HMAC key</selectable>
+							<selectable>KMAC key</selectable>
+							</selectables></h:td>
 						<h:td>Intermediary keys</h:td>
-						<h:td>[selection: exclusive OR (XOR); SHA256; SHA-512]</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
-						<h:td>[selection: ISO-HASH; FIPSSHA]</h:td></h:tr>
+						<h:td><selectables>
+							<selectable>exclusive OR (XOR)</selectable>
+							<selectable>SHA256</selectable>
+							<selectable>SHA-512</selectable></h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
+						<h:td><selectables>
+							<selectable>ISO-HASH</selectable>
+							<selectable>FIPSSHA</selectable>
+							</selectables></h:td>
+						</h:tr>
 		
 						<h:tr><h:td>KeyDrv5</h:td>
-						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>initialization vector</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable>
+							<selectable>HMAC key</selectable>
+							<selectable>KMAC key</selectable>
+							</selectables></h:td>
 						<h:td>Concatenated keys</h:td>
-						<h:td>KDF in [selection: Counter Mode, Feedback Mode, Double-Pipeline Iteration Mode] using [selection: CMAC-AES-128; CMAC-AES-192; CMAC-AES-256; HMAC-SHA-1;
-							HMAC-SHA-256; HMAC-SHA-512] as the PRF</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>KDF in <selectables>
+							<selectable>Counter Mode</selectable>
+							<selectable>Feedback Mode</selectable>
+							<selectable>Double Pipeline Iteration Mode</selectable>
+							</selectables> using <selectables>
+							<selecteable>CMAC-AES-128</selectable>
+							<selecteable>CMAC-AES-192</selectable>
+							<selecteable>CMAC-AES-256</selectable>
+							<selecteable>HMAC-SHA-1</selectable>
+							<selecteable>HMAC-SHA-256</selectable>
+							<selecteable>HMAC-SHA-512</selectable>
+							</selectables>as the PRF</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>NIST SP 800-108 [selection: (Section 5.1) (KDF in Counter Mode);<h:p/>
 							(Section 5.2) (KDF in Feedback Mode);<h:p/>
 							(Section 5.3) (KDF in Double-Pipeline Iteration Mode)]<h:p/>
-							[selection: ISO-CMAC; NIST-CMAC; ISO-CIPH; ISO-HMAC; FIPS-HMAC; ISO-HASH; FIPS-SHA]</h:td></h:tr>
+							<selectables>
+								<selectable>ISO-CMAC</selectable>
+								<selectable>NIST-CMAC</selectable>
+								<selectable>ISO-CIPH</selectable>
+								<selectable>ISO-HMAC</selectable> 
+								<selectable>FIPS-HMAC</selectable>
+								<selectable>ISO-HASH</selectable>
+								<selectable>FIPS-SHA</selectable>
+								</selectables></h:td>
+						</h:tr>
 
 						<h:tr><h:td>KeyDrv6</h:td>
-						<h:td>[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>initialization vector</selectable>
+							<selectable>authentication token</selectable>
+							<selectable>authorization value</selectable>
+							<selectable>HMAC key</selectable>
+							<selectable>KMAC key</selectable>
+							</selectables></h:td>
 						<h:td>Two keys</h:td>
-						<h:td>[selection: AESCCM, AES-GCM, AES-CBC, AESKWP, AES-KW, CAM-CBC, CAMCCM, CAM-GCM] from FCS_COP.1/SKC Symmetric Key table</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td>[selection: AES-CCM, AES-GCM, AES-CBC, AESKWP, AES-KW, CAM-CBC, CAMCCM, CAM-GCM] from FCS_COP.1/SKC Symmetric Key table</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>[selection: see List of Standards in FCS_COP.1/SKC Symmetric Key table]</h:td></h:tr>
 
 						<h:tr><h:td>KeyDrv7</h:td>
-						<h:td>[selection: symmetric key, secret IV, seed]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>secret IV</selectable>
+							<selectable>seed</selectable>
+							</selectables></h:td>
 						<h:td>Shared secret, salt, output length, fixed information</h:td>
 						<h:td>[selection: hash function from FCS_COP.1/Hash, keyed hash from FCS_COP.1/HMAC]</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>(NIST-KDRV) sec 4<h:p/>[selection: see List of Standards in FCS_COP.1/Hash and FCS_COP.1/HMAC]</h:td></h:tr>
 
 						<h:tr><h:td>KeyDrv8</h:td>
-						<h:td>[selection: symmetric key, secret IV, seed]</h:td>
+						<h:td><selectables>
+							<selectable>symmetric key</selectable>
+							<selectable>secret IV</selectable>
+							<selectable>seed</selectable>
+							</selectables></h:td>
 						<h:td>Shared secret, salt, IV, output length, fixed information</h:td>
 						<h:td>[selection: keyed hash from FCS_COP.1/HMAC]</h:td>
-						<h:td>[selection: 128, 192, 256] bits</h:td>
+						<h:td><selectables>
+							<selectable>128</selectable>
+							<selectable>192</selectable>
+							<selectable>256</selectable>
+							</selectables>bits</h:td>
 						<h:td>(NIST-KDRV) sec 5<h:p/>[selection: see List of Standards in FCS_COP.1/HMAC]</h:td></h:tr>
 					</h:table>
 				</title>
