@@ -495,24 +495,38 @@ users of the same system.
     <sec:SFRs title="Security Functional Requirements">
 	  
 	  <section title="Cryptographic Support (FCS)" id="fcs">
-	  
+
+	<f-component cc-id="fcs_ckm.1" title="Cryptographic Key Generation">
+		<f-element id="fcs-ckm-1e1">
+			<title>The TSF shall generate cryptographic keys by [<h:i>parsing in accordance with
+				FDP_ITC_EXT.1 and FDP_ITC_EXT.2,</h:i>
+				<selectables>
+					<selectable>asymmetric key generation in accordance with FCS_CKM.1/AK</selectable>
+					<selectable>symmetric key generation in accordance to FCS_CKM.1/SK</selectable>
+					<selectable>no other methods</selectable>
+				</selectables> <h:s>in accordance with a specified cryptographic key generation algorithm 
+				[assignment: <h:i>cryptographic key generation algorithm</h:i>]
+				and specified cryptographic key sizes 
+				[assignment: <h:i>cryptographic key sizes</h:i>]
+				that meet the following: [assignment: <h:i>list of standards</h:i>]</h:s>.
+			</title>
+		</f-element>
+		<note role="assignment">
+			Parsing of keys can refer to both the act of importing keys from outside the TOE boundary and to
+			the act of issuing commands or parameters to the TOE that trigger the TSF to perform a key
+			generation function.<h:p/>
+			If asymmetric key generation in accordance with FCS_CKM.1/AK is selected, the selection-based
+			SFR FCS_CKM.1/AK must be claimed by the TOE.<h:p/>
+			If symmetric key generation in accordance with FCS_CKM.1/SK is selected, the selection-based
+			SFR FCS_CKM.1/SK must be claimed by the TOE.<h:p/>	  
+		</note>
+		<aactivity>
+			<no-tests/>
+		</aactivity>
+	</f-component>
+		  
 		<f-component cc-id="fcs_ckm.1" iteration="AK" name="Cryptographic Key Generation (Asymmetric Keys)">
-			<exportable/>
-<!--			<exportable id="inf-dsc-fcs-ckm-ak" descr="Generated asymmetric keys for export">  -->
-<!--				<exp-sel descr="2048-bit RSA">sel-exp-ak-rsa-2048</exp-sel>
-				<exp-sel descr="3072-bit RSA">sel-exp-ak-rsa-3072</exp-sel>
-				<exp-sel descr="ECC-NIST Curve P-256">sel-exp-ak-eccn-P256</exp-sel>
-				<exp-sel descr="ECC-NIST Curve P-384">sel-exp-ak-eccn-P384</exp-sel>
-				<exp-sel descr="ECC-NIST Curve P-521">sel-exp-ak-eccn-P521</exp-sel>
-				<exp-sel descr="ECC-brainpool Curve P-256r1">sel-exp-ak-ecc-bpP256r1</exp-sel>
-				<exp-sel descr="ECC-brainpool Curve P-384r1">sel-exp-ak-ecc-bpP384r1</exp-sel>
-				<exp-sel descr="ECC-brainpool Curve P-521r1">sel-exp-ak-ecc-bpP512r1</exp-sel>
-				<exp-sel descr="DSA (1024, 160)">sel-exp-ak-dsa-1024-160</exp-sel>
-				<exp-sel descr="DSA (2048, 224)">sel-exp-ak-dsa-2048-224</exp-sel>
-				<exp-sel descr="DSA (2048, 256)">sel-exp-ak-dsa-2048-256</exp-sel>
-				<exp-sel descr="DSA (3027, 256)">sel-exp-ak-dsa-3027-256</exp-sel>
-				<exp-sel descr="Curve25519">sel-fcs-ckm-ak-ak5</exp-sel>   -->
-<!--   			</exportable>  --> 	    
+<!--			<exportable id="inf-dsc-fcs-ckm-ak"/> -->
 			<f-element id="fcs-ckm-1e1-ak">
 				<title>The TSF shall generate <h:b>asymmetric</h:b> cryptographic keys using the methods defined by 
 					the following rows in <xref to="fcs-ckm-1-ak-sels"/>:
@@ -591,7 +605,7 @@ users of the same system.
 		</f-component>
 	  
 		<f-component cc-id="fcs_ckm.1" iteration="SK" name="Cryptographic Key Generation (Symmetric Encryption Key)">
-<!--			<exportable id="inf-dsc-fcs-cop-sk"/> -->
+<!--			<exportable id="inf-dsc-fcs-ckm-sk"/> -->
 			<f-element id="fcs-ckm-1e1-sk">
 				<title>The TSF shall generate <h:b>symmetric</h:b> cryptographic keys using the methods defined by 
 					the following rows in <xref to="fcs-ckm-1-sk-sels"/>:
@@ -757,7 +771,102 @@ users of the same system.
 			</f-element>
 		</f-component>
 		
-		
+	<f-component cc-id="fcs_ckm_ext.4" title="Cryptographic Key Destruction">
+		<f-element id="fcs-ckm-ext-4e1">
+			<title>The TSF shall destroy cryptographic keys and keying material in accordance
+				with a specified cryptographic key destruction method 
+				<selectables linebreak="yes">
+					<selectable>For volatile memory, the destruction shall be executed by a 
+						<selectables>
+							<selectable>single overwrite consisting of 
+								<selectables>
+									<selectable>a pseudo-random pattern using the TSF’s RBG</selectable>
+									<selectable>zeroes</selectables>
+									<selectable>ones</selectable>
+									<selectable>a new value of a key</selectable>
+									<selectable><assignable>some value that does not contain any CSP</assignable></selectable>
+								</selectables></selectable>
+							<selectable>removal of power to the memory</selectable>
+							<selectable>removal of all references to the key directly followed by a request for garbage
+								collection</selectable>
+						</selectables></selectable>
+					<selectable>For non-volatile memory 
+						<selectables>
+							<selectable>that employs a wear-leveling algorithm, the destruction shall be executed by a
+								<selectables>
+									<selectable>single overwrite consisting of 
+										<selectables>
+											<selectable>zeroes</selectable>
+											<selectable>ones</selectable>
+											<selectable>pseudo-random pattern</selectable>
+											<selectable>a new value of a key of the same size</selectable>
+											<selectable><assignable>some value that does not contain any CSP</assignable></selectable>
+										</selectables></selectable>
+									<selectable>block erase</selectable>
+								</selectables></selectable>
+							<selectable>that does not employ a wear-leveling algorithm, the destruction shall be executed by a
+								<selectables linebreak="yes">
+									<selectable>
+										<selectables>
+											<selectable>single</selectable>
+											<selectable><assignable>ST author-defined multi-pass</assignable></selectable>
+										</selectables> overwrite consisting of 
+										<selectables>
+											<selectable>zeros</selectabe>
+											<selectable>ones</selectable>
+											<selectable>pseudo-random pattern</selectable>
+											<selectable>a new value of a key of the same size</selectable>
+											<selectable><assignable>some value that does not contain any CSP</assignable></selectable>
+										</selectables> followed by a read-verify. If the read-verification of the overwritten data fails,
+										the process shall be repeated again up to <assignable>number of times to attempt overwrite</assignable> times, 
+										whereupon an error is returned.</selectable>
+									<selectable>block erase</selectable>
+								</selectables></selectable>
+						</selectables></selectable>
+				</selectables> that meets the following: [<h:i>no standard</h:i>].
+			</title>
+			<note role="application">
+				A DSC must implement mechanisms to destroy cryptographic keys and key material contained in
+				persistent storage when no longer needed. The term “cryptographic keys” in this SFR includes
+				the authorization data that is the entry point to a key chain and all other cryptographic keys and
+				keying material (whether in plaintext or encrypted form). This SFR does not apply to the public
+				component of asymmetric key pairs, or to keys that are permitted to remain stored such as device
+				identification keys.<h:p/>
+				In the case of volatile memory, the selection “removal of all references to the key directly followed
+				by a request for garbage collection” is used in a situation where the TSF cannot address the
+				specific physical memory locations holding the data to be erased and therefore relies on
+				addressing logical addresses (which frees the relevant physical addresses holding the old data)
+				and then requesting the platform to ensure that the data in the physical addresses is no longer
+				available for reading (i.e. the “garbage collection” referred to in the SFR text).
+				Guidance documentation for the TOE requires users not to allow the TOE to leave the user’s
+				control while a session is active (and hence while the DEK is likely to be in plaintext in volatile
+				memory).<h:p/>
+				The selection for destruction of data in non-volatile memory includes block erase as an option,
+				and this option applies only to flash memory. A block erase does not require a read verify, since 
+				collaborative Protection Profile for Dedicated Security Components
+				the mappings of logical addresses to the erased memory locations are erased as well as the data
+				itself.<h:p/>
+				Where different destruction methods are used for different data or different destruction situations
+				then the different methods and the data/situations they apply to (e.g. different points in time, or
+				power-loss situations) are described in the TSS (and the ST may use separate iterations of the SFR
+				to aid clarity). The TSS includes a table describing all relevant keys and keying material (including
+				authorization data) used in the implementation of the SFRs, stating the source of the data, all
+				memory types in which the data is stored (covering storage both during and outside of a session,
+				and both plaintext and non-plaintext forms of the data), and the applicable destruction method
+				and time of destruction in each case.<h:p/>
+				Some selections allow assignment of “some value that does not contain any CSP.” This means
+				that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG_EXT
+				requirements, and not being any of the particular values listed as other selection options. The point
+				of the phrase “does not contain any sensitive data” is to ensure that the overwritten data is
+				carefully selected, and not taken from a general pool that might contain current or residual data
+				(e.g. SDOs or intermediate key chain values) that itself requires confidentiality protection.<h:p/>
+			</note>
+		<aactivity>
+			<no-tests/>
+		</aactivity>
+	</f-element>
+	</f-component>
+		  
 		<f-component cc-id="fcs_ckm_ext.5" name="Cryptographic Key Derivation">
 		<!-- <exportable id="inf-dsc=fcs-ckm-derv"/> -->
 			<f-element id="fcs-ckm-ext-5e1">
