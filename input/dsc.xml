@@ -2060,6 +2060,9 @@ users of the same system.
 					allows SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512 for Hash_DRBG or HMAC_DRBG
 					and only AES-based implementations for CTR_DRBG. 		
 				</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity
 			</f-element>
 		</f-component>
 	
@@ -2074,8 +2077,163 @@ users of the same system.
 		</f-element>
 	</f-component>
 	
+	<f-component cc-id="fcs_stg_ext.1" name="Protected Storage">
+		<f-element id="fcs-stg-ext-1e1">
+			<title>
+				The TSF shall provide 
+				<seletables>
+					<selectable>mutable hardware-based</selectable>
+					<selectable>immutable hardware-based</selectable>
+					<selectable>software-based</selectable>
+				</selectables> protected storage for asymmetric private keys and 
+				<selectables>
+					<selectable>symmetric keys</selectable>
+					<selectable>persistent secrets</selectable>
+					<selectable>no other keys</selectable>
+				</selectables>.
+			</title>
+			<note role="application">
+				If the protected storage is implemented in software that is protected as required by
+				FCS_STG_EXT.2, the ST author is expected to select "software-based." If "software-based" is selected,
+				the ST author is expected to select all "software-based key storage" in FCS_STG_EXT.2.<h:p/>
+				Support for protected storage for all symmetric keys and persistent secrets will be required in
+				future revisions.<h:p/>
+			</note>
+		</f-element>
+		<f-element id="fcs-stg-ext-1e2">
+			<title>
+				FCS_STG_EXT.1.2 The TSF shall support the capability of 
+				<selectables>
+					<selectable>importing keys/secrets into the TOE</selectable>
+					<selectable>causing the TOE to generate keys/secrets</selectable>
+				</selectables> upon request of 
+				<selectables>
+					<selectable>a client application</selectable>
+					<selectable>an administrator</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fcs-stg-ext-1e3">
+			<title>
+				The TSF shall be capable of destroying keys/secrets in the protected storage
+				upon request of 
+				<selectables>
+					<selectable>a client application</selectable>
+					<selectable>an administrator</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fcs-stg-ext-1e4">
+			<title>
+				The TSF shall have the capability to allow only the user that 
+				<selectables>
+					<selectable>imported the key/secret</selectable>
+					<selectable>caused the key/secret to be generated</selectable>
+				</selectables> to use the key/secret. Exceptions
+				may be explicitly authorized only by 
+				<selectables>
+					<selectable>the client application</selectable>
+					<selectable>the administrator</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fcs-stg-ext-1e5">
+			<title>
+				The TSF shall allow only the user that 
+				<selectables>
+					<selectable>imported the key/secret</selectable>
+					<selectable>caused the key/secret to be generated</selectable>
+				</selectables> to request that the key/secret be destroyed. Exceptions may
+				only be explicitly authorized by 
+				<selectables>
+					<selectable>the client application</selectable>
+					<selectable>the administrator</selectable>
+				</selectables>.
+			</title>
+			<note role="application">
+				Not all conformant TOEs will have the ability to import pre-generated keys into the TOE. In these
+				cases, the TOE’s ability to receive commands to perform key generation is considered to be its
+				implementation of the Parse service. A subject that caused a key to be generated is considered to
+				be the ‘owner’ of that key in the same manner as they would be if they had imported it directly.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity
+		</f-element>
+	</f-component>
+
+	<f-component cc-id="fcs_stg_ext.2" name="Key Storage Encryption">
+		<f-element id="fcs-stg-ext-1e1">
+			<title>
+				The TSF shall encrypt [<h:i>AKs, SKs, KEKs, and 
+				<selectables>
+					<selectable>long-term trusted channel key material</selectable>
+					<selectable>all software-based key storage</selectable>
+					<selectable>no other keys</selectable>
+				</selectables></h:i>] using one of the following
+				methods: <assignable>key encryption methods as specified in FCS_COP.1/KeyEnc</assignable>.
+			</title>
+			<aactivity>
+				<no-tests/>
+			</aactivity
+		</f-element>
+	</f-component>
 	
-		
+	<f-component cc-id="fcs_stg_ext.3" name="Key Integrity Protection">
+		<f-element id="fcs-stg-ext-3e1">
+			<title>
+				The TSF shall protect the integrity of any encrypted [<h:i>AKs, SKs, KEKs, and
+				<selectables>
+					<selectable>long-term trusted channel key material</selectable>
+					<selectable>all software-based key storage</selectable>
+					<selectable>no other keys</selectable>
+				</selectables></h:i>] by using 
+				<selectables linebreak="yes">
+					<selectable>Symmetric encryption in 
+						<selectables>
+							<selectable>AES_CCM</selectable>
+							<selectable>AES_GCM</selectable>
+							<selectable>AES_KW</selectable>
+							<selectable>AES_KWP</selectable>
+							<selectable>CAM_CCM</selectable>
+							<selectable>CAM_GCM</selectable>
+						</selectables> mode in accordance with FCS_COP.1/SKC</selectable>
+					<selectable>A hash of the stored key in accordance with FCS_COP.1/Hash</selectable>
+					<selectable>A keyed hash of the stored key in accordance with FCS_COP.1/HMAC</selectable>
+					<selectable>A digital signature of the stored key in accordance with FCS_COP.1/SigGen
+						using an asymmetric key that is protected in accordance with FCS_STG_EXT.2</selectable>
+					<selectable>An immediate application of the key for decrypting the protected data followed 
+						by a successful verification of the decrypted data with previously known information</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fcs-stg-ext-3e2">
+			<title>
+				The TSF shall verify the integrity of the 
+					<selectables>
+						<selectable>hash</selectable>
+						<selectable>digital signature</selectable>
+						<selectable>MAC</selectable>
+					</selectables> of the stored key prior to use of the key.
+			</title>
+			<note role="application">
+				This requirement is not applicable to derived keys that are not stored. It is not expected that a
+				single key will be protected from corruption by multiple of these methods; however, a product may
+				use one integrity-protection method for one type of key and a different method for other types of
+				keys.<h:p/>
+				The documentation of the product’s encryption key management should be detailed enough that,
+				after reading, the evaluator will thoroughly understand the product’s key management and how it
+				meets the requirements to ensure the keys are adequately protected. This documentation should
+				include an essay and diagrams. This documentation is not required to be part of the TSS – it can
+				be submitted as a separate document and marked as developer proprietary.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	
        </section>
     </sec:SFRs>
 	
