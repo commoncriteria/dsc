@@ -511,7 +511,7 @@ users of the same system.
 				that meet the following: [assignment: <h:i>list of standards</h:i>]</h:s>.
 			</title>
 		</f-element>
-		<note role="assignment">
+		<note role="application">
 			Parsing of keys can refer to both the act of importing keys from outside the TOE boundary and to
 			the act of issuing commands or parameters to the TOE that trigger the TSF to perform a key
 			generation function.<h:p/>
