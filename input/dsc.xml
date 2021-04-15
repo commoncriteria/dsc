@@ -821,7 +821,7 @@ users of the same system.
 										whereupon an error is returned.</selectable>
 									<selectable>block erase</selectable>
 								</selectables></selectable>
-						</selectables>
+						</selectables></h:li></h:ul>
 				that meets the following: [<h:i>no standard</h:i>].
 			</title>
 			<note role="application">
