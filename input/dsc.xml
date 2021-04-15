@@ -496,7 +496,7 @@ users of the same system.
 	  
 	  <section title="Cryptographic Support (FCS)" id="fcs">
 
-	<f-component cc-id="fcs_ckm.1" title="Cryptographic Key Generation">
+	<f-component cc-id="fcs_ckm.1" name="Cryptographic Key Generation">
 		<f-element id="fcs-ckm-1e1">
 			<title>The TSF shall generate cryptographic keys by [<h:i>parsing in accordance with
 				FDP_ITC_EXT.1 and FDP_ITC_EXT.2,</h:i>
@@ -771,7 +771,7 @@ users of the same system.
 			</f-element>
 		</f-component>
 		
-	<f-component cc-id="fcs_ckm.4" title="Cryptographic Key Destruction">
+	<f-component cc-id="fcs_ckm.4" name="Cryptographic Key Destruction">
 		<f-element id="fcs-ckm-4e1">
 			<title>The TSF shall destroy cryptographic keys and keying material in accordance
 				with a specified cryptographic key destruction method 
@@ -866,7 +866,7 @@ users of the same system.
 	</f-element>
 	</f-component>
 		  
-	<f-component cc-id="fcs_ckm_ext.4" title="Cryptographic Key and Key Material Destruction Timing">
+	<f-component cc-id="fcs_ckm_ext.4" name="Cryptographic Key and Key Material Destruction Timing">
 		<f-element id="fcs-ckm-ext-1e1">
 			<title>
 				The TSF shall destroy all keys and keying material when no longer needed.
@@ -1261,7 +1261,7 @@ users of the same system.
 		</f-component>
 		
 		
-	<f-component cc-id="fcs_cop.1" iteration="KAT" title="Cryptographic Operation (Key Agreement/Transport)">
+	<f-component cc-id="fcs_cop.1" iteration="KAT" name="Cryptographic Operation (Key Agreement/Transport)">
 		<f-element id="fcs-cop-1e1-kat">
 			<title>The TSF shall perform [<h:i>cryptographic key agreement/transport</h:i>] using the supported
 			methods for key agreement/transport defined by the following rows of <xref to="fcs-ckm-kat-sels"/>: 
@@ -1495,7 +1495,7 @@ users of the same system.
 			</f-element>
 		</f-component>
 		
-	<f-component cc-id="fcs_cop.1" iteration="SigGen" title="Cryptographic Operation (Signature Generation)">
+	<f-component cc-id="fcs_cop.1" iteration="SigGen" name="Cryptographic Operation (Signature Generation)">
 		<f-element id="fcs-cop-1e1-siggen">
 			<title>
 				The TSF shall perform [<h:i>digital signature generation</h:i>] using the supported methods 
@@ -1655,7 +1655,7 @@ users of the same system.
 		</f-element>
 	</f-component>
 		
-	<f-component cc-id="fcs_cop.1" iteration="SigVer" title="Cryptographic Operation (Signature Verification)">
+	<f-component cc-id="fcs_cop.1" iteration="SigVer" name="Cryptographic Operation (Signature Verification)">
 		<f-element id="fcs-cop-1e1-sigver">
 			<title>
 				The TSF shall perform [<h:i>digital signature verification</h:i>] using the supported methods 
