@@ -2060,9 +2060,9 @@ users of the same system.
 					allows SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512 for Hash_DRBG or HMAC_DRBG
 					and only AES-based implementations for CTR_DRBG. 		
 				</note>
-			<aactivity>
-				<no-tests/>
-			</aactivity
+				<aactivity>
+					<no-tests/>
+				</aactivity>
 			</f-element>
 		</f-component>
 	
@@ -2081,7 +2081,7 @@ users of the same system.
 		<f-element id="fcs-stg-ext-1e1">
 			<title>
 				The TSF shall provide 
-				<seletables>
+				<selectables>
 					<selectable>mutable hardware-based</selectable>
 					<selectable>immutable hardware-based</selectable>
 					<selectable>software-based</selectable>
@@ -2158,7 +2158,7 @@ users of the same system.
 			</note>
 			<aactivity>
 				<no-tests/>
-			</aactivity
+			</aactivity>
 		</f-element>
 	</f-component>
 
@@ -2175,7 +2175,7 @@ users of the same system.
 			</title>
 			<aactivity>
 				<no-tests/>
-			</aactivity
+			</aactivity>
 		</f-element>
 	</f-component>
 	
