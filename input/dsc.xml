@@ -1619,7 +1619,7 @@ users of the same system.
 							<selectable>NIST P-256</selectable>
 							<selectable>NIST P-384</selectable>
 							<selectable>NIST P-521</selectable>
-						<selectables> using
+						</selectables> using
 						<selectables>
 							<selectable>SHA-256</selectable>
 							<selectable>SHA-384</selectable>
