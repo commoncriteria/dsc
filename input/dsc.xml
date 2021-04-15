@@ -771,17 +771,16 @@ users of the same system.
 			</f-element>
 		</f-component>
 		
-	<f-component cc-id="fcs_ckm_ext.4" title="Cryptographic Key Destruction">
-		<f-element id="fcs-ckm-ext-4e1">
+	<f-component cc-id="fcs_ckm.4" title="Cryptographic Key Destruction">
+		<f-element id="fcs-ckm-4e1">
 			<title>The TSF shall destroy cryptographic keys and keying material in accordance
 				with a specified cryptographic key destruction method 
-				<selectables linebreak="yes">
-					<selectable>For volatile memory, the destruction shall be executed by a 
-						<selectables>
+					<h:ul><h:li>For volatile memory, the destruction shall be executed by a 
+						<selectables linebreak="yes">
 							<selectable>single overwrite consisting of 
 								<selectables>
 									<selectable>a pseudo-random pattern using the TSF’s RBG</selectable>
-									<selectable>zeroes</selectables>
+									<selectable>zeroes</selectable>
 									<selectable>ones</selectable>
 									<selectable>a new value of a key</selectable>
 									<selectable><assignable>some value that does not contain any CSP</assignable></selectable>
@@ -789,9 +788,9 @@ users of the same system.
 							<selectable>removal of power to the memory</selectable>
 							<selectable>removal of all references to the key directly followed by a request for garbage
 								collection</selectable>
-						</selectables></selectable>
-					<selectable>For non-volatile memory 
-						<selectables>
+						</selectables></h:li>
+					<h:li>For non-volatile memory 
+						<selectables linebreak="yes">
 							<selectable>that employs a wear-leveling algorithm, the destruction shall be executed by a
 								<selectables>
 									<selectable>single overwrite consisting of 
@@ -812,7 +811,7 @@ users of the same system.
 											<selectable><assignable>ST author-defined multi-pass</assignable></selectable>
 										</selectables> overwrite consisting of 
 										<selectables>
-											<selectable>zeros</selectabe>
+											<selectable>zeros</selectable>
 											<selectable>ones</selectable>
 											<selectable>pseudo-random pattern</selectable>
 											<selectable>a new value of a key of the same size</selectable>
@@ -822,8 +821,8 @@ users of the same system.
 										whereupon an error is returned.</selectable>
 									<selectable>block erase</selectable>
 								</selectables></selectable>
-						</selectables></selectable>
-				</selectables> that meets the following: [<h:i>no standard</h:i>].
+						</selectables>
+				that meets the following: [<h:i>no standard</h:i>].
 			</title>
 			<note role="application">
 				A DSC must implement mechanisms to destroy cryptographic keys and key material contained in
@@ -867,6 +866,28 @@ users of the same system.
 	</f-element>
 	</f-component>
 		  
+	<f-component cc-id="fcs_ckm_ext.4" title="Cryptographic Key and Key Material Destruction Timing">
+		<f-element id="fcs-ckm-ext-1e1">
+			<title>
+				The TSF shall destroy all keys and keying material when no longer needed.
+			</title>
+			<note role="application">
+				The DSC will have mechanisms to destroy keys, including intermediate keys and key material, by
+				using an approved method, FCS_CKM.4. Examples of keys include intermediate keys, leaf keys,
+				encryption keys, signing keys, verification keys, authentication tokens, and submasks. The DSC
+				will have mechanisms to destroy keys and key material contained in persistent storage when no
+				longer needed. Based on their implementation, vendors will explain when certain keys are no
+				longer needed. An example in which key is no longer necessary includes a wrapped key whose
+				password has changed. However, there are instances when keys are allowed to remain in memory,
+				for example, a device identification key.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+	  
+	  
 		<f-component cc-id="fcs_ckm_ext.5" name="Cryptographic Key Derivation">
 		<!-- <exportable id="inf-dsc=fcs-ckm-derv"/> -->
 			<f-element id="fcs-ckm-ext-5e1">
@@ -1239,6 +1260,166 @@ users of the same system.
 			</f-element>
 		</f-component>
 		
+		
+	<f-component cc-id="fcs_cop.1" iteration="KAT" title="Cryptographic Operation (Key Agreement/Transport)">
+		<f-element id="fcs-cop-1e1-kat">
+			<title>The TSF shall perform [<h:i>cryptographic key agreement/transport</h:i>] using the supported
+			methods for key agreement/transport defined by the following rows of <xref to="fcs-ckm-kat-sels"/>: 
+			<selectables>
+				<selectable id="sel-fcs-cop-kat-kas1">KAS1</selectable>
+				<selectable id="sel-fcs-cop-kat-kas2">KAS2</selectable>
+				<selectable id="sel-fcs-cop-kat-kts">KTS-OAEP</selectable>
+				<selectable id="sel-fcs-cop-kat-rsaes">RSAES-PKCS1-v1_5</selectable>
+				<selectable id="sel-fcs-cop-kat-ecdh-nist">ECDH-NIST</selectable>
+				<selectable id="sel-fcs-cop-kat-ecdh-bpc">ECDH-BPC</selectable>
+				<selectable id="sel-fcs-cop-kat-dh">DH</selectable>
+				<selectable id="sel-fcs-cop-kat-curve25519">Curve25519</selectable>
+				<selectable id="sel-fcs-cop-kat-ecies">ECIES</selectable>
+			</selectables>.<h:p/>
+			<h:b><ctr ctr-type='Table' id="fcs-ckm-kat-sels">: Supported Methods for Key Agreement/Transport Operation</ctr></h:b><h:br/>	
+			<h:table>
+				<h:tr class="header"><h:td>Identifier</h:td><h:td>Cryptographic Algorithm</h:td><h:td>Key Sizes</h:td>
+						<h:td>List of Standards</h:td></h:tr>
+					
+				<h:tr><depends on-sel="sel-fcs-cop-kat-kas1"/>
+					<h:td>KAS1</h:td>
+					<h:td>RSA-single party</h:td>
+					<h:td><selectables>
+						<selectable>2048</selectable>
+						<selectable>3072</selectable>
+						<selectable>4096</selectable>
+						<selectable>6144</selectable>
+						<selectable>8192</selectable>
+					</selectables>bits</h:td>
+					<h:td>NIST SP 800-56Br2 section 8.2</h:td>
+				</h:tr>
+			
+				<h:tr><depends on-sel="sel-fcs-cop-kat-kas2"/>
+					<h:td>KAS2</h:td>
+					<h:td>RSA-both party</h:td>
+					<h:td><selectables>
+						<selectable>2048</selectable>
+						<selectable>3072</selectable>
+						<selectable>4096</selectable>
+						<selectable>6144</selectable>
+						<selectable>8192</selectable>
+					</selectables>bits</h:td>
+					<h:td>NIST SP 800-56Br2 section 8.3</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel-fcs-cop-kat-kts"/>
+					<h:td>KTS-OAEP</h:td>
+					<h:td>RSA</h:td>
+					<h:td><selectables>
+						<selectable>2048</selectable>
+						<selectable>3072</selectable>
+						<selectable>4096</selectable>
+						<selectable>6144</selectable>
+						<selectable>8192</selectable>
+					</selectables>bits</h:td>
+					<h:td>NIST SP 800-56Br2 section 9</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel-fcs-cop-kat-rsaes"/>
+					<h:td>RSAES-PKCS1-v1_5</h:td>
+					<h:td>RSA</h:td>
+					<h:td><selectables>
+						<selectable>2048</selectable>
+						<selectable>3072</selectable>
+						<selectable>4096</selectable>
+						<selectable>6144</selectable>
+						<selectable>8192</selectable>
+					</selectables>bits</h:td>
+					<h:td>RFC 8017 Section 7.2</h:td>
+				</h:tr>
+				
+				<h:tr><depends on-sel="sel-fcs-cop-kat-ecdh-nist"/>
+					<h:td>ECDH-NIST</h:td>
+					<h:td>ECDH with NIST curves</h:td>
+					<h:td><selectables>
+						<selectable>256 (P-256)</selectable>
+						<selectable>384 (P-384)</selectable>
+						<selectable>512 (P-521)</selectable>
+					</selectables></h:td>
+					<h:td>NIST SP 800-56Ar3</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel-fcs-cop-kat-ecdh-bpc"/>
+					<h:td>ECDH-BPC</h:td>
+					<h:td>ECDH with Brainpool curves</h:td>
+					<h:td><selectables>
+						<selectable>256 (brainpoolP256r1)</selectable>
+						<selectable>384 (brainpoolP384r1</selectable>
+						<selectable>512 (brainpoolP512r1)</selectable>
+					</selectables></h:td>
+					<h:td>RFC 5639 (Section 3)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel-fcs-cop-kat-dh"/>
+					<h:td>DH</h:td>
+					<h:td>Diffie-Hellman</h:td>
+					<h:td><selectables>
+						<selectable>2048</selectable>
+						<selectable>3072</selectable>
+						<selectable>4096</selectable>
+						<selectable>6144</selectable>
+						<selectable>8192</selectable>
+					</selectables>bits</h:td>
+					<h:td>NIST SP 800-56A rev 3,
+						<selectables>
+							<selectable>RFC 3526 Section 
+								<selectables>
+									<selectable>3</selectable>
+									<selectable>4</selectable>
+									<selectable>5</selectable>
+									<selectable>6</selectable>
+									<selectable>7</selectable>
+									</selectables></selectable>
+							<selectable>RFC 7919 Appendices 
+								<selectables>
+									<selectable>A.1</selectable>
+									<selectable>A.2</selectable>
+									<selectable>A.3</selecatable>
+									<selectable>A.4</selectable>
+									<selecatble>A.5</selectable>
+								</selectables></selectable>
+						</selectables></h:td>
+				</h:tr>
+				
+				<h:tr><depends on-sel="sel-fcs-cop-kat-curve25519"/>
+					<h:td>Curve25519</h:td>
+					<h:td>ECDH</h:td>
+					<h:td>256 bits</h:td>
+					<h:td>RFC 7748</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel-fcs-cop-kat-ecies"/>
+					<h:td>ECIES</h:td>
+					<h:td>ECIES</h:td>
+					<h:td><selectables>
+						<selectable>256</selectable>
+						<selectable>384</selectable>
+						<selectable>512</selectable>
+					</selectables>bits</h:td>
+					<h:td>
+						<selectables>
+							<selectable>ANSI X9.63</selectable>,
+							<selectable>IEEE 1363a</selectable>,
+							<selectable>ISO/IEC 18033-2 Part 2</selectable>,
+							<selectable>SECG SEC1 sec 5.1</selectable>
+						</selectables></h:td>
+				</h:tr>
+			</h:table>
+			</title>
+			<note role="application">
+				The selections in this SFR should be consistent with the algorithms selected in FCS_CKM.2.	
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
 		<f-component cc-id="fcs_cop.1" iteration="KeyEnc" name="Cryptographic Operation (Key Encryption)">
 			<f-element id="fcs-cop-1e1-keyenc">
 				<title>
@@ -1313,6 +1494,328 @@ users of the same system.
 				</aactivity>
 			</f-element>
 		</f-component>
+		
+	<f-component cc-id="fcs_cop.1" iteration="SigGen" title="Cryptographic Operation (Signature Generation)">
+		<f-element id="fcs-cop-1e1-siggen">
+			<title>
+				The TSF shall perform [<h:i>digital signature generation</h:i>] using the supported methods 
+				for signature generation defined in the following rows of <xref to="fcs-cop-siggen-sels"/>
+				<selectables>
+					<selectable id="sel=fcs-cop-siggen-1">SigGen1</selectable>
+					<selectable id="sel=fcs-cop-siggen-2">SigGen2</selectable>
+					<selectable id="sel=fcs-cop-siggen-3">SigGen3</selectable>
+					<selectable id="sel=fcs-cop-siggen-4">SigGen4</selectable>
+					<selectable id="sel=fcs-cop-siggen-5">SigGen5</selectable>
+				</selectables>.<h:p/>
+				
+				<h:b><ctr ctr-type='Table' id="fcs-cop-siggen-sels">: Supported Methods for Signature Generation Operation</ctr></h:b><h:br/>	
+				<h:table>
+					<h:tr class="header"><h:td>Identifier</h:td><h:td>Cryptographic Algorithm</h:td>
+					<h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
+					
+					<h:tr><depends on-sel="sel=fcs-cop-siggen-1"/>
+					<h:td>SigGen1</h:td>
+					<h:td>RSASSA-PKCS1-v1_5 using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						<selectables>
+							<selectable>RFC 8017</selectable>
+							<selectable>PKCS #1 v2.2 (Section 8.2)</selectable>
+							<selectable>FIPS186-4, (Section 5.5)</selectable>
+						</selectables>(RSASSA-PKCS1-v1_5)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-siggen-2"/>
+					<h:td>SigGen2</h:td>
+					<h:td>Digital signature scheme 2 using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						ISO9796-2, (Clause 9) (Digital signature scheme 2)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-siggen-3"/>
+					<h:td>SigGen3</h:td>
+					<h:td>Digital signature scheme 3 using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						ISO9796-2, (Clause 10) (Digital signature scheme 3)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-siggen-4"/>
+					<h:td>SigGen4</h:td>
+					<h:td>RSASSA-PSS using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						[RFC8017, PKCS#1v2.2 (Section 8.1)] (RSASSAPSS)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-siggen-5"/>
+					<h:td>SigGen5</h:td>
+					<h:td>ECDSA on 
+						<selectables>
+							<selectable>brainpoolP256r1</selectable>
+							<selectable>brainpoolP384r1</selectable>
+							<selectable>brainpoolP512r1</selectable>
+							<selectable>NIST P-256</selectable>
+							<selectable>NIST P-384</selectable>
+							<selectable>NIST P-521</selectable>
+						<selectables> using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						<selectables linebreak="yes">
+							<selectable>
+								<selectables>
+									<selectable>ISO14888-3</selectable>
+									<selectable>FIPS186-4 (Section 6)</selectable>
+								</selectables>(EDCSA)</selectable>
+							<selectable>RFC5639 (Section 3)(Brainpool Curves)</selectable>
+							<selectable>FIPS186-4 (Appendix D.1.2) (NIST Curves)</selectable>
+						</selectables><h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+				</h:table>
+			</title>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+	<f-component cc-id="fcs_cop.1" iteration="SigVer" title="Cryptographic Operation (Signature Verification)">
+		<f-element id="fcs-cop-1e1-sigver">
+			<title>
+				The TSF shall perform [<h:i>digital signature verification</h:i>] using the supported methods 
+				for signature verification defined in the following rows of <xref to="fcs-cop-sigver-sels"/>
+				<selectables>
+					<selectable id="sel=fcs-cop-sigver-1">SigVer1</selectable>
+					<selectable id="sel=fcs-cop-sigver-2">SigVer2</selectable>
+					<selectable id="sel=fcs-cop-sigver-3">SigVer3</selectable>
+					<selectable id="sel=fcs-cop-sigver-4">SigVer4</selectable>
+					<selectable id="sel=fcs-cop-sigver-5">SigVer5</selectable>
+				</selectables>.<h:p/>
+				
+				<h:b><ctr ctr-type='Table' id="fcs-cop-sigver-sels">: Supported Methods for Signature Verification Operation</ctr></h:b><h:br/>	
+				<h:table>
+					<h:tr class="header"><h:td>Identifier</h:td><h:td>Cryptographic Algorithm</h:td>
+					<h:td>Key Sizes</h:td><h:td>List of Standards</h:td></h:tr>
+					
+					<h:tr><depends on-sel="sel=fcs-cop-sigver-1"/>
+					<h:td>SigVer1</h:td>
+					<h:td>RSASSA-PKCS1-v1_5 using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						<selectables>
+							<selectable>RFC 8017</selectable>
+							<selectable>PKCS #1 v2.2 (Section 8.2)</selectable>
+							<selectable>FIPS186-4, (Section 5.5)</selectable>
+						</selectables>(RSASSA-PKCS1-v1_5)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-sigver-2"/>
+					<h:td>SigVer2</h:td>
+					<h:td>Digital signature scheme 2 using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						ISO9796-2, (Clause 9) (Digital signature scheme 2)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-sigver-3"/>
+					<h:td>SigVer3</h:td>
+					<h:td>Digital signature scheme 3 using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						ISO9796-2, (Clause 10) (Digital signature scheme 3)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-sigver-4"/>
+					<h:td>SigVer4</h:td>
+					<h:td>RSASSA-PSS using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						[RFC8017, PKCS#1v2.2 (Section 8.1)] (RSASSAPSS)<h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+
+				<h:tr><depends on-sel="sel=fcs-cop-sigver-5"/>
+					<h:td>SigVer5</h:td>
+					<h:td>ECDSA on 
+						<selectables>
+							<selectable>brainpoolP256r1</selectable>
+							<selectable>brainpoolP384r1</selectable>
+							<selectable>brainpoolP512r1</selectable>
+							<selectable>NIST P-256</selectable>
+							<selectable>NIST P-384</selectable>
+							<selectable>NIST P-521</selectable>
+						<selectables> using
+						<selectables>
+							<selectable>SHA-256</selectable>
+							<selectable>SHA-384</selectable>
+							<selectable>SHA-512</selectable>
+							<selectable>SHA3-256</selectable>
+							<selectable>SHA3-384</selectable>
+							<selectable>SHA3-512</selectable>
+						</selectables></h:td>
+					<h:td><selectables>
+						<selectable>2048 bit</selectable>
+						<selectable>3072 bit</selectable>
+					</selectables></h:td>
+					<h:td>
+						<selectables linebreak="yes">
+							<selectable>
+								<selectables>
+									<selectable>ISO14888-3</selectable>
+									<selectable>FIPS186-4 (Section 6)</selectable>
+								</selectables>(EDCSA)</selectable>
+							<selectable>RFC5639 (Section 3)(Brainpool Curves)</selectable>
+							<selectable>FIPS186-4 (Appendix D.1.2) (NIST Curves)</selectable>
+						</selectables><h:p/>
+						<selectables>
+							<selectable>ISO10118-3 (Clause 10, 11)</selectable>
+							<selectable>FIPS180-4 (Section 6)</selectable>
+						</selectables>(SHA)</h:td>
+				</h:tr>
+				</h:table>
+			</title>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+		
 		
 		<f-component cc-id="fcs_rbg_ext.1" name="Random Bit Generation">
 			<f-element id="fcs-rbg-ext-1e1">
