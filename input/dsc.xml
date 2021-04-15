@@ -1961,7 +1961,7 @@ users of the same system.
 						</selectables></h:td>
 					<h:td>
 						ISO 18033-3 (Camellia)<h:p/>
-						ISO 10116 (CBC)<h:p/>
+						ISO 10116 (CBC)<h:p/></h:td>
 					</h:tr>
 
 					<h:tr><depends on-sel="sel=fcs-cop-skc-cam-ccm"/>
