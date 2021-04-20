@@ -2260,6 +2260,100 @@ users of the same system.
 		</f-element>
 	</f-component>
 	
+	<f-component cc-id="fdp_acf.1" name="Security Attribute Based Access Control">
+		<f-element id="fdp-acf-1e1">
+			<title>The TSF shall enforce the [<h:i>Access Control SFP</h:i>] to objects based on the
+				following:
+				[<h:i>subjects (defined in FDP_ACC.1.1) attempt to perform operations (defined in FDP_ACC.1.1)
+				against objects (defined in FDP_ACC.1.1). Subject and object attributes may be used to determine
+				whether the desired operations are permitted.<h:p/>
+				The following are the SFP-relevant security attributes that are associated with the subjects and
+				objects defined in FDP_ACC.1.1, as well as any restrictions on the attribute values:
+				<h:ul>
+					<h:li>S.DSC<h:ul>
+						<h:li>DSC.ID</h:li></h:ul></h:li>
+					<h:li>S.Admin – none</h:li>
+					<h:li>S.CA<h:ul>
+						<h:li>CA.ID</h:li></h:ul></h:li>
+					<h:li>S.EPS<h:ul>
+						<h:li>EPS.ID</h:li></h:ul></h:li>
+					<h:li>OB.P_SDO<h:ul>
+						<h:li>SDO.ID</h:li>
+						<h:li>SDO.Type</h:li>
+						<h:li>SDO.AuthData</h:li>
+						<h:li>SDO.Reauth</h:li>
+						<h:li>SDO.Conf</h:li>
+						<h:li>SDO.Export</h:li>
+						<h:li>SDO.Integrity</h:li>
+						<h:li>SDO.Bind</h:li></h:ul></h:li>
+					<h:li>OB.T_SDO – same as OB.P_SDO</h:li>
+					<h:li>OB.AuthData – none</h:li>
+					<h:li>OB.Pstate – none</h:li>
+					<h:li>OB.FAACntr – none</h:li>
+					<h:li>OB.AntiReplay – none</h:li>
+					<h:li>OB.Context– none</h:li>
+				</h:ul></h:i>].
+			</title>
+		</f-element>
+		<f-element id="fdp-acf-1e2">
+			<title>
+				The TSF shall enforce the following rules to determine if an operation among
+				controlled subjects and controlled objects is allowed: [<h:i>
+				<h:ul>
+					<h:li>Any subject that has been authorized to perform any operation against any OB.P_SDO or
+						OB.T_SDO object can continue to perform this operation if one of the following conditions
+						is true:<h:ul>
+						<h:li>The object’s SDO.Reauth attribute has a value of ‘none’, indicating that
+							reauthorization is not required for subsequent interactions with the SDO</h:li>
+						<h:li>The object’s SDO.Reauth attribute has a value of ‘each use’, indicating that reauthorization is required for each interaction with the SDO, and the subject has
+							supplied valid authorization data to the TOE</h:li></h:ul></h:li>
+					<h:li>[assignment: rules automatically enforced by the TSF that always prohibit certain subjectobject-operation actions]</h:li>
+					<h:li>[assignment: rules automatically enforced by the TSF that always permit certain subjectobject-operation actions]</h:li>
+					<h:li>[assignment: rules automatically enforced by the TSF that conditionally permit certain
+						subject-object-operation actions based on subject security attributes, object security
+						attributes, or other conditions]</h:li>
+					<h:li>[selection: [assignment: any configurable rules or parameters that can be modified to
+						affect the behavior of the Access Control SFP], no configurable rules]</h:li>
+				</h:ul></h:i>].
+			</title>
+		</f-element>
+		<f-element id="fdp-acf-1e3">
+			<title>
+				The TSF shall explicitly authorize access of subjects to objects based on the
+				following additional rules: <assignable>rules, based on security attributes, that explicitly
+				authorize access of subjects to objects</assignable>.
+			</title>
+			<note role="application">
+				The expectation of this SFR is that the reader is given sufficient information to determine, for each
+				object controlled by the TOE, the operations that can be performed on it based on the subject
+				attempting to perform the operation, and whether this is conditional based on attribute values or
+				any other circumstances.<h:p/>
+				It is expected that many of the subject-object-operation combinations will always be prohibited by
+				the TSF, either because the target object is not externally modifiable or because the subject lacks
+				the ability to perform the operation in question.<h:p/>
+				The ST author is not expected to create an exhaustive list of subject-object-operation
+				combinations; it is sufficient to list those that are always permitted and those that are conditionally
+				permitted with the expectation that all remaining combinations are prohibited.<h:p/>
+				FDP_ACF.1.3 and FDP_ACF.1.4 allow the ST author to optionally specify override conditions to
+				resolve otherwise contradictory Access Control SFP rules. For example, the rule “S.Admin may
+				always modify the SDO.Conf attribute of any OB.P_SDO or OB.T_SDO object” may be
+				overridden by a statement in FDP_ACF.1.4 that identifies any particular SDO objects as nonmodifiable 
+				regardless of subject authorizations.<h:p/>
+				The DSC may contain pre-installed SDOs. The DSC will enforce access control for pre-installed
+				SDOs like any other SDO it contains or manages.<h:p/>
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+						
+						
+						
+						
+				
+		
        </section>
     </sec:SFRs>
 	
