@@ -2232,7 +2232,33 @@ users of the same system.
 			</aactivity>
 		</f-element>
 	</f-component>
-	
+
+	    </section>
+	    
+	<section title="User Data Protection" id="fdp">
+		
+	<f-component cc-id="fdp_acc.1" name="Subset Access Control">
+		<f-element id="fdp-acc-1e1">
+			<title>
+				The TSF shall enforce the [<h:i>Access Control SFP</h:i>] on [
+				<h:i><h:ul>
+					<h:li>Subjects: S.DSC, S.Admin, S.CA, S.EPS</h:li>
+					<h:li>Objects: OB.P_SDO, OB.T_SDO, OB.AuthData, OB.Pstate, OB.FAACntr,
+						OB.AntiReplay, OB.Context</h:li>
+					<h:li>Operations: OP.Import, OP.Create, OP.Use, OP.Modify, OP.Attest, OP.Store, OP.Export,
+						OP.Destroy</h:li>
+					</h:ul></h:i>
+				].
+			</title>
+			<note role="application">
+				The set of operations specified in the assignment can be collectively referred to as “access.” Any
+				subsequent use of the term “access” should be interpreted to refer to one or more of these events.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
 	
        </section>
     </sec:SFRs>
