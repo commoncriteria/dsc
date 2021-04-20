@@ -2517,9 +2517,142 @@ users of the same system.
 		</f-element>
 	</f-component>
 		
+	<f-component cc-id="fdp_mfw_ext.1" name="Mutable/Immutable Firmware">
+		<f-element id="fdp-mfw-ext-1e1">
+			<title>
+				The TSF shall be maintained as 
+				<selectables>
+					<selectable>immutable</selectable>
+					<selectable>mutable</selectable>
+				</selectables> firmware.
+			</title>
+			<note role="application">
+				The ST author must include FDP_MFW_EXT.2, FDP_MFW_EXT.3, FPT_FLS.1/FW, and
+				FPT_RPL.1/Rollback if <h:u>mutable</h:u> is selected.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
 		
+	<f-component cc-id="fdp_rip.1" name="Subset Residual Information Protection">
+		<f-element id="fdp-rip-1e1">
+			<title>
+				The TSF shall ensure that any previous information content of a resource is made
+				unavailable upon the [<h:i>deallocation of the resource from</h:i>] 
+				the following objects: [<h:i>
+				<h:ul>
+					<h:li>SDOs</h:li>
+					<h:li>SDEs</h:li>
+				</h:ul></h:i>].
+			</title>
+			<note role="application">
+				When an SDE is a key then it is also subject to the key destruction requirements in FCS_CKM.4,
+				depending on where and how it is stored. This SFR applies to authorization data that are SDEs
+				and security attributes in SDOs.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+	<f-component cc-id="fdp_sdc_ext.1" name="Confidentiality of SDEs">
+		<f-element id="fdp-sdc-ext-1e1">
+			<title>
+				The TSF shall use 
+				<selectables>
+					<selectable>protected storage</selectable>
+					<selectable>symmetric encryption using
+						<selectables>
+							<selectable>AES-CCM</selectable>
+							<selectable>AES-GCM</selectable>
+							<selectable>AES-CBC</selectable>
+							<selectable>AES-KWP</selectable>
+							<selectable>AES-KW</selectable>
+							<selectable>CAM-CBC</selectable>
+							<selectable>CAM-CCM</selectable>
+							<selectable>CAM-GCM</selectable>
+						</selectables> as specified in FCS_COP.1/SKC</selectable>
+					<selectable>key wrapping using 
+						<selectables>
+							<selectable>KAS1</selectable>
+							<selectable>KAS2</selectable>
+							<selectable>KTS-OAEP</selectable>
+						</selectables> as specified in FCS_COP.1/KAT</selectable>
+				</selectables> to protect the confidentiality of authorization data
+				and <assignable>list of internally and externally stored SDEs identified 
+				in the Confidential SDE List attribute of an SDO</assignable>.
+			</title>
+		</f-element>
+		<f-element id="fdp-sdc-ext-1e2">
+			<title>
+				The TSF shall use FCS_CKM.1/KEK to derive or generate the key to
+				encrypt the SDEs.
+			</title>
+			<note role="application">
+				This SFR applies to confidential SDEs, especially secret and private keys, Allowed Random
+				Number Generators’ state data, and vendor verification reference data. This SFR also applies to
+				all authorization data appearing in the attribute list under SDO.AuthData as well as any
+				administrator authorization data which may be stored implicitly.<h:p/>
+				If the TOE stores these parameters outside of its boundary, it must encrypt them according to the
+				cryptographic requirements for key encryption, as required by FDP_ETC_EXT.2.<h:p/>
+				Vendor pre-installed SDOs includes both objects installed during manufacturing, and those
+				provisioned by the vendor before final release to customer. The administrator and no one else
+				owns and controls these objects.<h:p/>
+				The confidential-SDE List attribute of the SDO indicates those SDEs that require confidentiality.
+				If SDEs do not require confidentiality, then its omission from this list indicates that confidentiality
+				is not required.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
 		
-		
+	<f-component cc-id="fdp_sdi.2" name="Stored Data Integrity Monitoring and Action">
+		<f-element id="fdp-sdi-2e1">
+			<title>
+				The TSF shall monitor SDOs and SDEs controlled by the TSF for [<h:i>integrity errors</h:i>]
+				on all objects, based on the following attributes: 
+				<selectables>
+					<selectable><assignable>attribute associated with presence in protected storage</assignable></selectable>
+					<selectable>cryptographic hash</selectable>
+					<selectable>digital signature</selectable>
+					<selectable>integrity-providing encryption algorithm as specified 
+						in FCS_COP.1/KeyEnc 
+						<selectables>
+							<selectable>SE1</selectable>
+							<selectable>SE2</selectable>
+						</selectables></selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fdp-sdi-2e2">
+			<title>
+				Upon detection of a data integrity error, the TSF shall [<h:i><h:ul>
+				<h:li>prohibit the use of the altered data</h:li>
+				<h:li>send notification of the error where applicable</h:li>
+				</h:ul></h:i>].
+			</title>
+			<note role="application">
+				This SFR deals with the mechanism that protects the integrity of the SDEs and security attributes
+				within an SDO. This provides the binding data that ensuresthe prevention of unauthorized changes
+				to the SDEs and attributes.<h:p/>
+				The cryptographic requirements for cryptographic hashes and digital signatures apply here.<h:p/>
+				No specific requirement is placed here on the nature of the integrity protection data, but the
+				Security Target shall describe this protection measure, and shall identify the iteration of
+				FCS_COP.1/Hash or FCS_COP.1/HMAC that covers any cryptographic algorithm used.<h:p/>
+				The integrity protection data in FDP_SDI.2.1 is included in the list of attributes identified in
+				FMT_MSA.1, and protects the value of the SDEs and of the SDO security attributes.<h:p/>
+				When an SDO is parsed, its integrity is checked when it is imported into the TOE.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
        </section>
     </sec:SFRs>
 	
