@@ -2349,10 +2349,176 @@ users of the same system.
 	</f-component>
 
 						
-						
-						
-						
-				
+	<f-component cc-id="fcs_etc_ext.2" name="Propagation of SDOs">
+		<f-element id="fcs-etc-ext-1e2">
+			<title>
+				The TSF shall propagate only SDO references, wrapped authorization data,
+				and wrapped SDOs such that only 
+				<selectables>
+					<selectable>the TSF</selectable>
+					<selectable>authorized users</selectable>
+				</selectables> can access them.
+			</title>
+			<note role="application">
+				The “SDO reference” is a pointer to an object that resides in the TOE; this can be thought of as
+				a token to the object. The “only the TSF can unwrap the data” selection refers to data that is
+				stored outside the TOE boundary (i.e., data that has been propagated).
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+	<f-component cc-id="fdp_frs_ext.1" name="Factory Reset">
+		<f-element id="fdp-frs-ext-1e1">
+			<title>
+				The TSF shall permit a factory reset of the TOE upon: 
+				<selectables>
+					<selectable>activation by external interface</selectable>
+					<selectable>presentation of <assignable>types of authorization data 
+						required and reference to their specification</assignable></selectable>
+					<selectable>no actions or conditions</selectable>
+				</selectables>.
+			</title>
+			<note role="application">
+				If the DSC provides factory reset and requires an authorization to carry out the operation then the
+				ST author selects either <h:u>presentation of…</h:u> and fills in the authorization data accepted (e.g. a PIN
+				or a cryptographic token based on some specification referenced in the assigned value). If the DSC
+				provides factory reset external to the DSC without requiring authorization then the ST author
+				selects <h:u>activation by external interface</h:u>. This selection is intended for use when the device
+				containing the DSC takes responsibility for obtaining and checking the authorization for factory
+				reset.<h:p/>
+				If any selection other than <h:u>no actions or conditions</h:u> is made in FDP_FRS_EXT.1.1, 
+				the selectionbased SFR FDP_FRS_EXT.2 must be claimed.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+			
+	<f-component cc-id="fdp_itc_ext.1" name="Parsing of SDEs">
+		<f-element id="fdp-itc-ext-1e1">
+			<title>
+				The TSF shall support importing SDEs using 
+				<selectables>
+					<selectable>physically protected channels as specified in FTP_ITP_EXT.1</selectable>
+					<selectable>encrypted data buffers as specified in FTP_ITE_EXT.1</selectable>
+					<selectable>cryptographically protected data channels as specified in FTP_ITC_EXT.1</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-1e2">
+			<title>
+				The TSF shall verify the integrity of the SDE using 
+				<selectables>
+					<selectable>cryptographic hash as specified in FCS_COP.1/Hash</selectable>
+					<selectable>keyed hash as specified in FCS_COP.1/HMAC</selectable>
+					<selectable>integrityproviding encryption algorithm as specified in FCS_COP.1/KeyEnc
+						<selectables>
+							<selectable>SE1</selectable>
+							<selectable>SE2</selectable>
+						</selectables></selectable>
+					<selectable>digital signature as specified in FCS_COP.1/SigVer</selectable>
+					<selectable>integrity verification supported by FDP_ITC_EXT.1.1</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-1e3">
+			<title>
+				The TSF shall ignore any security attributes associated with the user data
+				when imported from outside the TOE.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-1e4">
+			<title>
+				The TSF shall bind SDEs to security attributes using <assignable>list of ways
+				the TSF generates security attributes and binds them to the SDEs</assignable>.
+			</title>
+			<note role="application">
+				The way the TSF checks the integrity of the SDE depends on the method of importation. For
+				example, the encrypted data channel may provide data integrity as part of its service.<h:p/>
+				When a TSF parses an SDE, it should generate security attributes and create an SDO by binding
+				the security attributes to the SDE.<h:p/>
+				If <h:u>physically protected channels as specified in FTP_ITC_EXT.1</h:u> is selected, the selection-based
+				SFR FTP_ITP_EXT.1 must be claimed.<h:p/>
+				If <h:u>encrypted data buffers as specified in FTP_ITE_EXT.1</h:u> is selected, the selection-based SFR
+				FTP_ITE_EXT.1 must be claimed.<h:p/>
+				If <h:u>cryptographically protected data channels as specified in FTP_ITC_EXT.1</h:u> is selected, the
+				selection-based SFR FTP_ITC_EXT.1 must be claimed.
+			</note>
+		<aactivity>
+			<no-tests/>
+		</aactivity>
+		</f-element>
+	</f-component>	
+
+	<f-component cc-id="fdp_itc_ext.2" name="Parsing of SDOs">
+		<f-element id="fdp-itc-ext-2e1">
+			<title>
+				The TSF shall support importing SDOs using 
+				<selectables>
+					<selectable>physically protected channels as specified in FTP_ITP_EXT.1</selectable>
+					<selectable>encrypted data buffers as specified in FTP_ITE_EXT.1</selectable>
+					<selectable>cryptographically protected data channels as specified in FTP_ITC_EXT.1</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-2e2">
+			<title>
+				The TSF shall verify the integrity of the SDO using 
+				<selectables>
+					<selectable>
+						cryptographic hash as specified in FCS_COP.1/Hash</selectable>
+					<selectable>keyed hash as specified in FCS_COP.1/HMAC</selectable>
+					<selectable>integrityproviding encryption algorithm as specified in FCS_COP.1/KeyEnc
+						<selectables>
+							<selectable>SE1</selectable>
+							<selectable>SE2</selectable>
+						</selectables></selectable>
+					<selectable>digital signature as specified in FCS_COP.1/SigVer</selectable>
+					<selectable>integrity verification supported by FDP_ITC_EXT.2.1</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-2e3">
+			<title>
+			       The TSF shall use the security attributes associated with the imported user
+				data.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-2e4">
+			<title>
+				The TSF shall ensure that the protocol used provides for the unambiguous
+				association between the security attributes and the user data received.
+			</title>
+		</f-element>
+		<f-element id="fdp-itc-ext-2e5">
+			<title>
+				The TSF shall ensure that interpretation of the security attributes of the imported
+				user data is as intended by the source of the user data.
+			</title>
+			<note role="application">
+				The way the TSF checks the integrity of the SDO depends on the method of importation. For
+				example, the encrypted data channel may provide data integrity as part of its service.<h:p/>
+				When a TSF parses an SDO, it should already have a set of security attributes. However, the TSF
+				may modify these attributes, if authorized, to comply with security policies on the TOE.<h:p/>
+				If <h:u>physically protected channels as specified in FTP_ITC_EXT.1</h:u> is selected, the selection-based
+				SFR FTP_ITP_EXT.1 must be claimed.<h:p/>
+				If <h:u>encrypted data buffers as specified in FTP_ITE_EXT.1</h:u> is selected, the selection-based SFR
+				FTP_ITE_EXT.1 must be claimed.<h:p/>
+				If <h:u>cryptographically protected data channels as specified in FTP_ITC_EXT.1</h:u> is selected, the
+				selection-based SFR FTP_ITC_EXT.1 must be claimed.
+			</note>
+			<aactivity>
+				<no-tests/>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+		
+		
 		
        </section>
     </sec:SFRs>
