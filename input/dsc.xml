@@ -2689,6 +2689,242 @@ users of the same system.
 		</f-element>
 	</f-component>
        </section>
+	   
+	   <section title="Identification and Authentication" id="fia">
+	   
+			When a platform process requests the ability to create, use, modify, dispose of, etc., an SDE or
+			SDO within the DSC, as a matter of policy, the DSC may expect or request authorization from the
+			platform process, which may include authentication of the requester on whose behalf the platform
+			process is acting. The DSC assumes the requester to be either a person, a process, or a device. The
+			rules on how the requester formats the request will be outside the scope of this cPP. Upon request
+			(or as a matter of an established protocol), the interface (on behalf of the user) presents to the DSC
+			process those authorization values required to authorize execution of the event request. This may
+			include one or more different types of authentication credentials. The DSC validates these items
+			before acting upon the requested event. The validation may simply compare the authorization
+			values to an expected value, or perform a more complex cryptographic protocol to verify the
+			authenticity of the user. After validation, the DSC may then create and subsequently use an
+			authorization value to represent the validation of these authorization values in anticipation of future
+			requests.<h:p/>
+			Requirements related to the strength, quality, and performance of authorization values supplied to
+			the DSC, such as X.509 certificates and biometric templates, are all outside the scope of the DSC
+			and are expected to be met by the platform, where applicable. The DSC is only expected to enforce
+			quality metrics on any authorization values it generates itself.<h:p/>
+	   
+	   
+		<f-component cc-id="fia_afl_ext.1" name="Authorization Failure Handling">
+			<f-element id="fia-afl-ext-1e1">
+				<title>
+					The TSF shall maintain 
+					<selectables>
+						<selectable>a unique counter for 
+							<selectables>
+								<selectable>each SDO</selectable>
+								<selectable>the following SDOs <assignable>list of SDOs</assignable></selectable>
+							</selectables></selectable>
+						<selectable>one global counter covering
+							<selectables>
+								<selectable>all SDOs</selectable>
+								<selectable>the following SDOs <assignable>list of SDOs</assignable></selectable>
+							</selectables></selectable>
+					</selectables>, called the failed authorization attempt counters, that counts of the number
+					of unsuccessful authorization attempts that occur related to authorizing access to these <h:b>SDOs</h:b>.
+				</title>
+			</f-element>
+			<f-element id="fia-afl-ext-1e2">
+				<title>
+					The TSF shall maintain a 
+					<selectables>
+						<selectable>static</selectable>
+						<selectable>administrator configurable variable</selectable>
+					</selectables> threshold of the minimal acceptable number of unsuccessful authorization
+					attempts that occur related to authorizing access to these <h:b>SDOs</h:b>.
+				</title>
+			</f-element>
+			<f-element id="fia-afl-ext-1e3">
+				<title>
+					When the failed authorization attempt counters 
+					<selectables>
+						<selectable>meets</selectable>
+						<selectable>surpasses</selectable>
+					</selectables> the threshold for unsuccessful authorization attempts, the TSF shall 
+					<selectables linebreak="yes">
+						<selectable>prevent future authorization attempts for a static prescribed amount of time</selectable>
+						<selectable>prevent future authorization attempts for an administrator configurable amount of time</selectable>
+						<selectable>collaborative Protection Profile for Dedicated Security Components</selectable>
+						<selectable>prevent all future authorization attempts indefinitely (i.e., lock), as described by
+							FIA_AFL_EXT.2</selectable>
+						<selectable>factory reset the TOE wiping out all non-persistent SDOs, as described by
+							FDP_FRS_EXT.2</selectable>
+					</selectables> for these <h:b>SDOs</h:b>.
+				</title>
+			</f-element>
+			<f-element id="fia-afl-ext-1e4">
+				<title>
+					The TSF shall increment the failed authorization attempt counter before it
+					verifies the authorization.
+				</title>
+				<note role="application">
+					The product validates the authorization factors prior to determining whether user (administrator
+					or client application) access to the SDE/SDO is permitted. In cases where validation of the
+					authorization factors fails, the product will not allow access to SDE/SDO. The product validates
+					the authorization factors in such a way that it does not allow an attacker to circumvent the other
+					requirements to gain knowledge about the SDE/SDO or other keying material that protects them
+					from inadvertent exposure.<h:p/>
+					It is possible for the TOE to have different rules for the treatment of different SDOs or groups of
+					SDOs. For example, some SDOs may trigger a factory reset in the event of excessive authorization
+					failures while others may only temporarily block future authorization attempts. The ST author
+					should iterate this SFR for each distinct response the TSF can make (as defined by the selections
+					in FIA_AFL_EXT.1.3) and the SDOs whose authorization failures will trigger these responses.<h:p/>
+					If <h:u>prevent all future authorization attempts indefinitely (i.e., lock), as described by
+					FIA_AFL_EXT.2</h:u> is selected in FIA_AFL_EXT.1.3, the selection-based SFR FIA_AFL_EXT.2 must
+					be claimed.<h:p/>
+					If <h:u>factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2</h:u> is
+					selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed.	<h:p/>			
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+		
+		<f-component cc-id="fia_sos.2" name="TSF Generation of Secrets">
+			<f-element id="fia-sos-2e1">
+				<title>
+					The TSF shall provide a mechanism to generate authorization data that meet [<h:i>the
+					following quality metrics:<h:ul>
+						<h:li>For each authentication attempt, the probability shall be less than one 
+							in 1,000,000 that a random attempt will be successful</h:li>
+						<h:li>For multiple attempts to authenticate during a one-minute period, the probability 
+						shall be less than one in 100,000 that a series of random attempts will be successful</h:li>
+						</h:ul></h:i>.
+				</title>
+			</f-element>
+			<f-element id="fia-sos-2e2">
+				<title>
+					The TSF shall be able to enforce the use of TSF generated authorization data for
+					<assignable>non-empty list of TSF functions</assignable>.
+				</title>
+				<note role="application">
+					This SFR expects the TSF must generate authorization data from a sufficiently large key space to
+					ensure that users cannot employ random guessing as a statistically plausible method of authorizing
+					actions within the TOE, both for a single event and over a session. 
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+		
+		<f-component cc-id="fia_uau.2" name="User Authentication before Any Action">
+			<f-element id="fia-uau-2e1">
+				<title>
+					The TSF shall require each user <h:b>and SDO owner</h:b> to be successfully authenticated
+					before <h:b>authorizing</h:b> any <h:s>other</h:s> TSF-mediated actions on behalf of that 
+					user <h:b>or SDO owner</h:b>.
+				</title>
+				<note role="application">
+					This SFR goes with FDP_ACF.1, which authorizes access to SDOs (i.e. authorizes operations with
+					or on SDOs). The security policies in FDP_ACF.1 may require authentication of the subjects and
+					owners of the SDOs before the TSF authorizes access to them. An authentication token is critical
+					data bound to a user. Such data, when presented to the TOE and successfully verified by it,
+					authenticates the user. The TOE may use the successful authentication of a user as an
+					authorization to execute an action on its behalf, or to perform a requested operation on or with an
+					SDO.<h:p/>
+					This requirement specifies the TSF exercise an authentication mechanism from FIA_UAU.5 by
+					which the TOE authenticates the identity of the user requesting the operation and the owner of the
+					SDO which is an object in the operation. Such authentication is necessary to authorize it to operate
+					with the SDOs. A user could present a unique authentication token. The TSF may accept
+					authentication tokens with no further conditioning. The TSF validates the authentication token
+					prior to granting the authorization to perform the requested operation with the SDO. The SDO
+					security attribute SDO.Reauth determines whether or not the TOE may authenticate the user and
+					the SDO owner only once or each time each time it operates with the SDO.<h:p/>
+					The means of validation may vary based on the type of authentication token.<h:p/>
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+		
+		<f-component cc-id="fia_uau.5" name="Multiple Authentication Mechanisms">
+			<f-element id="fia-uau-5e1">
+				<title>
+					The TSF shall provide 
+					<selectables>
+						<selectable>none</selectable>
+						<selectable>authentication token mechanism</selectable>
+						<selectable>cryptographic signature mechanism</selectable>
+						<selectable><assignable>list of authentication mechanisms</assignable></selectable>
+					</selectables> to support user authentication.
+				</title>
+			</f-element>
+			<f-element id="fia-uau-5e2">
+				<title>
+					The TSF shall authenticate any user’s claimed identity according to the 
+					<selectables>
+						<selectable>all subject users and SDO owners shall successfully authenticate themselves using one of the
+							mechanisms listed in FIA_UAU.5.1</selectable>
+						<selectable>the Prove service shall not accept "none" as an authentication method</selectable>
+						<selectable><assignable>rules describing how each authentication mechanism
+							provides authentication</assignable></selectable>.
+					</selectables>
+				</title>
+				<note role="application">
+					This SFR describes the authentication mechanisms required for any user of any service as a
+					precondition for providing authorization to execute the service. This includes the authentication
+					of the owner of the SDOs of the service.
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
+
+		<f-component cc-id="fia-uau.6" name="Re-Authenticating">
+			<f-element id="fia-uau-6e1">
+				<title>
+					The TSF shall re-authenticate the user <h:b>for access to an SDO</h:b> under the conditions:<h:br/>
+					[<h:br/>
+					<h:ol type="1">
+						<h:li>Re-authentication and re-authorization by further successful completion of the
+							authentication and authorization methods in FIA_UAU.2, in accordance with the value of
+							the SDO.Reauth attribute of the SDO as follows:
+							<h:ol type="a">
+								<h:li>If SDO.Reauth has the value ‘each access’;</h:li>
+								<h:li>if SDO.Reauth has the value 'policy' and the TSF determines that the TOE satisfies
+									the policy for re-authentication and reauthorization</h:li>
+							</h:ol>
+						</h:li>
+					</h:ol><h:br/>]
+				</title>
+				<note role="application">
+					The allowed values for the SDO.Reauth attribute of an SDO are defined in FMT_MSA.3 and the
+					SDO Attributes Initialization Table. The rules in FDP_ACF.1.2 and also ensure that the need for
+					re-authorization has been checked before access to an SDO.<h:p/>
+					An SDO.Reauth value of ‘none’ indicates that no authentication of the subject user nor of the SDO
+					owners is necessary. It also indicates that no reauthorization for operations using the SDO is
+					necessary.<h:p/>
+					An SDO.Reauth value of policy indicates that there may be a more complicated set of
+					circumstances that trigger a re-auth (re-authentication of the users and owners as well as reauthorization of the operation). This could be a policy of a time limit for which a user can use an
+					SDO before re-authentication (e.g. 10 minutes or 24 hours). The ST should indicate the policies
+					allowed, and how the TOE evaluates the policies. The ST should also indicate the location of those
+					policies, and how the TOE protects the integrity of those policies.<h:p/>
+					When the TSF binds a user to access an SDO, this means that the TSF has authenticated the user
+					and that the TSF authorized the user to have the right to exercise one or more of the following
+					actions: generate the SDO, modify the SDO, including its security attributes, use the SDO in a
+					TOE operation, propagate or duplicate the SDO for use by a device external to the DSC, or destroy
+					the SDO. The user may not have exclusive rights to exercise the operations listed.<h:p/>
+					Policy as represented by the attributes in the SDO dictates whether or not a user must authenticate
+					itself in order to authorize access to the SDO.<h:p/>
+					It is possible that the attributes of some SDOs should remain unchanged, and that the attributes
+					of other SDOs may be changed by authorized users. If this is the case, then the ST author should
+					iterate this SFR and indicate in the TSS which SDOs apply to each iteration.<h:p/>
+				</note>
+				<aactivity>
+					<no-tests/>
+				</aactivity>
+			</f-element>
+		</f-component>
     </sec:SFRs>
 	
 	
