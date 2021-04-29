@@ -265,9 +265,6 @@
       <usecase title="Elephant-own device" id="elephant">
         <description>This is everything we need to describe in words about this use case.</description>	
 	  <config>
-                <ref-id>soup</ref-id><not><ref-id>ratatouille</ref-id><ref-id>pizza</ref-id></not>
-                <not><ref-id>table2</ref-id></not> <!-- This says you can't choose this selectable-->
-                <ref-id>optional-comp-example</ref-id><!-- Inclusion of an optional/objective requirement -->
 	  </config>
       </usecase>
       </usecases>
@@ -530,6 +527,10 @@ users of the same system.
 				TSS to determine whether it describes any supported asymmetric or symmetric key
 				generation functionality consistent with the claims made in FCS_CKM.1.1.
 			</TSS>
+			<Guidance>
+				The evaluator shall verify that the guidance instructs the administrator how to
+				configure the TOE to use the selected key types for all uses identified in the ST.
+			</Guidance>
 			<KMD>
 				The evaluator shall confirm that the KMD describes:<h:ul>
 				<h:li>The parsing interface and how the TSF imports keys for internal use</h:li>
@@ -540,10 +541,6 @@ users of the same system.
 				If the TOE uses the generated key in a key chain/hierarchy then the KMD shall
 				describe how the key is used as part of the key chain/hierarchy. 
 			</KMD>
-			<Guidance>
-				The evaluator shall verify that the guidance instructs the administrator how to
-				configure the TOE to use the selected key types for all uses identified in the ST.
-			</Guidance>
 			<Tests>
 				Testing for this function is performed in conjunction with FDP_ITC_EXT.1 and
 				FDP_ITC_EXT.2. If asymmetric or symmetric key generation functionality is
@@ -767,13 +764,13 @@ users of the same system.
 						the TSS describes the method of derivation and that this method is consistent with
 						FCS_CKM_EXT.5.<h:p/>
 					</TSS>
+					<Guidance>
+						There are no guidance evaluation activities for this component.
+					</Guidance>
 					<KMD>
 						The evaluator shall iterate through each of the methods selected by the ST and
 						confirm that the KMD describes the applicable selected methods.
 					</KMD>
-					<Guidance>
-						There are no guidance evaluation activities for this component.
-					</Guidance>
 					<Tests>
 						The evaluator shall iterate through each of the methods selected by the ST and
 						perform all applicable tests from the selected methods.
@@ -839,13 +836,13 @@ users of the same system.
 						FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then
 						the TOE must support “DH” from FCS_COP.1/KAT.<h:p/>
 					</TSS>
-					<KMD>
-						There are no KMD evaluation activities for this component.
-					</KMD>
 					<Guidance>
 						The evaluator shall verify that the guidance instructs the administrator how to
 						configure the TOE to use the selected key establishment scheme.
 					</Guidance>
+					<KMD>
+						There are no KMD evaluation activities for this component.
+					</KMD>
 					<Tests>
 						Testing for this SFR is performed under the corresponding functions in
 						FCS_COP.1/KAT.
@@ -988,19 +985,6 @@ users of the same system.
 					how that pattern is obtained and used, and that this justifies the claim that the pattern
 					does not contain any sensitive data. <h:p/>
 				</TSS>
-				<KMD>
-						The evaluator shall examine the KMD to verify that it identifies and describes the
-						interfaces that are used to service commands to read/write memory. The evaluator
-						shall examine the interface description for each different media type to ensure that
-						the interface supports the selections made by the ST author.<h:p/>
-						45 The evaluator shall examine the KMD to ensure that all keys and keying material
-						identified in the TSS and KMD have been accounted for.<h:p/>
-						46 Note that where selections include ‘destruction of reference to the key directly
-						followed by a request for garbage collection’ (for volatile memory) then the
-						evaluator shall examine the KMD to ensure that it explains the nature of the
-						destruction of the reference, the request for garbage collection, and of the garbage
-						collection process itself.<h:p/>
-				</KMD>
 				<Guidance>
 					The evaluator shall check that the guidance documentation for the TOE requires
 					users to ensure that the TOE remains under the user’s control while a session is
@@ -1026,6 +1010,19 @@ users of the same system.
 					to be contained in a file less than 982 bytes which would be completely contained in the
 					master file table.<h:p/>
 				</Guidance>
+				<KMD>
+						The evaluator shall examine the KMD to verify that it identifies and describes the
+						interfaces that are used to service commands to read/write memory. The evaluator
+						shall examine the interface description for each different media type to ensure that
+						the interface supports the selections made by the ST author.<h:p/>
+						45 The evaluator shall examine the KMD to ensure that all keys and keying material
+						identified in the TSS and KMD have been accounted for.<h:p/>
+						46 Note that where selections include ‘destruction of reference to the key directly
+						followed by a request for garbage collection’ (for volatile memory) then the
+						evaluator shall examine the KMD to ensure that it explains the nature of the
+						destruction of the reference, the request for garbage collection, and of the garbage
+						collection process itself.<h:p/>
+				</KMD>
 				<Tests>
 					The following tests require the developer to provide access to a test platform that
 					provides the evaluator with tools that are typically not found on factory products.<h:p/>
