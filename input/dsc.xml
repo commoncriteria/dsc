@@ -62,11 +62,8 @@
       The scope of this Protection Profile (PP) is to
       describe the security functionality of QQQQ products in terms of <xref g='CC'/>
       and to define functional and assurance requirements for such products.
-      <choice>An operating system is software that manages computer hardware and software
-      resources, and provides common services for application programs. 
-
-
-    </section>
+      </section>
+	
     <tech-terms>
       <term abbr='AES' full="Advanced Encryption Standard"/>
       <term abbr='API' full="Application Programming Interface"/>
