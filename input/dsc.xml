@@ -2487,7 +2487,7 @@ users of the same system.
 					The following or equivalent steps shall be taken to test the TSF.<h:p/>
 					For each supported modulus size, underlying hash algorithm, and length of the
 					trailer field (1- or 2-byte), the evaluator shall generate NT sets of recoverable
-					message (M1), non-recoverable message (M2), salt, public key and signature (<h:i>&#03A3;</h:i>).<h:p/>
+					message (M1), non-recoverable message (M2), salt, public key and signature (<h:i>&#931;</h:i>).<h:p/>
 					<h:ol type="1">
 						<h:li><h:i>N<h:sub>T</h:sub></h:i> shall be greater than or equal to 20.</h:li>
 						<h:li>The length of salts shall be selected from its supported length range of salt.
@@ -2552,10 +2552,10 @@ users of the same system.
 									bit string <h:i>D</h:i> in the message representative is set to all zeroes except for
 									the rightmost <h:i>L<h:sub>S</h:sub></h:i> bits of <h:i>D</h:i>.</h:li>
 								<h:li> (non-conformant signature length) Altering a signature so that the length
-									of signature <h:i>&#03A3;</h:i> is changed to modulus size and the most significant bit of
-									signature <h:i>&#03A3;</h:i> is set equal to '1'.</h:li>
+									of signature <h:i>&#931;</h:i> is changed to modulus size and the most significant bit of
+									signature <h:i>&#931;</h:i> is set equal to '1'.</h:li>
 								<h:li>(non-conformant signature) Altering a signature so that the integer
-									converted from signature <h:i>&#03A3;</h:i> is greater than modulus <h:i>n</h:i>.</h:li>
+									converted from signature <h:i>&#931;</h:i> is greater than modulus <h:i>n</h:i>.</h:li>
 							</h:ol>
 						</h:li>
 					</h:ol>
@@ -2888,12 +2888,12 @@ users of the same system.
 					ciphertext value using key of each size consisting of all zeros and an IV of all zeros.<h:p/>
 					<h:b><h:i>AES-CBC Multi-Block Message Test</h:i></h:b><h:p/>
 					The evaluator shall test the encrypt functionality by encrypting nine i-block
-					messages for each selected key size, for 2 &#2264; i &#2264; 10. For each test, the 
+					messages for each selected key size, for 2 &#8804; i &#8804; 10. For each test, the 
 					evaluator shall supply a key, an IV, and a plaintext message of length i blocks, and encrypt the
 					message using AES-CBC. The resulting ciphertext values shall be compared to the
 					results of encrypting the plaintext messages using a known good implementation.<h:p/>
 					The evaluator shall test the decrypt functionality by decrypting nine i-block
-					messages for each selected key size, for 2 &#2264; i &#2264; 10. For each test, the evaluator shall
+					messages for each selected key size, for 2 &#8804; i &#8804; 10. For each test, the evaluator shall
 					supply a key, an IV, and a ciphertext message of length i blocks, and decrypt the
 					message using AES-CBC. The resulting plaintext values shall be compared to the
 					results of decrypting the ciphertext messages using a known good implementation.<h:p/>
@@ -2946,10 +2946,10 @@ users of the same system.
 					functionality of AES-CCM for the following input parameter and tag lengths:<h:p/><h:ul>
 					<h:li><h:b>Keys:</h:b> All supported and selected key sizes (e.g., 128, 192, or 256 bits).</h:li>
 					<h:li><h:b>Associated Data:</h:b> Two or three values for associated data length: The minimum
-					(&#2265; 0 bytes) and maximum (&#2264; 32 bytes) supported associated data lengths, and
+					(&#8805; 0 bytes) and maximum (&#8804; 32 bytes) supported associated data lengths, and
 					2^16 (65536) bytes, if supported.</h:li>
-					<h:li><h:b>Payload:</h:b> Two values for payload length: The minimum (&#2265; 0 bytes) and
-					maximum (&#2264; 32 bytes) supported payload lengths.</h:li>
+					<h:li><h:b>Payload:</h:b> Two values for payload length: The minimum (&#8805; 0 bytes) and
+					maximum (&#8804; 32 bytes) supported payload lengths.</h:li>
 					<h:li><h:b>Nonces:</h:b> All supported nonce lengths (e.g., 8, 9, 10, 11, 12, 13) in bytes.</h:li>
 					<h:li><h:b>Tag:</h:b> All supported tag lengths (e.g., 4, 6, 8, 10, 12, 14, 16) in bytes.</h:li></h:ul>
 					The testing for CCM consists of five tests. To determine correctness in each of the
@@ -3061,16 +3061,16 @@ users of the same system.
 					ciphertext value using key of each size consisting of all zeros.<h:p/>
 					<h:b><h:i>AES-CTR Multi-Block Message Test</h:i></h:b><h:p/>
 					The evaluator shall test the encrypt functionality by encrypting nine i-block
-					messages for each selected key size, for 2 &#2264; i &#2264; 10. For each test, the evaluator shall
+					messages for each selected key size, for 2 &#8804; i &#8804; 10. For each test, the evaluator shall
 					supply a key and a plaintext message of length i blocks, and encrypt the message
 					using AES-CTR. The resulting ciphertext values shall be compared to the results of
 					encrypting the plaintext messages using a known good implementation.<h:p/>
 					The evaluator shall test the decrypt functionality by decrypting nine i-block
-					messages for each selected key size, for 2 &#2264; i &#2264; 10. For each test, the evaluator shall
+					messages for each selected key size, for 2 &#8804; i &#8804; 10. For each test, the evaluator shall
 					supply a key and a ciphertext message of length i blocks, and decrypt the message
 					using AES-CTR. The resulting plaintext values shall be compared to the results of
 					decrypting the ciphertext messages using a known good implementation.<h:p/>
-					<h:b><h:i>AES-CTR Monte Carlo Tests</h:b></h:i><h:p/>
+					<h:b><h:i>AES-CTR Monte Carlo Tests</h:i></h:b><h:p/>
 					The evaluator shall test the encrypt functionality for each selected key size using
 					100 2-tuples of pseudo-random values for plaintext and keys.<h:p/>
 					The evaluator shall supply a single 2-tuple of pseudo-random values for each
