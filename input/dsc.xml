@@ -38,7 +38,7 @@
                         562626874aacfbb9beb397fca5be128c86ec4ebf
                         /input/tls.xml</raw-url>
 		<url>https://www.niap-ccevs.org/Profile/Info.cfm?PPID=439&amp;id=439</url>
-               <depends on="pizza"/>
+<!--               <depends on="pizza"/>  -->
 	</include-pkg>
 	    
     <include-pkg id="ssh">
@@ -63,48 +63,7 @@
       describe the security functionality of QQQQ products in terms of <xref g='CC'/>
       and to define functional and assurance requirements for such products.
       <choice>An operating system is software that manages computer hardware and software
-      resources, and provides common services for application programs. The hardware
-      it manages may be <selectables><selectable id="physical">physical</selectable>
-		                             <selectable id="virtual">virtual</selectable><selectable id="imgi">imaginary</selectable></selectables>.</choice>
-      <h:div> Something</h:div>
-      <h:p> This is going to show some tests:
- 	<h:ul>
-	  <h:li> Terms with abbrs like ASLR, or API, should be found a linked automatically.</h:li>
-          <h:li> And components can be refered to by their name: FQQ_QQQ.1 </h:li>
-          <h:li> And so can requirements: FQQ_QQQ.1.1 or by their unique identifier: <xref to="a-unique-id"/></h:li>
- 
-   	  <h:li> Or you can stop them <no-link>ASLR</no-link> </h:li>
-          <h:li> This is how you do a picture: 
-                <figure entity="images/niaplogo.png" title="Niap's Logo " id="fig-logo"/> </h:li>
-          <h:li> And this is how you reference it: <xref to="fig-logo"/></h:li>
-          <h:li> This is how you do an equation with an arbitrary counter:  
-              <equation id="quadeq">x=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}</equation>
-
-</h:li> 
-          <h:li> And this is how you reference it: <xref to="quadeq"/> </h:li>
-          <h:li> <h:div><depends on="aaa"/> 
-                    Some text </h:div> </h:li> 
-			<h:li> <h:div><depends on="a-feature-id"/>
-                    Someting dependent on a feature</h:div> </h:li> 
-           
-          <h:li> And here's the audit event table for mandatory requirements. 
-           
-			 <xref g="t-audit-mandatory"/> for more information.
-<!-- 
-                 <audit-events table="mandatory"/> -->
-          </h:li>
-          <h:li> Test for an xref to section <xref to="Threats"/> </h:li>
-        </h:ul>
-        And this is another sentence (or fragment). I added this sentence and deleted the next one. 
-		This uses the plural acronym OSes. 
-      </h:p>
-      <h:p> And here's a generic coutner 
-                       <ctr id="c-abc" ctr-type="Abc ">: Some Words</ctr>
-      </h:p>
-      <h:p>
-        And here's the reference to it <xref to="c-abc"/>.
-      </h:p>
- 
+      resources, and provides common services for application programs. 
 
 
     </section>
@@ -1762,11 +1721,11 @@ users of the same system.
 				The TSF shall perform [<h:i>digital signature generation</h:i>] using the supported methods 
 				for signature generation defined in the following rows of <xref to="fcs-cop-siggen-sels"/>
 				<selectables>
-					<selectable id="sel=fcs-cop-siggen-1">SigGen1</selectable>
-					<selectable id="sel=fcs-cop-siggen-2">SigGen2</selectable>
-					<selectable id="sel=fcs-cop-siggen-3">SigGen3</selectable>
-					<selectable id="sel=fcs-cop-siggen-4">SigGen4</selectable>
-					<selectable id="sel=fcs-cop-siggen-5">SigGen5</selectable>
+					<selectable id="sel-fcs-cop-siggen-1">SigGen1</selectable>
+					<selectable id="sel-fcs-cop-siggen-2">SigGen2</selectable>
+					<selectable id="sel-fcs-cop-siggen-3">SigGen3</selectable>
+					<selectable id="sel-fcs-cop-siggen-4">SigGen4</selectable>
+					<selectable id="sel-fcs-cop-siggen-5">SigGen5</selectable>
 				</selectables>.<h:p/>
 				
 				<h:b><ctr ctr-type='Table' id="fcs-cop-siggen-sels">: Supported Methods for Signature Generation Operation</ctr></h:b><h:br/>	
@@ -1922,11 +1881,11 @@ users of the same system.
 				The TSF shall perform [<h:i>digital signature verification</h:i>] using the supported methods 
 				for signature verification defined in the following rows of <xref to="fcs-cop-sigver-sels"/>
 				<selectables>
-					<selectable id="sel=fcs-cop-sigver-1">SigVer1</selectable>
-					<selectable id="sel=fcs-cop-sigver-2">SigVer2</selectable>
-					<selectable id="sel=fcs-cop-sigver-3">SigVer3</selectable>
-					<selectable id="sel=fcs-cop-sigver-4">SigVer4</selectable>
-					<selectable id="sel=fcs-cop-sigver-5">SigVer5</selectable>
+					<selectable id="sel-fcs-cop-sigver-1">SigVer1</selectable>
+					<selectable id="sel-fcs-cop-sigver-2">SigVer2</selectable>
+					<selectable id="sel-fcs-cop-sigver-3">SigVer3</selectable>
+					<selectable id="sel-fcs-cop-sigver-4">SigVer4</selectable>
+					<selectable id="sel-fcs-cop-sigver-5">SigVer5</selectable>
 				</selectables>.<h:p/>
 				
 				<h:b><ctr ctr-type='Table' id="fcs-cop-sigver-sels">: Supported Methods for Signature Verification Operation</ctr></h:b><h:br/>	
