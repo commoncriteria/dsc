@@ -2487,7 +2487,7 @@ users of the same system.
 					The following or equivalent steps shall be taken to test the TSF.<h:p/>
 					For each supported modulus size, underlying hash algorithm, and length of the
 					trailer field (1- or 2-byte), the evaluator shall generate NT sets of recoverable
-					message (M1), non-recoverable message (M2), salt, public key and signature (<h:i>&Sigma;</h:i>).<h:p/>
+					message (M1), non-recoverable message (M2), salt, public key and signature (<h:i>#03A3;</h:i>).<h:p/>
 					<h:ol type="1">
 						<h:li><h:i>N<h:sub>T</h:sub></h:i> shall be greater than or equal to 20.</h:li>
 						<h:li>The length of salts shall be selected from its supported length range of salt.
@@ -2552,10 +2552,10 @@ users of the same system.
 									bit string <h:i>D</h:i> in the message representative is set to all zeroes except for
 									the rightmost <h:i>L<h:sub>S</h:sub></h:i> bits of <h:i>D</h:i>.</h:li>
 								<h:li> (non-conformant signature length) Altering a signature so that the length
-									of signature <h:i>&Sigma;</h:i> is changed to modulus size and the most significant bit of
-									signature <h:i>&Sigma;</h:i> is set equal to '1'.</h:li>
+									of signature <h:i>#03A3;</h:i> is changed to modulus size and the most significant bit of
+									signature <h:i>#03A3;</h:i> is set equal to '1'.</h:li>
 								<h:li>(non-conformant signature) Altering a signature so that the integer
-									converted from signature <h:i>&Sigma;</h:i> is greater than modulus <h:i>n</h:i>.</h:li>
+									converted from signature <h:i>#03A3;</h:i> is greater than modulus <h:i>n</h:i>.</h:li>
 							</h:ol>
 						</h:li>
 					</h:ol>
