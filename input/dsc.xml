@@ -2,9 +2,12 @@
 <?xml-stylesheet type="text/xsl" href="../transforms/pp2html.xsl"?>
 
 <PP xmlns="https://niap-ccevs.org/cc/v1"
-    xmlns:sec="https://niap-ccevs.org/cc/v1/section" name="collaborative Protection Profile for Dedicated Security Component"
-    xmlns:h="http://www.w3.org/1999/xhtml" boilerplate='yes'>
+    xmlns:sec="https://niap-ccevs.org/cc/v1/section" 
+    xmlns:h="http://www.w3.org/1999/xhtml" 
 
+    target-products="Dedicated Security Components"
+    boilerplate='yes'>
+    <cPP/>
   <!-- <inline-comment color='green'> Hello World QQQQ </inline-comment> -->
   <!-- <inline-comment color='blue' linebreak='yes'> Hello World QQQQ </inline-comment> -->
   <PPReference>
@@ -465,7 +468,6 @@ users of the same system.
 				[assignment: <h:i>cryptographic key sizes</h:i>]
 				that meet the following: [assignment: <h:i>list of standards</h:i>]</h:s>.
 			</title>
-		</f-element>
 		<note role="application">
 			Parsing of keys can refer to both the act of importing keys from outside the TOE boundary and to
 			the act of issuing commands or parameters to the TOE that trigger the TSF to perform a key
@@ -504,6 +506,7 @@ users of the same system.
 				FCS_CKM.1/AK or FCS_CKM.1/SK.
 			</Tests>
 		</aactivity>
+		</f-element>
 	</f-component>
 		  
 		<f-component cc-id="fcs_ckm.1" iteration="AK" name="Cryptographic Key Generation (Asymmetric Keys)">
