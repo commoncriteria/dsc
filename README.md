@@ -14,7 +14,9 @@ A list of products that have passed evaluation against this Protection Profile c
 ## Draft Version
 
 * [collaborative Protection Profile for Dedicated Security Component](https://commoncriteria.github.io/pp/dsc/dsc-release.html) (html)
+* [Supporting Documents for Dedicated Security Component cPP](https://commoncriteria.github.io/pp/dsc/dsc-sd.html) (html)
 * [collaborative Protection Profile for Dedicated Security Component](https://commoncriteria.github.io/pp/dsc/dsc-release.pdf) (pdf)
+* [Supporting Documents for Dedicated Security Component cPP](https://commoncriteria.github.io/pp/dsc/dsc-sd.pdf) (pdf)
 
 ## Release Version
 * [collaborative Protection Profile for Dedicated Security Component](https://www.niap-ccevs.org/MMO/PP/cpp_dsc_v1.0.pdf)
