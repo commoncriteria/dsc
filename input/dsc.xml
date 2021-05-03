@@ -4401,8 +4401,69 @@ users of the same system.
 					selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed.	<h:p/>			
 				</note>
 				<aactivity>
-					<no-tests/>
-				</aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to determine that it contains a description for
+					how successive unsuccessful authorization attempts are detected and tracked. The
+					evaluator shall examine the TSS to determine that is contains a description of the
+					actions in the event that the authorization attempt threshold is met or exceeded.<h:p/>
+					The evaluator shall also examine the TSS to determine that it describes how the
+					failed authorization attempt counter is incremented before the authorization is
+					verified.<h:p/>
+					The evaluator shall also examine the TSS to determine the behaviour that will occur
+					if there are excessive failed authorization attempts, specifically whether future
+					attempts are prevented for a static or configurable amount of time, future attempts
+					are prevented indefinitely, or a factory reset is triggered.
+				</TSS>
+				<Guidance>
+					The evaluator shall examine the guidance documentation to ensure that instructions
+					for configuring the number of successive unsuccessful authentication attempts and
+					time period (if implemented) are provided, and that the process of unlocking the
+					SDOs is described for each “action” specified (if that option is chosen).<h:p/>
+					The evaluator shall examine the guidance documentation to confirm that it
+					describes, and identifies the importance of, any actions that are required in order to
+					ensure that access to SDOs can be maintained, unless it is made permanently
+					unavailable due to a factory reset.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform the following tests for each method by which the TSF
+					authorizes access the SDOs (e.g. any passwords entered as part of establishing
+					authorization):
+					<testlist>
+						<test>
+							The evaluator shall use the operational guidance to configure the number of
+							successive unsuccessful authorization attempts allowed by the TOE (and, if the time
+							period selection in FIA_AFL_EXT.1.3 is included in the ST, then the evaluator
+							shall also use the operational guidance to configure the time period after which
+							access is re-enabled). The evaluator shall test that once the authorization attempts
+							limit is reached, authorization attempts with valid credentials are no longer
+							successful.
+						</test>
+						<test>
+							After reaching the limit for unsuccessful authorization attempts as in Test 1
+							above, the evaluator shall proceed as follows. If the action selected in
+							FIA_AFL_EXT.1.3 is included in the ST then the evaluator shall confirm by testing
+							that following the operational guidance and performing each action specified in the 
+							ST to re-enable access results in successful access. If the time period selection in
+							FIA_AFL_EXT.1.3 is included in the ST, then the evaluator shall wait for just less
+							than the time period configured in Test 1 and show that an authorization attempt
+							using valid credentials does not result in successful access. The evaluator shall then
+							wait until just after the time period configured in Test 1 and show that an
+							authorization attempt using valid credentials results in successful access.
+						</test>
+						<test>
+							[conditional]: If <h:u>factory reset the TOE wiping out all non-persistent SDOs,
+							as described by FDP_FRS_EXT.2</h:u> is selected in FIA_AFL_EXT.1.3, the evaluator
+							shall perform the test required by FDP_FRS_EXT.2 with step 5 replaced with “The
+							evaluator shall initiate a factory reset by deliberately meeting or surpassing the
+							threshold for unsuccessful authorization attempts, depending on whether meets or
+							surpasses is selected in FIA_AFL_EXT.1.3.”
+						</test>
+					</testlist>
+				</Tests>				
+			</aactivity>
 			</f-element>
 		</f-component>
 		
@@ -4429,7 +4490,55 @@ users of the same system.
 					actions within the TOE, both for a single event and over a session. 
 				</note>
 				<aactivity>
-					<no-tests/>
+					<TSS>
+						The evaluator shall ensure that the TSS describes for each of the TSF functions
+						listed in FIA_SOS.2.2, if the available key space is configurable, and the size (or
+						range) of the key space employed to generate authorization values.<h:p/>
+						The evaluator shall ensure that the TSS states that the quality metrics provided is
+						based on the assumption of sufficient entropy being provided in accordance with
+						the information given in [DSCcPP] Annex D.<h:p/>
+						The evaluator shall ensure that the TSS describes the restrictions implemented in
+						order to restrict consecutive authentication attempts. (Authentication throttling)<h:p/>
+						The evaluator shall ensure that the TSS describes the mechanism used to generate
+						authorization values and documents the quality metric that the mechanism provides.
+						The information provided in the TSS shall demonstrate that:<h:ol type="a">
+						<h:li>The probability that a random single authentication attempt will be
+							successful is less than one in 1,000,000; and</h:li>
+						<h:li>The probability that random multiple authentication attempts during a one
+							(1) minute period will be successful is less than one in 100,000.</h:li></h:ol>
+					</TSS>
+					<Guidance>
+						The evaluator shall examine the guidance documentation to determine that it
+						describes any configuration necessary to enforce the use of TSF generated
+						authorization values listed in FIA_SOS.2.2.<h:p/>
+						The evaluator shall ensure that the guidance documentation provides any
+						instructions needed to set parameters affecting the available key spaces.
+					</Guidance>
+					<KMD>
+						There are no KMD evaluation activities for this component.
+					</KMD>
+					<Tests>
+						The evaluator shall perform the following tests.<h:p/>
+						<testlist>
+							<test>
+								The evaluator shall compose a set of 50 authorization values that meet
+								the requirements, and 50 authorization values that fail to meet the requirements.<h:ol type="a">
+								<h:li>For each authentication value that meets the requirements, the evaluator
+									shall verify that the TOE supports the authentication value.</h:li>
+								<h:li>For each authentication value that does not meet the requirements, the
+									evaluator shall verify that the TOE does not support the authentication
+									value.</h:li></h:ol>
+								While the evaluator is not required (nor is it feasible) to test all possible
+								compositions of authentication values, the evaluator shall ensure that the key
+								space identified in the TSS is valid.
+							</test>
+							<test>
+								For each TSF function listed in FIA_SOS.2.2 the TOE shall be
+								configured to generate the authentication values; the evaluator shall check that
+								the TOE produces the authentication values.
+							</test>
+						</testlist>
+					</Tests>
 				</aactivity>
 			</f-element>
 		</f-component>
@@ -4460,7 +4569,37 @@ users of the same system.
 					The means of validation may vary based on the type of authentication token.<h:p/>
 				</note>
 				<aactivity>
-					<no-tests/>
+					<TSS>
+						The evaluator shall examine the TSS to determine that it describes the identification
+						and authentication process for each supported method (PIN/try-PIN, salted hash,
+						etc.), the circumstances in which each supported method is used, and constitutes
+						“successful authentication.”<h:p/>
+						The evaluator shall examine the TSS to determine that it describes which actions
+						are allowed before user identification and authentication. The evaluator shall also
+						determine that the TSS describes, for each action that does require identification
+						and authentication, the method and circumstances by which the authentication is
+						performed (e.g., as per the application note, the TSF may authenticate a user once
+						rather than each time access to an SDO is attempted; the TSS shall describe when
+						authentication is or is not required in order to perform a TSF-mediated action).
+					</TSS>
+					<Guidance>
+						The evaluator shall examine the guidance documentation to determine that any
+						necessary preparatory steps (e.g., establishing valid credential material such as PIN) 
+						to logging in are described. For each supported the login method, the evaluator shall
+						ensure the guidance documentation provides clear instructions for successfully
+						logging on.
+					</Guidance>
+					<KMD>
+						There are no KMD evaluation activities for this component.
+					</KMD>
+					<Tests>
+						The evaluator shall use the guidance documentation to configure the appropriate
+						credentials supported for each authentication method. For that authentication
+						method, the evaluator shall attempt to perform TSF-mediated actions that require
+						successful use of that authentication method and subsequently show that providing
+						correct I&A information results in the ability to perform the requested action, while
+						providing incorrect information results in denial of access.
+					</Tests>
 				</aactivity>
 			</f-element>
 		</f-component>
@@ -4494,7 +4633,29 @@ users of the same system.
 					of the owner of the SDOs of the service.
 				</note>
 				<aactivity>
-					<no-tests/>
+					<TSS>
+						The evaluator shall examine the TSS and ensure that it describes the authentication
+						mechanisms used to support user authentication for the Prove service as well as how
+						each authentication mechanism provides authentication for the Prove service.
+					</TSS>
+					<Guidance>
+						If the supported authentication mechanisms are configurable, the evaluator shall
+						examine the operational guidance to verify that it describes how to configure the
+						authentication mechanisms used to provide authentication for the Prove service.
+					</Guidance>
+					<KMD>
+						There are no KMD evaluation activities for this component.
+					</KMD>
+					<Tests>
+						For each supported authentication mechanism, the evaluator shall verify that valid
+						credentials result in successful authentication and invalid credentials result in a
+						rejected authentication attempt. If the supported authentication mechanisms are
+						configurable, the evaluator shall follow the operational guidance to enable/disable
+						the various mechanisms and ensure that valid credentials do not result in successful
+						authentication if that mechanism is disabled, or that there is no interface to provide
+						authentication credentials over an external interface when that mechanism is
+						disabled.
+					</Tests>
 				</aactivity>
 			</f-element>
 		</f-component>
@@ -4540,13 +4701,35 @@ users of the same system.
 					iterate this SFR and indicate in the TSS which SDOs apply to each iteration.<h:p/>
 				</note>
 				<aactivity>
-					<no-tests/>
+					<TSS>
+						The evaluator shall examine the TSS to determine that it describes each of the
+						options for reauthorization.
+					</TSS>
+					<Guidance>
+						There are no AGD evaluation activities for this component.
+					</Guidance>
+					<KMD>
+						There are no KMD evaluation activities for this component.
+					</KMD>
+					<Tests>
+						The evaluator shall use the configuration guidance to create an SDO with each of
+						the options for reauthorization, then identify functions to exercise each of these
+						options, then execute these options providing the correct authorization confirming
+						that the operation succeeded with respect to the reauthorization option chosen. The
+						evaluator shall then attempt to execute these functions while providing the incorrect
+						authorization and confirming that the operation fails.
+					</Tests>
 				</aactivity>
 			</f-element>
 		</f-component>
 		
 		</section>
-		
+	    
+<!--	    
+    <section id="fmt" title="Security Management (FMT)" 
+
+    </section>
+-->		
     </sec:SFRs>
 	
 	
