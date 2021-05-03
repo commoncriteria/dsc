@@ -3778,7 +3778,7 @@ users of the same system.
 		<TSS>
 			The evaluator shall examine the TSS to verify that it describes the policy rules for
 			the Access Control SFP. Specifically, the evaluator should be able to identify, for
-			any arbitrary subject-object-operation pairing, which of the following is true:<h:ul type="a">
+			any arbitrary subject-object-operation pairing, which of the following is true:<h:ol type="a">
 			<h:li>The subject can always perform the desired operation.</h:li>
 			<h:li>The subject can never perform the desired operation, either because they
 				lack sufficient permission or because the TSF includes no interface to
@@ -3794,7 +3794,7 @@ users of the same system.
 			<h:li>Whether the subject can perform the desired operation depends on TSF
 				configuration (which the evaluator shall verify is described in the TSS as
 				part of the evaluation of FMT_SMF.1).</h:li>
-			<h:li>Some combination of c, d, and e.</h:li></h:ul>
+			<h:li>Some combination of c, d, and e.</h:li></h:ol>
 				Given that this SFR requires a large number of potential subject-object-operation
 				pairings to be identified, it is not the expectation that the TSS contain an exhaustive
 				list of these pairings. It is possible that large numbers of pairings are addressed by
@@ -3808,6 +3808,7 @@ users of the same system.
 			objects, and operations as the PP. If this is the case, the evaluator shall verify that
 			the TSS includes a mapping that unambiguously shows how the vendor’s preferred
 			terminology corresponds to what the PP defines.<h:p/>
+		</TSS>
 		<Guidance>
 			For any access control policy enforcement behavior that is configurable, the
 			evaluator shall ensure that the operational guidance describes how to perform the
