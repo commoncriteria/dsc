@@ -5223,6 +5223,25 @@ users of the same system.
 		</f-component>
 
 		<f-component cc-id="fmt_msa.3" name="Static Attribute Initialization">
+			This SFR deals with the initialization of the attributes of an SDO when it is created by parsing or
+			provisioning. The generation process includes SDOs created by the TSF (provisioned) and those
+			imported via FDP_ITC_EXT.2 (parsed).<h:p/>
+			The TSF is expected to give an SDO a set of security attributes at the time of its creation. This set
+			is expected to include at least the following attributes:<h:ul>
+			<h:li>SDO identifier</h:li>
+			<h:li>SDO type</h:li>
+			<h:li>SDO reference authorization data (i.e. the data that is used when determining whether to
+			grant access to an SDO, for each relevant mode of access, on the basis of an authorization
+			token presented to the DSC)</h:li>
+			<h:li>Re-authorization conditions (i.e. event after which re-authorization is required)</h:li>
+			<h:li>Confidential-SDE list (each SDE in this list is held encrypted when the SDO is stored)</h:li>
+			<h:li>Export Flag (indicating whether the SDO is allowed to be propagated)</h:li>
+			<h:li>Integrity protection data</h:li>
+			<h:li>Binding Data (created by the TOE to strongly link or associate the SDO with other entities
+			such as the TOE itself or with other SDOs in a hierarchy such as a child to a parent).</h:li></h:ul>
+			The TSF provides the capability to protect the contents of an SDO (i.e. the set of its SDEs together
+			with the SDO attributes) from unauthorized modification. The DSC shall check for such
+			modifications before using the SDO or any of its SDEs. <h:p/>		
 			<f-element cc-id="fmt-msa-3e1">
 				<title>
 					The TSF shall enforce the [<h:i>Access Control SFP</h:i>] to provide 
@@ -5271,27 +5290,6 @@ users of the same system.
 							<h:td>Import and generation process</h:td><h:td><assignable>range of allowed values</assignable></h:td></h:tr>
 					</h:table>
 				</title>
-				<note role="application">
-					This SFR deals with the initialization of the attributes of an SDO when it is created by parsing or
-					provisioning. The generation process includes SDOs created by the TSF (provisioned) and those
-					imported via FDP_ITC_EXT.2 (parsed).<h:p/>
-					The TSF is expected to give an SDO a set of security attributes at the time of its creation. This set
-					is expected to include at least the following attributes:<h:ul>
-					<h:li>SDO identifier</h:li>
-					<h:li>SDO type</h:li>
-					<h:li>SDO reference authorization data (i.e. the data that is used when determining whether to
-					grant access to an SDO, for each relevant mode of access, on the basis of an authorization
-					token presented to the DSC)</h:li>
-					<h:li>Re-authorization conditions (i.e. event after which re-authorization is required)</h:li>
-					<h:li>Confidential-SDE list (each SDE in this list is held encrypted when the SDO is stored)</h:li>
-					<h:li>Export Flag (indicating whether the SDO is allowed to be propagated)</h:li>
-					<h:li>Integrity protection data</h:li>
-					<h:li>Binding Data (created by the TOE to strongly link or associate the SDO with other entities
-					such as the TOE itself or with other SDOs in a hierarchy such as a child to a parent).</h:li></h:ul>
-					The TSF provides the capability to protect the contents of an SDO (i.e. the set of its SDEs together
-					with the SDO attributes) from unauthorized modification. The DSC shall check for such
-					modifications before using the SDO or any of its SDEs. <h:p/>
-				</note>
 				<note role="application">
 					Both admin and client application roles can initiate the import process. The imported object
 					contains the default values for each attribute, where allowed. The TSF can override default values
