@@ -5029,7 +5029,7 @@ users of the same system.
 						credentials supported for each authentication method. For that authentication
 						method, the evaluator shall attempt to perform TSF-mediated actions that require
 						successful use of that authentication method and subsequently show that providing
-						correct I&A information results in the ability to perform the requested action, while
+						correct I&amp;A information results in the ability to perform the requested action, while
 						providing incorrect information results in denial of access.
 					</Tests>
 				</aactivity>
