@@ -1562,7 +1562,6 @@ users of the same system.
 					be claimed.<h:p/>
 				</note>
 				<aactivity>
-				<aactivity>
 					<TSS>
 						The evaluator shall check that the TSS includes a description of the key derivation
 						functions and shall check that this uses a key derivation algorithm and key sizes
