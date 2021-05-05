@@ -4338,6 +4338,88 @@ users of the same system.
 		</f-element>
 	</f-component>
 
+	<f-component cc-id="fdp_dau.1" iteration="prove" name="Basic Data Authentication (for Use with The Prove Service)" status="sel-based">
+		<f-element id="fdp-dau-1e1-prove">
+			<title>
+				The TSF shall provide a capability to generate evidence that can be used as
+				a guarantee of the validity of 
+				<selectables>
+					<selectable><assignable>list of objects or information types</assignable> declared
+						valid by the TSF</selectable>
+					<selectable><assignable>list of objects or information types</assignable>
+						declared valid by an authenticated user</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fdp-dau-1e2-prove">
+			<title>
+				The TSF shall provide <assignable>list of subjects</assignable> with the ability to
+				verify evidence of the validity of the indicated information.
+			</title>
+			<note role="application">
+				This SFR describes the output of the Prove service provided by the DSC. The evidence of validity
+				or authenticity, or other evidence derived, is expected to be processed by the RoT for Measurement.
+				Additionally, the use of a RoT for Reporting presupposes a logging capability or other means of
+				generating state information that could be conveyed to external entities. Therefore,
+				FDP_DAU.1.1/Prove must be selected if-and-only-if the RoT for Measurement and the RoT for
+				Reporting are both selected in FPT_ROT_EXT.1.1. An ‘authenticated user’ in the sense of the
+				selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according
+				to the mechanisms of FIA_UAU.5.<h:p/>
+				In FDP_DAU.1.1/Prove, the DSC will issue a validity-stamped or authenticity-stamped piece of
+				data. In this case, validity-stamped means that the form of the issued data enables an external
+				entity to verify that the data has been issued via the DSC’s Prove service. The implementation
+				might be via a DSC cryptographic signature, or a MAC using a symmetric key shared with the 
+				receiver, for example. Authenticity-stamped means that the receiver of the data can verify that the
+				user providing this data is authentic.<h:p/>
+				Data that would need to be validity-stamped includes data over which the DSC is the authority,
+				such as the state of its own firmware. Data that would need to be authenticity-stamped includes
+				data about which the DSC knows nothing, but where it will issue the data with a statement that the
+				DSC has authenticated the source of this data.<h:p/>
+				For data that is validity-stamped, the DSC does nothing but respond to a request to issue the data;
+				thus, authentication of the user issuing the data is not needed and is covered by
+				FDP_DAU.1/Prove. Otherwise, in the case the DSC has no understanding of this data, a step is
+				needed via FIA_UAU.5 by which the DSC authenticates the user for this service, and that the DSC
+				or Prove service will therefore vouch for the user, not the validity of the data itself.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS and ensure it describes the data that is validitystamped and where applicable, authenticity-stamped to the level of understanding
+					the DSC has about the data or its origin (from the user providing it to the Prove
+					service). The evaluator shall also ensure that the TSS describes how the evidence
+					of validity or authenticity is generated, including the subjects who perform the
+					verification, and the form the validity or authenticity stamp is represented (i.e. a
+					cryptographic signature, MAC using a symmetric key shared with the receiver,
+					etc.).
+				</TSS>
+				<Guidance>
+					The evaluator shall ensure that the operational guidance describes how to configure
+					validity-stamping on the TOE.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The following testing may require the TOE developer to make a test harness
+					available to the evaluator that allows the evaluator to interface directly with the
+					DSC. Tests may also require the use of an automated script provided by either the
+					vendor or the evaluator. If a test script is made available, the evaluator shall verify
+					that it includes sufficient detail to validate the claims made in the TSS.<h:p/>
+					<h:b>Test 1: Demonstrate the TOE can validity-stamp data.</h:b><h:p/>
+					For each configurable option to validity-stamp data, the evaluator shall configure
+					the TOE to create a data object or import a data object which has not-yet been
+					validity-stamped. The evaluator shall then instruct the TOE to validity-stamp this
+					data object. The evaluator shall then export each data object and demonstrate it has
+					been validity-stamped in accordance with the configured options.<h:p/>
+					<h:b>Test 2: Demonstrate the TOE can disable validity-stamping of data objects.</h:b><h:p/>
+					The evaluator shall disable, or ensure validity-stamping has been disabled on the
+					TOE.<h:p/>
+					The evaluator shall create a data object on the TOE or import an already-created
+					data object which has not been validity-signed.<h:p/>
+					The evaluator shall export that data object and verify it has not been validity-stamped.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
 						
 	<f-component cc-id="fdp_etc_ext.2" name="Propagation of SDOs">
 		<f-element id="fdp-etc-ext-1e2">
@@ -4420,6 +4502,60 @@ users of the same system.
 		</f-element>
 	</f-component>
 			
+	<f-component cc-id="fdp_frs_ext.2" name="Factory Reset Behavior" status="sel-based">
+		<f-element id="fdp-frs-ext-2e1">
+			<title>
+				Upon initiation of a factory reset, the TSF shall destroy [<h:i>all non-persistent
+				SDOs</h:i>] and restore the following pre-installed SDOs to their factory settings: 
+				<assignable>preinstalled SDOs to be restored during a factory reset</assignable>.
+			</title>
+			<note role="application">
+				Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive
+				failed authentication or authorization attempts. Those that do are expected to perform a factory
+				reset in a manner that prevents any inadvertent disclosure of security-relevant data that was
+				present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as
+				indicated by selection of <h:u>factory reset the TOE wiping out all non-persistent SDOs, as described
+				by FDP_FRS_EXT.2</h:u> in FIA_AFL_EXT.1.3, or by <h:u>no actions or conditions</h:u> NOT being selected in
+				FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to determine the pre-installed SDOs that are
+					reverted to their factory settings when a factory reset occurs, what the factory
+					settings are for those SDOs, and that the TSS states that all non-persistent SDOs are
+					destroyed.
+				</TSS>
+				<Guidance>
+					The evaluator shall examine the operational guidance and verify that it identifies
+					the pre-installed SDOs that are reverted to their initial values when a factory reset
+					has been performed.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform the following test:<h:ol type="1">
+					<h:li>The evaluator shall use each supported role to create or import an SDE or
+						SDO that has known data.</h:li>
+					<h:li>The evaluator shall then verify that the created SDE/SDO resides either
+						within the DSC, or under the control of the DSC.</h:li>
+					<h:li>The evaluator shall perform some action for each created or imported
+						SDE/SDO in step 1 that demonstrates that the SDE/SDO has been set to the
+						indicated value.</h:li>
+					<h:li>For each pre-installed SDO that is identified in FDP_FRS_EXT.2.1, the
+						evaluator shall perform some action to verify what the current value of that
+						SDO is.</h:li>
+					<h:li>The evaluator shall initiate a factory reset.</h:li>
+					<h:li>For each operation in step 3, the evaluator shall re-attempt the operation and
+						verify that it no longer completes successfully because the SDE/SDO data
+						has been erased.</h:li>
+					<h:li>For each pre-installed SDO that is identified in step 4, the evaluator shall reattempt the operation and verify that the SDOs have been set to their factory
+						default values.</h:li></h:ol>
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+		
 	<f-component cc-id="fdp_itc_ext.1" name="Parsing of SDEs">
 		<f-element id="fdp-itc-ext-1e1">
 			<title>
@@ -4613,6 +4749,122 @@ users of the same system.
 			</aactivity>
 		</f-element>
 	</f-component>
+		
+	<f-component cc-id="fdp_mfw_ext.2" name="Basic Firmware Integrity" status="sel-based">
+		<f-element id="fdp-mfw-ext-2e1">
+			<title>
+				The TSF shall have the ability to verify the integrity of the firmware.
+			</title>
+		</f-element>
+		<f-element id="fdp-mfw-ext-2e2">
+			<title>
+				The TSF shall provide a capability to generate evidence of the integrity of
+				the firmware.
+			</title>
+			<note role="application">
+				Data and firmware integrity is not a required component of this cPP in all cases because some
+				DSCs will have immutable firmware. This SFR must be claimed if <h:u>mutable</h:u> is selected in
+				FDP_MFW_EXT.1.1.<h:p/>
+				The TOE guarantees the integrity of the firmware by verifying its integrity.<h:p/>
+				Verifying the integrity of the firmware could be accomplished by guaranteeing the validity of
+				firmware within the TOE prior to execution.<h:p/>
+				This requirement covers the case of ensuring the firmware is trustworthy in immutable form or
+				mutable through any firmware updates, since the integrity and authenticity are checked prior to
+				execution.<h:p/>
+				FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and
+				uses digital signatures and MAC verification for update verification. The ST Author should choose
+				the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author
+				should make the appropriate assignments/selections to specify the parameters that are
+				implemented for that algorithm.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall verify that the TSS describes which critical memory is measured
+					for these integrity values and how the measurement is performed (including which
+					TOE software measures the memory integrity values, how that software accesses
+					the critical memory, and which algorithms are used).
+				</TSS>
+				<Guidance>
+					If the integrity values are provided to the administrator, the evaluator shall verify
+					that the AGD guidance contains instructions for retrieving these values and
+					information for interpreting them. For example, if multiple measurements are taken,
+					what those measurements are and how changes to those values relate to changes in
+					the device state.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					Note that the following test may require the developer to provide access to a test
+					platform that provides the evaluator with tools that are not typically available to end
+					users.<h:p/>
+					The evaluator shall repeat the following test for each measurement:<h:p/>
+					The evaluator shall boot the TOE in an approved state and record the measurement
+					taken. The evaluator shall modify the critical memory or value that is measured.
+					The evaluator shall reboot the TOE and verify that the measurement changed.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+<f-component cc-id="fdp_mfw_ext.3" name="Firmware Authentication with Identity of Guarantor" status="sel-based">
+	<f-element id="fdp-mfw-ext-3e1">
+		<title>
+			The TSF shall have the ability to verify the authenticity of the firmware.
+		</title>
+	</f-element>
+	<f-element id="fdp-mfw-ext-3e2">
+		<title>
+			The TSF shall provide a capability to generate evidence of the
+			authenticity of the firmware.
+		</title>
+		<note role="application">
+			Firmware authentication is not a required component of this cPP in all cases because some DSCs
+			will have immutable firmware. This SFR must be claimed if <h:u>mutable</h:u> is selected in
+			FDP_MFW_EXT.1.1.<h:p/>
+			The TOE guarantees the authenticity of the firmware by verifying its signature.<h:p/>
+			Verifying the authenticity of the firmware could be accomplished by guaranteeing the validity of
+			firmware within the TOE prior to execution.<h:p/>
+			This requirement covers the case of ensuring the firmware is trustworthy in immutable form or
+			mutable through any firmware updates, since the integrity and authenticity are checked prior to
+			execution.<h:p/>
+			FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and
+			uses digital signatures and MAC verification for update verification. The ST Author should choose
+			the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author
+			should make the appropriate assignments/selections to specify the parameters that are
+			implemented for that algorithm.
+		</note>
+		<aactivity>
+			<TSS>
+				The evaluator shall examine the TSS to ensure it describes the methods and
+				identities used to verify integrity and authenticity of the firmware. The TSS shall
+				identify the Guarantor and how to verify its identity.
+			</TSS>
+			<Guidance>
+				There are no guidance activities for this component.
+			<KMD>
+				There are no KMD evaluation activities for this component.
+			</KMD>
+			<Tests>
+				The TOE guarantees the authenticity of the firmware using the identity of the
+				Guarantor. This prevents impersonating a Guarantor when sending firmware to a
+				device or modifying the firmware in transit.<h:p/>
+				<h:b>Test 1: Verify Authentic Firmware</h:b><h:p/>
+				The evaluator shall trigger the TOE to load and evaluate the authenticity of
+				authentic firmware according the methods described in the TSS. The evaluator shall
+				ensure that the TOE provides a clear indication of the success of the evaluation to
+				consider the test a ‘Pass’, otherwise, the test is a ‘Fail’.<h:p/>
+				<h:b>Test 2: Verify Unauthentic Firmware</h:b><h:p/>
+				The evaluator shall deliberately modify authentic firmware.<h:p/>
+				The evaluator shall trigger the TOE to load and evaluate the authenticity of the
+				deliberately modified firmware according the methods described in the TSS. The
+				evaluator shall ensure that the TOE provides a clear indication of the failure of the
+				evaluation to consider the test a ‘Pass’, otherwise, the test is a ‘Fail’.
+			</Tests>
+		</aactivity>
+	</f-element>
+</f-component>
+
+
 		
 	<f-component cc-id="fdp_rip.1" name="Subset Residual Information Protection">
 		<f-element id="fdp-rip-1e1">
@@ -4959,6 +5211,42 @@ users of the same system.
 			</f-element>
 		</f-component>
 		
+		<f-component cc-id="fia_afl_ext.2" name="Authorization Failure Response" status="sel-based">
+			<f-element id="fia-afl-ext-2e1">
+				<title>
+					When the TSF locks an <h:b>SDO</h:b> (i.e. prevents authorization attempts for an
+					SDO) due to a user exceeding the allowed threshold for unsuccessful authorization attempts, then
+					only an administrator may unlock access to the <h:b>SDO</h:b> and reset the corresponding failed
+					authorization attempt counter.
+				</title>
+				<note role="application">
+					This SFR is applicable only when the TSF’s response to excessive authorization failures selects
+					<h:u>prevent all future authorization attempts indefinitely (i.e., lock)</h:u> as specified by FIA_AFL_EXT.1.3.
+				</note>
+				<aactivity>
+					<TSS>
+						The evaluator shall examine the TSS to determine that it describes the method by
+						which access to an SDO is restored following a lockout that results from excessive
+						authentication failures.
+					</TSS>
+					<Guidance>
+						The evaluator shall examine the guidance to ensure that it describes the method by
+						which an administrator unlocks access to an SDO following a lockout that results
+						from excessive authentication failures.
+					<KMD>
+						There are no KMD evaluation activities for this component.
+					</KMD>
+					<Tests>
+						The evaluator shall intentionally fail authentication attempts to access an SDO until
+						they are locked out from interacting with it. The evaluator shall then follow the
+						operational guidance to unlock access to the SDO and verify that it was successful
+						by subsequently using valid credentials to access the SDO.
+					</Tests>
+				</aactivity>
+			</f-element>
+		</f-component>
+		   
+		   
 		<f-component cc-id="fia_sos.2" name="TSF Generation of Secrets">
 			<f-element id="fia-sos-2e1">
 				<title>
@@ -5614,6 +5902,51 @@ users of the same system.
 		</f-element>
 	</f-component>
 
+	<f-component cc-id="fpt_fls.1" iteration="FW" name="Failure with Preservation of Secure State (Firmware)" status="sel-based">
+		<f-element id="fpt-fls-1e1-fw">
+			<title>
+				The TSF shall preserve a secure state when the following types of firmware
+				failures occur: [<h:i>authenticity violation, integrity violation, rollback violation</h:i>].
+			</title>
+			<note role="application">
+				A DSC’s ability to handle failures related to authenticity, integrity, and invalid versions of
+				firmware is not applicable in all cases because some DSCs will have immutable firmware. This
+				SFR must be claimed if <h:u>mutable</h:u> is selected in FDP_MFW_EXT.1.1.<h:p/>
+				The phrase “secure state” refers to a state in which the TOE has consistent TSF data and a TSF
+				that can correctly enforce the policy. The TOE must ensure that no further processing of TSF or
+				user data takes place while in an insecure state. This state may be the initial “boot” of a clean
+				system, or it might be some check-pointed state. It is expected that in most cases, the TOE will halt
+				and require a reset or re-initialization to return to a known secure state.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to verify that it describes the actions taken
+					when the TOE experiences each of the stated failures and how these actions ensure
+					the DSC preserves a secure state.<h:p/>
+					The evaluator shall verify that the TSS describes the state of the DSC when the
+					firmware validity checks fail, including the various failure modes assumed.
+				</TSS>
+				<Guidance>
+					For each failure state, the evaluator shall examine the operational guidance to verify
+					that it describes what actions should be taken to attempt to resolve the failure state.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					Note that this test requires firmware builds that are deliberately invalidated to cause
+					authenticity, integrity, and rollback violation failures.<h:p/>
+					The evaluator shall examine the TOE’s behavior when it is loaded with a firmware
+					build that causes a firmware failure. The evaluator shall ensure that when the failure
+					occurs, the TOE prevents further processing of TSF and user data and performs any
+					actions consistent with maintaining a secure state as described in the TSS.<h:p/>
+					The evaluator shall repeat this test as necessary to observe each of the specific
+					firmware failures identified in the SFR.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+	
 	<f-component cc-id="fpt_itt.1" name="Basic Internal TSF Data Transfer Protection" status="optional">
 		<f-element id="fpt-itt-1e1">
 			<title>
@@ -6056,6 +6389,68 @@ users of the same system.
 		</f-element>
 	</f-component>
 	
+
+	<f-component cc-id="fpt_rpl.1" iteration="Rollback" name="Replay Detection (Rollback)" status="sel-based">
+		<f-element id="fpt-rpl-1e1-rollback">
+			<title>
+				The TSF shall detect replay for the following entities: [<h:i>previous firmware builds</h:i>].
+			</title>
+		</f-element>
+		<f-element cc-id="fpt-rpl-1e2-rolback">
+			<title>The TSF shall prevent the execution of the loaded firmware and perform 
+				<selectables>
+					<selectable><assignable>other actions</assignable></selectable>
+					<selectable>no other actions</selectable>
+				</selectables> when replay is detected.
+			</title>
+			<note role="application">
+				A DSC’s ability to detect an attempted rollback (software/firmware downgrade) is not applicable
+				in all cases because some DSCs will have immutable firmware that cannot be modified in any way.
+				This SFR must be claimed if <h:u>mutable</h:u> is selected in FDP_MFW_EXT.1.1.<h:p/>
+				The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a
+				firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is
+				greater than or equal to the previously authenticated firmware identifier. For example, this could
+				be accomplished by ensuring the validated instance of the firmware to be loaded is greater than
+				or equal to the instance previously validated and loaded into the TOE. By loading a previous
+				instance of firmware, it potentially opens up the device to known vulnerabilities.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS and other vendor documentation and ensure
+					that they describe the methods used to guarantee the validity of firmware identifiers
+					and prevents the TSF from executing older instances than that which is currently
+					authorized.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall repeat the following tests to cover all allowed firmware
+					verification mechanisms as described in the TSS. For example, if the firmware
+					verification mechanism replaces an entire partition or subset of the DSC scope
+					containing many separate code files, the evaluator does not need to repeat the test
+					for each individual file.
+					<testlist>
+						<test>
+							The evaluator shall attempt to execute an earlier instance or build of the
+							software (as determined by the vendor). The evaluator shall verify that this attempt
+							fails by checking the version identifiers or cryptographic hashes of the firmware
+							against those previously recorded and checking that the values do not correspond
+							to an unauthorized build.
+						</test>
+						<test>
+							The evaluator shall attempt to execute a current or later instance and shall
+							verify that the firmware execution succeeds.
+						</test>
+					</testlist>
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+		
 	
 	<f-component cc-id="fpt_rpl_ext.1" name="Replay Prevention">
 		<f-element id="fpt-rpl-ext-1e1">
@@ -6257,6 +6652,266 @@ users of the same system.
 			</aactivity>
 		</f-element>
 	</f-component>
+</section>
+		
+<section id="ftp" title="Trusted Paths/Channels">
+
+	<f-component cc-id="ftp_ccmp_ext.1" name="CCM Protocol" status="sel-based">
+		<f-element id="ftp-ccmp-ext-1e1">
+			<title>
+				The TSF shall implement CCMP using 
+				<selectables>
+					<selectable>AES</selectable>
+					<selectable>Camellia</selectable>
+				</selectables> in CCM mode and key size 
+				<selectables>
+					<selectable>128-bits</selectable>
+					<selectable>256-bits</selectable>
+				</selectables> as defined in 
+				<selectables>
+					<selectable>IEEE 802.11i</selectable>
+					<selectable>IEEE 802.11ac</selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="ftp-ccmp-ext-1e2">
+			<title>The TSF shall discard incoming messages if authentication fails.</title>
+		</f-element>
+		<f-element id="ftp-ccmp-ext-1e3">
+			<title>
+				The TSF shall discard incoming messages that are malformed or invalid.
+			</title>
+			<note role="application">
+				This SFR must be claimed if <h:u>CCMP</h:u> is selected in FTP_ITC_EXT.1.<h:p/>
+				Inclusion of this SFR requires inclusion of AES-CCM or CAM-CCM in FCS_COP.1/SKC.<h:p/>
+				CCMP is defined in IEEE 802.11i. CCMP-256 is defined in IEEE 802.11ac.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall verify that the TSS includes a description of the TOE’s expected
+					responses to CCMP authentication failures and malformed or invalid CCMP data
+					units.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform the following tests:
+					<testlist>
+						<test>
+							The evaluator shall attempt to establish a CCMP connection to the TOE
+							from an external entity, observe the return traffic with a network traffic analyzer,
+							and verify that the connection succeeds and that the traffic is identified as properly
+							constructed CCMP data units.
+						</test>
+						<test>
+							The evaluator shall attempt to establish a CCMP connection to the TOE
+							using five messages with incorrect or invalid authentication factors and verify that
+							an authentication failure or error status is returned.
+						</test>
+						<test>
+							The evaluator shall attempt to establish a CCMP connection to the TOE
+							using five different messages that are malformed or invalid due to noncompliance
+							with the CCMP standard and observe that all connection attempts are unsuccessful.
+						</test>
+						<test>
+							The evaluator shall establish a valid CCMP connection to the TOE. Once
+							this has been established, the evaluator shall send ten different messages that are
+							malformed or invalid due to noncompliance with the CCMP standard and observe
+							that each of these messages are rejected.
+						</test>
+					</testlist>
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	<f-component cc-id="ftp_gcmp_ext.1" name="GCM Protocol" status="sel-based">
+		<f-element id="ftp-gcmp-ext-1e1">
+			<title>
+				The TSF shall implement GCMP using 
+				<selectables>
+					<selectable>AES</selectable>
+					<selectable>Camellia</selectable>
+				</selectables> in GCM mode and key size 
+				<selectables>
+					<selectable>128-bits</selectable>
+					<selectable>256-bits</selectable>
+				</selectables> as defined in 
+				[<h:i>IEEE 802.11ad</h:i>].
+			</title>
+		</f-element>
+		<f-element id="ftp-gcmp-ext-1e2">
+			<title>The TSF shall discard incoming messages if authentication fails.</title>
+		</f-element>
+		<f-element id="ftp-gcmp-ext-1e3">
+			<title>
+				The TSF shall discard incoming messages that are malformed or invalid.
+			</title>
+			<note role="application">
+				This SFR must be claimed if <h:u>GCMP</h:u> is selected in FTP_ITC_EXT.1.<h:p/>
+				Inclusion of this SFR requires inclusion of AES-GCM or CAM-GCM in FCS_COP.1/SKC.<h:p/>
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall verify that the TSS includes a description of the TOE’s expected
+					responses to GCMP authentication failures and malformed or invalid GCMP data
+					units.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform the following tests:
+					<testlist>
+						<test>The evaluator shall attempt to establish a GCMP connection to the TOE
+							from an external entity, observe the return traffic with a network traffic analyzer,
+							and verify that the connection succeeds and that the traffic is identified as properly
+							constructed GCMP data units.</test>
+						<test>
+							The evaluator shall attempt to establish a GCMP connection to the TOE
+							using five messages with incorrect or invalid authentication factors and verify that
+							an authentication failure or error status is returned.</test>
+						<test>
+							The evaluator shall attempt to establish a GCMP connection to the TOE
+							using five different messages that are malformed or invalid due to noncompliance
+							with the GCMP standard and observe that all connection attempts are unsuccessful.</test>
+						<test>
+							The evaluator shall establish a valid GCMP connection to the TOE. Once
+							this has been established, the evaluator shall send ten different messages that are
+							malformed or invalid due to noncompliance with the GCMP standard and observe
+							that each of these messages are rejected.
+						</test>
+					</testlist>
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+	<f-component cc-id="ftp_itc_ext.1" name="Cryptographically Protected Communications Channels" status="sel-based">
+		<f-element id="ftp-itc-ext-1e1">
+			<title>
+				The TSF shall use 
+				<selectables>
+					<selectable>CCMP</selectable>
+					<selectable>GCMP</selectable>
+				</selectables> protocol to provide a communication channel between itself and 
+				<assignable>list of entities external to the TOE</assignable>
+				that protects channel data from disclosure and ensures the integrity of channel data.
+			</title>
+			<note role="application">
+				This SFR must be claimed if <h:u>cryptographically protected data channels as specified in
+				FTP_ITC_EXT.1</h:u> is selected in either FDP_ITC_EXT.1 or FDP_ITC_EXT.2.<h:p/>
+				Entities external to the TOE include applications that communicate with the TOE such as
+				authentication capabilities (e.g. biometrics reader), external storage, and interfaces with an
+				external DSC.<h:p/>
+				If <h:u>CCMP</h:u> is selected, the ST author must include FTP_CCMP_EXT.1.
+				If <h:u>GCMP</h:u> is selected, the ST author must include FTP_GCMP_EXT.1.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall review the TSS to determine that it lists all trusted channels the
+					TOE uses for remote communications, including both the external entities and
+					remote users used for the channel as well as the protocol that is used for each.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall configure the TOE to communicate with each external IT entity
+					or type of remote user identified in the TSS. The evaluator shall monitor network
+					traffic while the TSF performs communication with each of these destinations. The
+					evaluator shall ensure that for each session a trusted channel was established in
+					conformance with the protocols identified in the selection.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+		
+		
+	<f-component cc-id="ftp_ite_ext.1" name="Encrypted Data Communications" status="sel-based">
+		<f-element id="ftp-ite-ext-1e1">
+			<title>
+				The TSF shall encrypt data for transfer between the TOE and 
+				<assignable>list of entities external to the TOE</assignable>
+				using a cryptographic algorithm and key size as specified in
+				FCS_COP.1/SKC, and using 
+				<selectables linebreak="yes">
+					<selectable>Pre-shared keys</selectable>
+					<selectable>Keys established according to FCS_CKM.2</selectable>
+					<selectable>Keys exchanged using a physically protected communication mechanism 
+						conformant with FTP_ITP_EXT.1</selectable>
+				</selectables>.
+			</title>
+			<note role="application">
+				This SFR must be claimed if <h:u>encrypted data buffers as specified in FTP_ITE_EXT.1</h:u> is selected in
+				either FDP_ITC_EXT.1 or FDP_ITC_EXT.2.<h:p/>
+				This requirement applies to encrypted data communications between the TOE and external entities
+				that do not use a physically protected mechanism conforming to FTP_ITP_EXT.1, or a
+				cryptographically protected data channel as conforming to FTP_ITC_EXT.1. For example, if data
+				is transferred through encrypted buffers (or blobs) then this requirement applies. If data is
+				transferred through a physically protected channel, then FTP_ITP_EXT.1 applies. This
+				requirement would apply, for example, for communications implemented through a shared data
+				buffer.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall review the TSS to determine that it lists all encryption
+					mechanisms the TOE uses for protected external communications, along with the
+					types of communications protected using each mechanism.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall configure the TOE to communicate with each external entity
+					identified in the TSS. The evaluator shall initiate a transaction that will result in
+					data being transferred to the TOE through the mechanism and other data returned
+					to the initiating entity through the mechanism. The evaluator must verify that the
+					data returned to the entity was encrypted using the documented mechanism when
+					received.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+	<f-component cc-id="ftp_itp_ext.1" name="Physically Protected Channel" status="sel-based">
+		<f-element id="ftp-itp-ext-1e1">
+			<title>
+				The TSF shall provide a physically protected communication channel
+				between itself and <assignable>list of other IT entities within the same platform</assignable>.
+			</title>
+			<note role="application">
+				This SFR must be claimed if <h:u>physically protected channels as specified in FTP_ITP_EXT.1</h:u> is
+				selected in either FDP_ITC_EXT.1 or FDP_ITC_EXT.2.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall review the TSS to determine that it lists all mechanisms the TOE
+					uses for physically protected external communications, along with the types of
+					communications protected using each mechanism.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					There are no test activities for this component.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+		
 </section>
 
     </sec:SFRs>
