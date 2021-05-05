@@ -5167,7 +5167,26 @@ users of the same system.
 					to authenticated administrators.
 				</title>
 				<aactivity>
-					<no-tests/>
+				<TSS>
+					The evaluator shall verify that the TSS describes those management functions that
+					may be performed by the Administrator, to include how the client applications are
+					prevented from accessing, performing, or relaxing the function (if applicable), and
+					how they are prevented from modifying the Administrator configuration. The TSS
+					also describes any functionality that is affected by administrator-configured policy
+					and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					For each management function described in FMT_SMF_EXT.1.1, the evaluator
+					shall perform the function with administrator authorization data and confirm it
+					succeeds, and again with client application authorization data and confirm that it
+					fails.
+				</Tests>
 				</aactivity>
 			</f-element>
 			<audit-event/>
@@ -5217,7 +5236,20 @@ users of the same system.
 					Attributes Modification Table.<h:p/>
 				</note>
 				<aactivity>
-					<no-tests/>
+				<TSS>
+					The evaluator shall confirm that the TSS describes the modification constraints for
+					each SDO security attribute.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall confirm that the evaluation activities for FDP_ACF.1 contains
+					tests for the OP.Modify operation on objects OB.P_SDO, OB.T_SDO.
+				</Tests>
 				</aactivity>
 			</f-element>
 		</f-component>
@@ -5369,12 +5401,601 @@ users of the same system.
 					this SFR and indicate in the TSS what the default attribute properties are for each SDO.<h:p/>
 				</note>
 				<aactivity>
-					<no-tests />
+				<TSS>
+					The evaluator shall confirm that the TSS describes the initialization process for
+					importing and generating SDOs. The TSS shall describe each type of SDO.Type
+					and any additional attributes that are beyond the ones listed. Additionally, list any
+					further restrictions of the allowed values for the minimum list of attributes.<h:p/>
+					The evaluator shall confirm that the TSS describes the allowed values for each of
+					the attributes.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall confirm that the evaluation activities for FDP_ACF.1 contains
+					tests for the OP.Import and OP.Create operations on objects OB.P_SDO,
+					OB.T_SDO.
+				</Tests>
 				</aactivity>
 			</f-element>
 		</f-component>
+	    
+	<f-component cc-id="fmt_smf.1" name="Specification of Management Functions">
+		<f-element id="fmt-smf-1e1">
+			<title>
+				The TSF shall be capable of performing the following management functions: [<h:i><h:ul>
+				<h:li>Set authorization failure parameters for FIA_AFL_EXT.1</h:li>
+				<h:li>Reset TOE to factory state for FDP_FRS_EXT.1</h:li>
+				<h:li>Configure authorization policies for TOE resources
+				<selectables linebreak="yes">
+					<selectable>update TOE firmware and pre-installed SDOs</selectable>
+					<selectable>unlock access to SDO following excessive failed authorization attempts</selctable>
+					<selectable>no other functions</selectable>
+				</selectables></h:li></h:ul>.
+			</title>
+			<note role="application">
+				If FDP_MFW_EXT.1 selects <h:u>mutable firmware</h:u>, then FMT_SMF.1 must select 
+				<h:u>Update TOE firmware and pre-installed SDOs</h:u>.<h:p/>
+				Recall that resetting a TOE to factory state also wipes all user data, but may not
+				wipe out preinstalled SDOs. Configuring authorization policies includes setting policies
+				for allowed access to SDOs.<h:p/>
+				Protections for pre-installed SDEs/SDOs come through the firmware, and by extension, through
+				firmware updates. In the same vein, the authorized updates may also affect the SDEs as well, if the
+				vendor so chooses. One could say that the authorized update binds the attributes present in the
+				functionality of the firmware to the pre-installed SDEs.<h:p/>
+			</note>
+			<aactvitity>
+				<TSS>
+					The evaluator shall verify that the TSS describes all management functions.
+				</TSS>
+				<Guidance>
+					The evaluator shall verify that the AGD describes how the administrator configures
+					the management functions.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					Testing for this component is performed through evaluation of FMT_MOF_EXT.1.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+	<f-component cc-id="fmt_smr.2" name="Restrictions on Security Roles">
+		<f-element id="fmt-smr-2e1">
+			<title>
+				The TSF shall maintain the roles: [<h:i>administrator, client application</h:i>].
+			</title>
+		</f-element>
+		<f-element id="fmt-smr-2e2">
+			<title>
+				The TSF shall be able to associate users with roles.
+			</title>
+		</f-element>
+		<f-element id="fmt-smr-2e3">
+			<title>
+				The TSF shall ensure that the conditions [<h:ul>
+				<h:li>Only client applications can access their own encrypted data,</h:li>
+				<h:li>Only administrators can perform privileged functions</h:li></h:ul>]<h:br/>
+				are satisfied.
+			</title>
+			<note role="application">
+				This cPP uses the term “user” throughout to reference both the administrator and client
+				application roles simultaneously.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall confirm that the TSS describes the mechanisms by which client
+					applications can exclusively access their own encrypted data and administrators
+					cannot access client application encrypted data. The evaluator shall also confirm
+					the TSS describes the mechanisms that allow only administrators to perform
+					privileged functions.
+				</TSS>
+				<Guidance>
+					The evaluator shall verify that the AGD describes how the administrator configures
+					the management functions.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					Testing for this component is performed through evaluation of FMT_MOF_EXT.1.
+				</Tests>
+				
+			</aactivity>
+		</f-element>
+	</f-component>
+	    
     </section>
-		
+	    
+<section id="fpt" title="Protection of the TSF">
+	
+	<f-component cc-id="fpt_fls.1" iteration="FI" name="Failure with Preservation of Secure State (Fault Injection)">
+		<f-element id="fpt-fls-1e1-fi">
+			<title>
+				The TSF shall preserve a secure state when the following types of failures occur:
+				[<h:i>fault injections</h:i>].
+			</title>
+			<note role="application">
+				Note that a secure state does not imply the uninterrupted enforcement of all claimed security
+				functionality it is appropriate for the TSF to “fail closed” and block the execution of 
+				securityrelevant behavior if a fault injection attempt or other significant glitch occurs.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to verify that it describes the actions taken
+					when the TOE experiences fault injection and how the DSC preserves a secure state.<h:p/>
+					The evaluator shall verify that the TSS describes the state of the DSC when the
+					firmware validity checks fail, including the various failure modes assumed.
+				</TSS>
+				<Guidance>
+					The evaluator shall examine the operational guidance to verify that it describes what
+					actions should be taken to attempt to resolve the failed state.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform fault injection on the DSC and attempt to extract a
+					known SDO/SDE.<h:p/>
+					The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known
+					value. The evaluator will then cause the TOE to process the SDO/SDE, possibly
+					multiple times, while injecting faults on the TOE.<h:p/>
+					If the evaluator is able to acquire the original SDO/SDE or a known result from the
+					DSC processing the SDO/SDE, the test is a ‘Fail’, otherwise, the test is a ‘Pass’.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	<f-component cc-id="fpt_mod_ext.1" name="Debug Modes">
+		<f-element id="fpt-mod-ext-1e1">
+			<title>The TSF shall provide no access to debug modes.</title>
+			<note role="application">
+				‘Debug modes’ may include, but are not limited to, any alternate mode of operation, such
+				as developer mode, test mode, manufacturer mode, or altered boot mode. 
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to ensure it describes the mechanisms the TSF
+					employs to prevent access to debug modes with a brief description of each debug
+					mode supported.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall attempt to exercise any single function from each supported
+					debug mode. If the evaluator is able to exercise any function from any of the
+					supported debug modes, the test is a ‘Fail’, otherwise, the test is a ‘Pass’.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+
+	<f-component cc-id="fpt_php.3" name="Resistance to Physical Attack">
+		<f-element id="fpt-php-3e1">
+			<title>The TSF shall resist [<h:i>data extraction via fault injection, extreme temperatures,
+				abnormal voltage</h:i>] to the [<h:i>TSF storage elements that contain 
+				<selectables>
+					<selectable>SDEs</selectable>
+					<selectable>SDOs</selectable>
+					<selectable>firmware</selectable>
+				</selectables></h:i>] by responding automatically such that the SFRs are always enforced.
+			</title>
+			<note role="application">
+				Physical protection mechanisms as envisioned by this requirement are mechanisms that protect
+				communications to the extent that encryption or other logical protections are not required to
+				ensure confidentiality, integrity, and assured identification of endpoints. Such mechanisms may
+				include, for example, physically isolated traces, or mechanisms that take advantage of physical
+				properties of signals to ensure that communications are receivable only by the intended endpoint.<h:p/>
+				Any physical external casing or potting material of the TOE is considered an ‘external interface’,
+				not just those interfaces over which data is transmitted. This ensures that the TSF will respond
+				appropriately if, for example, an attacker penetrates the physical surface of the DSC in an attempt
+				to access its stored data.<h:p/>
+				The TOE’s protection against abnormal temperature and voltage can be considered equivalent to
+				what is required by assertion AS07.77 of [ISO-TR].	<h:p/>
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to ensure it describes the methods used by the
+					TOE to detect physical tampering and how the TOE will respond when physical
+					tampering has been detected.<h:p/>
+					The evaluator shall also examine the TSS to ensure that it documents the
+					temperature and voltage ranges in which the TSF is assured to operate properly.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform the following tests:<h:p/>
+					<h:b>Test 1: Fault Injection</h:b><h:p/>
+					Refer to the testing for FPT_FLS.1/FI.<h:p/>
+					<h:b>Test 2: Temperature and Power Analysis</h:b><h:p/>
+					The following testing is derived from [ISO 24759] test procedures TE07.77.01
+					through TE07.77.03:<h:p/>
+					The evaluator shall configure the ambient temperature and voltage close to the
+					approximate extreme of the normal operating ranges specified in the TSS and verify
+					that the TSF continues to function as expected. The evaluator shall determine
+					‘expected functionality’ based on how the TSS describes the TOE’s reaction to an
+					environmental failure. For example, if the TSS states that the TOE’s response is to
+					shut down, it can be assumed that the TOE functions as expected if it does not shut
+					down. If the TSS states that the TOE’s response is to zeroize certain data, it can be
+					assumed that the TOE functions as expected if the evaluator performs functions that
+					rely on known data values and obtain results that indicate non-zero values.<h:p/>
+					The evaluator shall then extend the temperature and voltage outside of the specified
+					normal range and verify that the TOE responds in the manner specified in the ST. 
+					If the TOE’s response is to zeroize known data, the evaluator shall return the
+					ambient temperature and voltage to a normal range, perform functions that rely on
+					known data values, and observe that the results of these functions are consistent
+					with known values of zero.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	<f-component cc-id="fpt_pro_ext.1" name="Root of Trust">
+		<f-element id="fpt-pro-ext-1e1">
+			<title>The TSF shall contain an SDO that contains the identity of the Root of Trust.</title>
+			<note role="application">
+				Every DSC is expected to have a single RoT that comprises the DSC hardware and pre-installed
+				SDOs, from which services (e.g. Storage, Authorization, etc.) can be offered.<h:p/>
+				Depending on the use case and the way status registers are used, unique identity keys may be
+				bound to the TOE, the TOE platform, or both.<h:p/>
+				The sole presence of unique identity keys linking to the RoT does not prove authenticity without
+				the use of digital signatures.<h:p/>
+			</note>
+		</f-element>
+		<f-element id="fpt-pro-ext-1e2">
+			<title>
+				The TSF shall maintain Root of Trust data as 
+				<selectables>
+					<selectable>immutable</selectable>
+					<selectable>mutable if and only if its mutability is controlled by a unique identifiable owner</selectable>
+				</selectables>.
+			</title>
+			<note role="application">
+				One expects that only authorized sources can modify the single RoT, such as through a secure
+				update. A pre-installed SDO may contain the identity of the manufacturer of the RoT.<h:p/>
+				The process of authenticating the source of a secure update may involve querying the identity of
+				the manufacturer, contained on a pre-installed SDO. If this identity is in the form of an X.509
+				certificate containing a signature verification key signed by the manufacturer, then the
+				authentication process is sufficient.<h:p/>
+				A unique identifiable owner is assumed to be one with an administrative role; however, there may
+				be circumstances where the owner does not take on an administrative role, which should be
+				documented.<h:p/>
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall ensure that the TSS describes either a pre-installed identity
+					(contained within an SDO), or a process on how the TOE creates an identity. IEEE
+					802.1ar is one example of a standard which a device can use to create such an
+					identity.<h:p/>
+					The evaluator shall additionally examine the TSS to ensure that it describes how the
+					Root of Trust is immutable or otherwise mutable if and only if controlled by a
+					unique identifiable owner, the roles this owner assumes in doing so (manufacturer
+					administrator, owner administrator, etc.), as well as the circumstances in which the
+					Root of Trust is mutable.<h:p/>
+					[conditional] For an immutable Root of Trust, the evaluator shall ensure there are
+					no RoT update functions.<h:p/>
+					[conditional] For a mutable Root of Trust, the evaluator shall ensure the Root of
+					Trust update mechanism uses an approved method for authenticating the source of
+					the update.
+				</TSS>
+				<Guidance>
+					For mutable Root of Trust data, the evaluator shall confirm the AGD contains an
+					approved authenticated method for modifying the Root of Trust identity.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					<h:b><h:i>Immutability</h:i></h:b><h:p/>
+					For immutable Root of Trust identity, the evaluator shall confirm a successful
+					evaluation of FPT_PHP.1 (Physical Protection).
+					<h:b><h:i>Mutability</h:i></h:b><h:p/>
+					For a mutable Root of Trust identity, the evaluator shall perform the following tests:<h:ol type="1">
+					<h:li>Create or use an authenticated Root of Trust identity, confirm the
+						authenticated method for modifying the Root of Trust identity succeeds.</h:li>
+					<h:li>Create or use an unauthenticated Root of Trust identity, confirm the target
+						fails to modify the Root of Trust identity.</h:li>
+					</h:ol>
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+
+	<f-component cc-id="fpt_rot_ext.1" name="Root of Trust Services">
+		<f-element id="fpt-rot-ext-1e1">
+			<title>The TSF shall provide a Root of Trust for Storage, a Root of Trust for
+				Authorization, and 
+				<selectables>
+					<selectable>Root of Trust for Measurement</selectable>
+					<selectable>Root of Trust for Reporting</selectable>
+					<selectable>no others</selectable>
+				</selectables>.
+			</title>
+			<note role="application">
+				This document uses the [<h:i>GP_ROT</h:i>] definitions for RoT for Storage (denoted as the combination of
+				RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs
+				use Roots of Trust for Storage to protect SDOs. Section 6.5 has a number of requirements for
+				ensuring the TSF has functionality to authorize a user in order to access an SDO, including
+				FIA_UAU.6.<h:p/>
+				If both <h:u>Root of Trust for Measurement and Root of Trust for Reporting</h:u> are selected in
+				FPT_ROT_EXT.1.1, the selection-based SFR FDP_DAU.1/Prove must also be claimed. <h:p/>
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall ensure that the TSS identifies the Roots of Trust it uses
+					(including but not limited to the Roots of Trust identified in the selections in this
+					requirement) and describes their function in the context of the TOE.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					<h:b><h:i>Root of Trust for Storage</h:i></h:b><h:p/>
+					The evaluator shall confirm a successful evaluation of FCS_CKM.1/KEK,
+					FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, FPT_PHP.3.
+					<h:b><h:i>Root of Trust for Authorization</h:i></h:b><h:p/>
+					The evaluator shall confirm a successful evaluation of FIA_AFL_EXT.1.
+					<h:b><h:i>Root of Trust for Measurement</h:i></h:b><h:p/>
+					The evaluator shall confirm a successful evaluation of FCS_COP.1/Hash
+					<h:b><h:i>Root of Trust for Reporting</h:i></h:b><h:p/>
+					The evaluator shall confirm a successful evaluation of FCS_COP.1/SigGen.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	<f-component cc-id="fpt_rot_ext.2" name="Root of Trust for Storage">
+		<f-element id="fpt-rot-ext-2e1">
+			<title>
+				The TSF shall prevent unauthorized access to SDOs associated with the
+				Root of Trust for Storage.
+			</title>
+			<note role="application">
+				TOEs may use shielded locations or cryptographic protections to prevent unauthorized access to
+				SDOs. Use FDP_SDI.2 to protect the integrity of SDOs stored in the RoT for Storage.
+			</note>
+			<aactivity>
+			<TSS>
+				The evaluator shall ensure that the TSS describes how the Root of Trust for Storage
+				prevents unauthorized access to SDOs. The evaluator shall also examine the TSS to
+				verify that it uses approved mechanisms to protect the integrity of SDOs. 
+			</TSS>
+			<Guidance>
+				There are no AGD evaluation activities for this component.
+			</Guidance>
+			<KMD>
+				There are no KMD evaluation activities for this component.
+			</KMD>
+			<Tests>
+				Testing for this component is completed through evaluation of FCS_CKM.1/KEK,
+				FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, and FPT_PHP.3.
+			</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	
+	<f-component cc-id="fpt_rpl_ext.1" name="Replay Prevention">
+		<f-element id="fpt-rpl-ext-1e1">
+			<title>
+				The TSF shall have a mechanism for preventing replay of user authorization
+				of operations on SDOs using the following methods 
+				<selectables>
+					<selectable>monotonic counters</selectable>
+					<selectable>random nonces</selectable>
+					<selectable><assignable>other methods as specified</assignable></selectable>
+				</selectables>.
+			</title>
+		</f-element>
+		<f-element id="fpt-rpl-ext-1e2">
+			<title>
+				The TSF shall detect replay for the following actions: [<h:i>authorization of
+				operations on SDOs</h:i>].
+			</title>
+		</f-element>
+		<f-element id="fpt-rpl-ext-1e3">
+			<title>
+				The TSF shall deny the requested operation on the SDO when it detects a replay.
+			</title>
+			<note role="application">
+				The TSF receives authorization from an external source to the DSC to perform an operation on
+				an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the
+				communication to the DSC can copy the authorization and replay it. Random nonces and
+				monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this
+				requirement, operations on SDOs include generating, using, modifying, propagating, and
+				destroying. Besides monotonic counters and random nonces, the TSF could employ other methods
+				to prevent replay of user authorizations, which the Security Target should describe.<h:p/>
+				This requirement does not specify how TSF detects replays. <h:p/>
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS to verify that it describes the mechanism
+					employed for preventing replay of user authorization of operations on SDOs and
+					that access is denied when replay is detected.
+				</TSS>
+				<Guidance>
+					The evaluator shall examine the operational guidance to verify that it describes how
+					to enforce Replay Prevention if configuration is necessary.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall perform an authorization of an operation on an SDO and capture
+					or retain that authorization for reuse. The evaluator shall then attempt to replay that
+					same authorization and ensure that the DSC does not allow the authorization to take
+					place. If the replay of the authorization is allowed to take place for an operation on
+					SDOs, the test is a ‘Fail’, otherwise, the test is a ‘Pass’.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	<f-component cc-id="fpt_stm.1" name="Reliable Time Stamps">
+		<f-element id="fpt-stm-1e1">
+			<title>The TSF shall be able to provide reliable time stamps.</title>
+			<note role="application">
+				It is acceptable for the TSF to provide timestamp data either through an internal clock or a
+				counter. It is also permissible for the TSF to obtain time data from a clock contained within the
+				same physical enclosure as the TOE.<h:p/>
+			</note>
+			<aactivity>
+			<TSS>
+				The evaluator shall examine the TSS to ensure that it lists each security function
+				that makes use of time. The TSS provides a description of how the time is
+				maintained and considered reliable in the context of each of the time related
+				functions.
+			</TSS>
+			<Guidance>
+				The evaluator shall examine the guidance documentation to ensure it instructs the
+				administrator how to set the time or indicates any configuration steps required for
+				the TSF to receive time data from an external source.
+			</Guidance>
+			<KMD>
+				There are no KMD evaluation activities for this component.
+			</KMD>
+			<Tests>
+				The evaluator shall perform the following tests:
+				<testlist>
+					<test>[conditional]: If the TSF provides a mechanism to manually set the time, the
+						evaluator shall use the guidance documentation to set the time. The evaluator shall
+						then use an available interface to observe that the time was set correctly.
+					</test>
+					<test>
+						[conditional]: If the TSF receives time data from some source outside the
+						TOE, the evaluator shall use the guidance documentation to configure the external
+						time source (if applicable). The evaluator shall observe that the time has been set to
+						the expected value.
+					</test>
+				</testlist>
+			</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+	<f-component cc-id="fpt_tst.1" name="TSF Testing">
+		<f-element id="fpt-tst-1e1">
+			<title>
+				The TSF shall run a suite of self tests during power-on start-up, 
+				<selectables>
+					<selectable>periodically during normal operation</selectable>
+					<selectable>at the request of the authorized user</selectable>
+					<selectable>at no other condition</selectable>
+					<selectable>at the conditions 
+						<assignable>conditions under which self test should occur</assignable>
+					</selectable>
+				</selectables> to demonstrate the correct operation of [<h:u>the TSF</h:u>].
+			</title>
+		</f-element>
+		<f-element id="fpt-tst-1e2">
+			<title>The TSF shall provide authorized users with the capability to verify the integrity
+				of [<h:u>TSF data</h:u>].
+			</title>
+		</f-element>
+		<f-element id="fpt-tst-1e3">
+			<title>
+				The TSF shall provide authorized users with the capability to verify the integrity of
+				the [<h:u>TSF</h:u>].
+			</title>
+			<note role="application">
+				This requirement intends to cover integrity of the TSF functionality (i.e. runtime checks).<h:p/>
+				TSF integrity testing provides the ability to test the TSF’s correct operation. These tests are
+				expected to be performed automatically and autonomously at start-up but may also be performed
+				periodically during operation, at the request of the authorized user, or when other conditions are
+				met. It also provides the ability to verify the integrity of TSF data and executable code.<h:p/>
+				All cryptographic functions come with known answer tests (KATs). In addition to verifying the
+				integrity of the firmware executing the TSF, the DSC should also verify the integrity of any data
+				associated with the TSF (such as constants for cryptographic algorithms) as well as performing
+				the KATs.<h:p/>
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS and other vendor documentation and ensure
+					they describe the methods used to verify integrity of the TSF and TSF data. The
+					evaluator shall also verify that the TSS describes how the tests are performed
+					automatically and autonomously (without intervention).
+				</TSS>
+				<Guidance>
+					The evaluator shall examine the operational guidance to ensure it provides
+					authorized users with the capability to verify the integrity of the TSF and its data.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					<testlist>
+						<test>The evaluator shall verify that the DSC performs an integrity check of all
+							TSF, including data, as well as performing KATs for those functions. The evaluator
+							shall verify failures using malformed known answer test data (for example,
+							unexpected input or output values).
+						</test>
+						<test>The evaluator shall ensure that when an integrity check failure occurs
+							specific to failing KATs and failure to verify the integrity of the TSF, the TOE will
+							prevent any further processing of the current TSF and user data.
+						</test>
+					</testlist>
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+	
+</section>
+
+<section id="fru" title="Resource Utilization (FRU)">
+	
+	<f-component cc-id="fru_flt.1" name="Degraded Fault Tolerance">
+		<f-element id="fru-flt-1e1">
+			<title>
+				The TSF shall ensure the operation of [protection of TSF data] when the following
+				failures occur: [<h:i>fault injection</h:i>].
+			</title>
+			<note role="application">
+				TSF data may be protected in response to a fault injection either by providing a method to ensure
+				that the data remains protected or by logically destroying the data or any part of a key change
+				that encrypts it. This behavior may differ based on the type of fault.
+			</note>
+			<aactivity>
+				<TSS>
+					The evaluator shall examine the TSS and other vendor documentation and ensure
+					they describe the response and state of TSF data to each type of fault injection into
+					the TOE.
+				</TSS>
+				<Guidance>
+					There are no AGD evaluation activities for this component.
+				</Guidance>
+				<KMD>
+					There are no KMD evaluation activities for this component.
+				</KMD>
+				<Tests>
+					The evaluator shall process SDOs/SDEs while applying each type of identified
+					Fault Injection into the TSF. The evaluator will note whether the TSF response is
+					as noted in the TSS and whether the state can be confirmed. If the response and
+					state are as documented, the test is a ‘Pass’, otherwise, the test is a ‘Fail’.
+				</Tests>
+			</aactivity>
+		</f-element>
+	</f-component>
+</section>
+
     </sec:SFRs>
 	
 	
