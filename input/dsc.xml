@@ -5786,7 +5786,7 @@ users of the same system.
 				<h:li>Configure authorization policies for TOE resources
 				<selectables linebreak="yes">
 					<selectable>update TOE firmware and pre-installed SDOs</selectable>
-					<selectable>unlock access to SDO following excessive failed authorization attempts</selctable>
+					<selectable>unlock access to SDO following excessive failed authorization attempts</selectable>
 					<selectable>no other functions</selectable>
 				</selectables></h:li></h:ul>.
 			</title>
@@ -5801,7 +5801,7 @@ users of the same system.
 				vendor so chooses. One could say that the authorized update binds the attributes present in the
 				functionality of the firmware to the pre-installed SDEs.<h:p/>
 			</note>
-			<aactvitity>
+			<aactivity>
 				<TSS>
 					The evaluator shall verify that the TSS describes all management functions.
 				</TSS>
@@ -5859,7 +5859,6 @@ users of the same system.
 				<Tests>
 					Testing for this component is performed through evaluation of FMT_MOF_EXT.1.
 				</Tests>
-				
 			</aactivity>
 		</f-element>
 	</f-component>
