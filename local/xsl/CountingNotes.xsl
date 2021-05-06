@@ -13,10 +13,11 @@
   <!-- ############### -->
   <!--     INCLUDES     -->
   <!-- ############### -->
-  <xsl:import href="../../transforms/xsl/pp2html.xsl"/>
+  <xsl:import href="../../transforms/xsl/module2html.xsl"/>
 
 
   <xsl:template name="handle-note-header">
+    <xsl:message>IN HEADER</xsl:message>
     <span class="note-header">
       <xsl:variable name="prefix"><xsl:choose>
         <xsl:when test="../cc:a-element[@type='D']">Developer</xsl:when>                    
