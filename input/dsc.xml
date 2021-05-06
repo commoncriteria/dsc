@@ -5788,7 +5788,7 @@ users of the same system.
 					<selectable>update TOE firmware and pre-installed SDOs</selectable>
 					<selectable>unlock access to SDO following excessive failed authorization attempts</selectable>
 					<selectable>no other functions</selectable>
-				</selectables></h:li></h:ul>.
+				</selectables></h:li></h:ul></h:i>.
 			</title>
 			<note role="application">
 				If FDP_MFW_EXT.1 selects <h:u>mutable firmware</h:u>, then FMT_SMF.1 must select 
@@ -5959,7 +5959,7 @@ users of the same system.
 				<selectables>
 					<selectable>modification</selectable>
 					<selectable>no other actions</selectable>
-				</selectable> when it is transmitted between separate parts of the TOE.
+				</selectables> when it is transmitted between separate parts of the TOE.
 			</title>
 			<aactivity>
 				<TSS>
