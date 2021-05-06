@@ -4394,6 +4394,7 @@ users of the same system.
 				<Guidance>
 					The evaluator shall ensure that the operational guidance describes how to configure
 					validity-stamping on the TOE.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -4529,6 +4530,7 @@ users of the same system.
 					The evaluator shall examine the operational guidance and verify that it identifies
 					the pre-installed SDOs that are reverted to their initial values when a factory reset
 					has been performed.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -4790,6 +4792,7 @@ users of the same system.
 					information for interpreting them. For example, if multiple measurements are taken,
 					what those measurements are and how changes to those values relate to changes in
 					the device state.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -4841,6 +4844,7 @@ users of the same system.
 			</TSS>
 			<Guidance>
 				There are no guidance activities for this component.
+			</Guidance>
 			<KMD>
 				There are no KMD evaluation activities for this component.
 			</KMD>
@@ -5233,6 +5237,7 @@ users of the same system.
 						The evaluator shall examine the guidance to ensure that it describes the method by
 						which an administrator unlocks access to an SDO following a lockout that results
 						from excessive authentication failures.
+					</Guidance>
 					<KMD>
 						There are no KMD evaluation activities for this component.
 					</KMD>
@@ -5929,6 +5934,7 @@ users of the same system.
 				<Guidance>
 					For each failure state, the evaluator shall examine the operational guidance to verify
 					that it describes what actions should be taken to attempt to resolve the failure state.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -6423,6 +6429,7 @@ users of the same system.
 				</TSS>
 				<Guidance>
 					There are no AGD evaluation activities for this component.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -6694,6 +6701,7 @@ users of the same system.
 				</TSS>
 				<Guidance>
 					There are no AGD evaluation activities for this component.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -6762,6 +6770,7 @@ users of the same system.
 				</TSS>
 				<Guidance>
 					There are no AGD evaluation activities for this component.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -6820,6 +6829,7 @@ users of the same system.
 				</TSS>
 				<Guidance>
 					There are no AGD evaluation activities for this component.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -6868,6 +6878,7 @@ users of the same system.
 				</TSS>
 				<Guidance>
 					There are no AGD evaluation activities for this component.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
@@ -6901,6 +6912,7 @@ users of the same system.
 				</TSS>
 				<Guidance>
 					There are no AGD evaluation activities for this component.
+				</Guidance>
 				<KMD>
 					There are no KMD evaluation activities for this component.
 				</KMD>
