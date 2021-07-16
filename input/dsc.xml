@@ -52,14 +52,16 @@
    </include-pkg>	
 
 
-  <sec:Introduction title="PP introduction">
-  
+  <sec:Introduction title="Introduction">
+
+	  <!--
 	<section title="PP Reference Identification">
 		PP Reference: collaborative Protection Profile for Dedicated Security Component<h:p/>
 		PP Version: 1.0<h:p/>
 		PP Date: September 10, 2020<h:p/>
 	</section>
-	
+	-->
+	  
     <section title="TOE Overview" id="ppoverview">
       
     	 The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this
@@ -302,18 +304,12 @@
 	
     <tech-terms>
       <term abbr='AES' full="Advanced Encryption Standard"/>
-      <term abbr='API' full="Application Programming Interface"/>
-      <term full="Address Space Layout Randomization" abbr="ASLR">
-	An anti-exploitation feature which loads memory mappings into unpredictable
-	locations. ASLR makes it more difficult for an attacker to redirect control to code
-	that they have introduced into the address space of a process.
+      <term full="Access">
+	In the context of SDOs, access to an SDO represents the list of actions permissible with an SDO, including its generation, use,
+	modification, propagation, and destruction.
       </term>
       <term full="Administrator">
-	An administrator is responsible for management activities, including setting policies that are 
-	applied by the enterprise on the operating system.
-	This administrator could be acting remotely through a management server, from which the system
-	receives configuration policies.
-	An administrator can enforce settings on the system which cannot be overridden by non-administrator users.
+	A type of user that has special privileges to manage the TSF.
       </term>
       <term full="Application" abbr="app">
 	Software that runs on a platform and performs tasks on behalf of the user
@@ -324,6 +320,29 @@
 	that allows an application to make use of services provided by another software
 	component, such as a library. APIs are often provided for a set of libraries included
 	with the platform.
+      </term>
+      <term full="Attestation">
+	The process of presenting verifiable evidence describing those characteristics that affect integrity. Examples of these characteristics
+	are boot firmware and boot critical data which, combined, describe the way the DSC booted. [SA]
+      </term>
+      <term full="Attributes">
+	Indications of characteristics or properties of the SDEs bound in an SDO.
+      </term>
+      <term full="Authorization Value">
+	Critical data bound to an action by itself or to action on a subject. Such data, when presented to the TOE, authorizes the action by itself
+	or authorizes the action on or with the subject respectively.
+      </term>
+      <term full="Authorization Data">
+	Collective term for authentication tokens and authorization values.
+      </term>
+      <term full="Authentication Token">
+	Critical data bound to a user. Such data, when presented to the TOE
+	and successfully verified by it, authenticates the user. The TOE may
+	use the successful authentication of a user as an authorization to
+	execute an action on its behalf.
+      </term>
+      <term full="Authenticator">
+	A shortened name for Authentication Token.
       </term>
       <term abbr='CESG' full="Communications-Electronics Security Group"/>
       <term abbr='CMC' full="Certificate Management over CMS"/>
