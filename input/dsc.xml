@@ -60,12 +60,245 @@
 		PP Date: September 10, 2020<h:p/>
 	</section>
 	
-    <section title="Overview" id="ppoverview">
+    <section title="TOE Overview" id="ppoverview">
       
-      The scope of this Protection Profile (PP) is to
-      describe the security functionality of QQQQ products in terms of <xref g='CC'/>
-      and to define functional and assurance requirements for such products.
-      </section>
+    	 The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this
+	cPP, a DSC is the combination of a hardware component and its controlling firmware. The
+	firmware should be dedicated to providing the encompassing platform with services for the
+	provisioning, protection, and use of Security Data Objects (SDOs), which include keys, identities,
+	attributes, and other types of Security Data Elements (SDEs). See Figure 1 for an example of a
+	TOE representation.<h:p/>
+	    
+	<!-- Insert Figure 1 here: Representation of the Target of Evaluation (TOE) -->
+	    
+	The TOE should be one or more discrete and embedded hardware components that provide wellscoped security functions that are physically inaccessible directly from the rich operating system.
+	The DSC TOE would consist of isolated firmware and circuitry capable of executing well-defined
+	commands against SDEs/SDOs in memory and across restricted interfaces.<h:p/>  
+	    
+	Examples of a DSC that could claim conformance to this cPP include Secure Elements (SE),
+	Trusted Platform Modules (TPM), Hardware Security Modules (HSM), Trusted Execution
+	Environments (TEE), and Secure Enclave Processors (SEP). In some cases, vendors have already
+	integrated these dedicated hardware components into a System on Chip (SoC) and as such are
+	isolated components of a larger physical package. Figure 2 below shows a block diagram of a
+	typical example of a DSC TOE with all of its internal components. <h:p/>
+	    
+	<!-- Insert Figure 2 here: Example of TOE Internal Components -->
+	    
+	<section title="Security Data Objects" id="sec-sdo">
+		<!-- Insert Figure 3 here: Composition of an SDO -->
+		An SDO is created by combining SDEs with some attributes. Each SDE used to create the SDO
+		reaches the DSC in one of the following ways:<h:ul>
+			<h:li>By parsing SDEs received via secure channels (see O.PARSE_PROTECTION).</h:li>
+			<h:li>By generating the SDEs locally on the DSC as part of the Provisioning service.</h:li>
+		</h:ul>
+		An SDO may include one or more SDEs from one or both of these sources. In the Provisioning
+		step, the relevant SDEs are then bound together with a set of attributes resulting in an SDO.
+		Explicit binding occurs when the DSC includes one or more SDEs along with their attributes in a
+		formatted structure to form the SDO. An X.509 certificate is just one example of an SDO (where
+		the signature in the certificate provides the binding of the attributes contained). A DSC protects
+		the integrity of an SDO with one of the following methods:<h:ul>
+			<h:li>Hash or keyed hash (FCS_COP.1/Hash, FCS_COP.1/HMAC)</h:li>
+			<h:li>Digital signature (FCS_COP.1/SigGen, FCS_COP.1/SigVer)</h:li>
+		</h:ul>
+		Explicit binding may also occur when the DSC wraps an SDO prior to storing it externally. Figure
+		3 shows an example SDO with binding data used to secure an arbitrary number of SDEs.<h:p/>
+		Implicit binding may occur by virtue of the location of SDEs within the DSC. An implicit binding
+		may occur for pre-installed SDEs, in which case the DSC restricts the functionality it allows with
+		the SDEs. It may also occur when the contents of certain protected storage locations carry with
+		them implicit attributes simply by existing in these locations. <h:p/>
+		Vendors may pre-install keys and other material in the DSC during the manufacturing process, or
+		the DSC may automatically generate keys or other material upon first boot. Since the user (an
+		administrator or client application acting on behalf of a human user) provides no input to these
+		items, the cPP calls these pre-installed SDEs. Pre-installed SDEs have two distinguishing
+		characteristics: <h:ul>
+			<h:li>These keys may persist over a factory reset; and </h:li>
+			<h:li>They may not be accessible to administrators. </h:li>
+		</h:ul>
+		If the SDOs have been erased (e.g. due to a tamper response), then a factory reset may not be
+		possible. Following an initial boot (e.g. first boot by end-user, or following a factory reset), a DSC
+		may generate SDEs unique to an instance of a DSC that are persisted across user sessions. These
+		are considered to be pre-installed SDEs. <h:p/>
+		Pre-installed SDOs (i.e., SDEs with implicit binding installed by the vendor at manufacturing time)
+		are typically not accessible by non-administrative users of the platform (i.e., client applications)
+		and are reserved for use by the DSC itself to manage its sub-components, keys, and, indirectly,
+		user content. Pre-installed SDOs typically have implicitly bound attributes. Since pre-installed
+		SDOs rarely, if ever, leave the DSC, they may have no formal structure containing attributes. That
+		does not mean these attributes do not exist; only that there exists no structure in which one would
+		find them all in one place.<h:p/>
+		The DSC may allow the modification of attributes for pre-installed SDOs. One example would be
+		the authorization value necessary to use the SDO. Obviously, the vendor may have a strong desire
+		to keep the users of the DSC from changing the SDE itself, or deleting it. They could allow
+		administrators to hide the SDO, but not delete it for the sake of factory resets.<h:p/>
+		Another case of implicit binding occurs when a DSC reserves a bank of user-accessible registers
+		with common attributes. The bank contains one or more registers, usually all of the same size.
+		Again, the functionality within the firmware determines the attributes especially when the function
+		applies only to one or more members of the bank of reserved registers. Without the benefit of a
+		structure with explicit attributes, the DSC relies on the firmware to enforce the policies inherent
+		to the attributes associated with a bank of registers; for example, the DSC firmware implicitly
+		binds the common attributes to the bank of registers.<h:p/>
+		An SDO held in the DSC may be exported (propagated) only if it is either in a wrapped form (i.e.
+		with confidentiality and integrity of the SDO protected by a cryptographic key-based operation),
+		or if it is transmitted over a secure channel (protecting confidentiality, integrity and optionally
+		authenticity of the receiving endpoint). <h:p/>
+	    </section>
+	    <section title="Services" id="sec-services">
+		    <!-- Insert Figire 4 here: Services Provided by the TOE -->
+		    The labels in Figure 4 refer to the following:<h:ul>
+		    <h:li>SDE: Security Data Element</h:li>
+		    <h:li>SDO ID: Unique identifier for an SDO</h:li>
+		    <h:li>SDO1: SDO that is modified or is a reference to original SDO</h:li>
+		    <h:li>SDO2: SDO that is bound to the DSC but stored outside of it</h:li>
+		    </h:ul>
+		    DSCs provide seven core security services to a platform as illustrated in Table 1. <h:p/>
+		    <h:b><ctr ctr-type='Table' id="t-core-services">: Core Security Services</ctr></h:b><h:br/>							
+			<h:table>
+				<h:tr class="header"><h:td>Service</h:td><h:td>Description</h:td></h:tr>
+
+				<h:tr><h:td>Parse</h:td>
+				<h:td>The DSC shall ingest pre-provisioned keys, credentials, tokens, attributes, etc. from trusted
+				components or services external to its boundary either across a secured channel or in a manner
+				that the objects are protected for use only by the DSC.</h:td></h:tr>
+								
+				<h:tr><h:td>Provision</h:td>
+				<h:td>The DSC shall create SDOs from parsed or generated SDEs and attributes using binding
+				mechanisms to apply integrity protection to the SDEs together with their attributes.</h:td></h:tr>
+
+				<h:tr><h:td>Protect</h:td>
+				<h:td>The DSC shall manage protected storage for all SDOs. Platform users (through client
+				applications) can store SDOs either inside or outside the DSC boundary. A DSC shall maintain
+				the integrity and confidentiality (if required) of SDOs both inside the boundary and stored
+				outside the boundary.</h:td></h:tr>
+
+				<h:tr><h:td>Process</h:td>	
+				<h:td>The DSC shall modify and use SDOs or their attributes on behalf of authorized entities. The
+				Process service shall coordinate with the Protect service for storage of the SDOs while not in use
+				and shall collaborate with the Prove service to authenticate the requesting entity and validate
+				their authorization for access to the SDO in the requested mode. The Process service shall
+				submit an SDO to the Purge service when it is no longer needed by the platform.</h:td></h:tr>
+
+				<h:tr><h:td>Prove</h:td>
+				<h:td>The DSC may attest to a remote entity that the DSC is currently in a specific state. During this
+				process, the DSC shall use the appropriate attributes or authentication tokens (such as nonces,
+				digital signatures, etc.) to enable the remote entity to verify the authenticity of the source of the
+				evidence.</h:td></h:tr>
+
+				<h:tr><h:td>Purge</h:td>
+				<h:td>When the platform no longer needs an SDO, the DSC shall execute a mechanism for destroying
+				the SDO by permanently removing it from the DSC to protect against unauthorized recovery.</h:td></h:tr>
+
+				<h:tr><h:td>Propagate</h:td>
+				<h:td>If an SDO is required by or allowed to be used by a remote peer, the DSC shall ensure that the
+				SDO is exported only as a protected object or is transmitted over a trusted channel.</h:td></h:tr>
+			</h:table>
+	    </section>
+	    <section title="Roots of Trust" id="sec-rot">
+		    This collaborative Protection Profile (cPP) assumes a DSC will contain one Root of Trust (RoT)
+			that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs,
+			including a unique identity bound to the hardware. The firmware code may be immutable, or it
+			may be mutable but with controlled, authenticated, and authorized updates allowed. This code may
+			provide one or more RoT services, such as a RoT for Measurement, Verification, or Reporting.
+			The unique identity bound to the hardware should be immutable and third parties should be able
+			to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique
+			identity may be a credential signed by the manufacturer).
+	    </section>
+	    <section title="DSC Characteristics" id="sec-dsc-char">
+		    The security functional requirements rely on the following characteristics of the DSC:<h:ul>
+			    <h:li>Users<h:li>
+			    <h:li>Subjects<h:li>
+			    <h:li>Objects<h:li>
+			    <h:li>Security Attributes<h:li>
+			    <h:li>Operations<h:li></h:ul>
+		    Users: The entities using the DSC will be client applications on the platform. They may be acting
+			as proxies for users or may have identities of their own. The DSC will not be able to distinguish
+			the difference; therefore, the cPP will recognize an entity known as the Client Application (CA),
+			as the user presenting authentication tokens and authorization values (collectively known as
+			authorization data) to the DSC for the purposes of identity verification and authorization to
+			perform operations. Section 2.4.1 discusses the concept of users in more detail. This cPP also
+			recognizes a special user called the administrator, which typically has access to DSC objects
+			normally denied to CAs (see definition of objects below).<h:p/>
+			Subjects: The following list contains the fundamental actors in the expected operational use cases
+			of the DSC. The first three are active actors, while the fourth is usually passive but could be active.<h:ul>
+				    <h:li>S.DSC – DSC with security attribute DSC.ID, which is the identity of the DSC</h:li>
+				    <h:li>S.Admin – Admin (an authorized administrator with special privileges) security attribute
+					    Admin.ID – See section 2.4.1 for more discussion on Admin.</h:li>
+				    <h:li>S.CA – CA (i.e. an authorized user or an application with a verifiable identity) with security
+					    attribute CA.ID – See section 2.4.1 for more discussion on users.</h:li>
+				    <h:li>S.EPS – External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination,
+					in the case of data imported and exported for the sole use inside the DSC). In the case of a
+					passive EPS, the DSC will properly protect the integrity and confidentiality of the objects
+					it stores and retrieves from there. In the case of an active EPS with security attribute
+					EPS.ID, the DSC and EPS may choose to create a secure channel through which they will
+					    pass objects back and forth.</h:li></h:ul>
+			Objects: The following list contains objects the DSC expects to use during the expected operational
+			use cases.<h:ul>
+				    <h:li>OB.P_SDO – Pre-provisioned SDOs (e.g. DSC.ID) with security attributes listed in the
+					    next paragraph.</h:li>
+					<h:li>OB.T_SDO – Transient SDOs or just SDOs (i.e. SDOs in the DSC currently, but are either
+					ephemeral or are normally stored external to DSC when not in use) with security attributes
+					listed in the next paragraphs. See sections 2.4.2, 2.4.4, and 2.4.6 for more discussion on
+					keys, which are the primary use cases for SDOs.</h:li>
+					<h:li>OB.AuthData – Authorization Data (including authentication data, e.g. PINs, passwords,
+					tokens) </h:li>
+					<h:li>OB.Pstate – Platform State (e.g. measurements and assertions)</h:li>
+					<h:li>OB.FAACntr – Failed Authorization Attempt Counters</h:li>
+					<h:li>OB.AntiReplay – Anti-replay tokens (e.g. counters, nonces, etc.)</h:li>
+					<h:li>OB.Context – Session Context (The DSC may maintain one or more sessions with a CA
+					involving one or more of SDOs, Authorization Data, Platform State, Failed Authorization
+					Counters, and Anti-Replay Tokens. The DSC may represent internally the state of these
+					objects at any given time in a Session Context) – See section 2.4.3 for more discussion on
+						sessions.</h:li></h:ul>
+			Security Attributes: The following list contains the minimum security attributes for a DSC.
+			Individual DSCs may implement additional security attributes beyond this (whether they are
+			additional standalone attributes or additional attributes that are associated with SDOs); the ST
+			author is expected to identify these.<h:ul>
+				    <h:li>DSC.ID – The DSC identifier. It may also serve as the identifier for the DSC RoT.</h:li>
+				    <h:li>CA.ID – The Client Application identifier</h:li>
+				    <h:li>EPS.ID – The External Platform Storage (EPS) identifier. This attribute is optional for a
+					passive EPS (i.e. plain memory that only stores information). If the DSC uses a Client
+					    Application to manage storage, then support for this attribute is required.</h:li>
+				    <h:li>SDO.* – The SDO Security Attributes:<h:ul>
+					    <h:li>SDO.ID – SDO Identifier</h:li>
+					    <h:li>SDO.Type – SDO Type</h:li>
+					    <h:li>SDO.AuthData – SDO Reference authorization data</h:li>
+					    <h:li>SDO.Reauth – SDO re-authorization conditions</h:li>
+					    <h:li>SDO.Conf – SDO Confidential SDE list</h:li>
+					    <h:li>SDO.Export – SDO export flag</h:li>
+					    <h:li>SDO.Integrity – SDO integrity protection data</h:li>
+					    <h:li>SDO.Bind – SDO binding data</h:li></h:ul></h:li></h:ul>
+			Operations: The following list contains the expected operations of a DSC.<h:ul>
+				    <h:li>OP.Import (See Parse) – The DSC may receive SDOs, SDEs, Authorization Data, Platform
+					State, Anti-Replay Tokens or Session Contexts from the CA or the EPS. The Admin may
+					    also give the DSC Authorization Data.</h:li>
+				<h:li>OP.Create (See Provision) – The DSC may create SDOs, SDEs, Authorization Data,
+					Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or
+					Admin.</h:li>
+				<h:li>OP.Use (See Process) – The DSC may use or perform a cryptographic operation on
+					PreProvisioned SDOs, Transient SDOs, SDEs, Authorization Data, Platform State, 
+					AntiReplay Tokens, or Session Contexts with Create authorization from a CA or 
+					Admin. Cryptographic operations may include encryption, decryption, hashing, signature
+					generation, and signature verification.	</h:li>
+				    <h:li>OP.Modify (See Process) – The DSC may modify SDOs, SDEs, Authorization Data,
+					Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or
+					    Admin.</h:li>
+				<h:li>OP.Attest (See Prove) – The DSC may create an attestation of Platform State using an SDO
+					or Pre-Provisioned SDO and Anti-Replay Tokens as authorized by a CA or Admin
+					respectively. </h:li>
+				    <h:li>OP.Store (See Protect) – The DSC may store SDOs, SDEs, Authorization Data, Platform
+					State, Anti-Replay Tokens, or Session Contexts in protected storage of the DSC. See
+					    section 2.4.5 for more discussion on protected storage.</h:li>
+				<h:li>OP.Export (See Propagate) – The DSC may export SDOs, SDEs, Authorization Data,
+				Platform State, or Anti-Replay Tokens to a CA or EPS with the proper authorization from
+				the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in
+				such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store,
+				export, or destroy them. The DSC may export Session Contexts only to an EPS binding it
+					in the same way as above.</h:li>
+				<h:li>OP.Destroy (See Purge) – The DSC may purge SDOs, SDEs, Authorization Data, Platform
+				State, Anti-Replay Tokens, or Session Contexts in protected storage with proper
+					authorization from the owner of each object.</h:li></h:ul>
+		    </section> <!-- DSC Characteristics -->
+	    </section> <!-- Security Data Objects -->
+		
+    </section>
 	
     <tech-terms>
       <term abbr='AES' full="Advanced Encryption Standard"/>
