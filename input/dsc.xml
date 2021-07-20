@@ -400,10 +400,9 @@
 				    </section> <!-- Roles -->
 			
 		
-    </section> <!-- Key Reference Model -->
-							
+	    </section> <!-- Key Reference Model -->
+	  </section> <!-- Overview -->						
 		
-    </section>
 	
     <tech-terms>
       <term abbr='AES' full="Advanced Encryption Standard"/>
@@ -561,29 +560,8 @@
       <term abbr='XCCDF' full="eXtensible Configuration Checklist Description Format"/>
       <term abbr='XOR' full="Exclusive Or"/>
     </tech-terms>    
-    <section title="Compliant Targets of Evaluation" id="TOEdescription">
-      <section title="TOE Boundary" id="TOEboundary">
-        <figure entity="images/Toe.png" title="General TOE " id="toe"/>
-      </section>
-      <section title="TOE Platform" id="TOEplatform">
-      </section>
-    </section>
-    <section title="Use Cases" id="usecases">Requirements in this Protection Profile are designed to
-      address the security problems in at least the following use cases. These use cases are intentionally
-      very broad, as many specific use cases exist for an operating system. These use cases may also
-      overlap with one another.  An operating system's functionality may even be effectively extended by
-      privileged applications installed onto it.  However, these are out of scope of this PP. 
-      <usecases>
-	  
-	  
-      <usecase title="Elephant-own device" id="elephant">
-        <description>This is everything we need to describe in words about this use case.</description>	
-	  <config>
-	  </config>
-      </usecase>
-      </usecases>
-    </section>
-  </sec:Introduction>
+
+</sec:Introduction>
 
   <sec:cclaims title="Conformance Claims"/>
   <sec:spd title="Security Problem Description">The security problem is described in terms
