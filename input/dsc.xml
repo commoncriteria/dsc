@@ -299,6 +299,109 @@
 					authorization from the owner of each object.</h:li></h:ul>
 		    </section> <!-- DSC Characteristics -->
 	    </section> <!-- Security Data Objects -->
+	
+	<section title="TOE Use Cases" id="sec-usecases">
+		DSCs are used in platforms to support mobile commerce, to manage platform credentials, manage
+		user access to sensitive resources such as enterprise data centers or entertainment content servers,
+		to manage and protect data-in-transit such as through secure channels or VPN tunnels, and to
+		manage and protect keying, authentication, and authorization material for data-at-rest solutions
+		such as self-encrypting drives.<h:p/>
+		For the mobile commerce use case, users, merchants, and financial institutions expect and require
+		that financial transactions between them and their platforms be trusted and secure. For example, <h:ul>
+		<h:li>All peers to a transaction must be able to authenticate each other.</h:li>
+		<h:li>The integrity of the transaction must be ensured.</h:li></h:ul>
+		To support such transactions, a DSC performs the following: <h:ul>
+		<h:li>Ingests data elements and attributes and exports the data objects associated with these
+			transactions and the identities of the parties</h:li>
+		<h:li>Generates data objects to use for these transactions.</h:li>
+		<h:li>Securely stores data elements bound with their attributes within a protected hardware
+			boundary.</h:li>
+		<h:li>Authenticates and processes these data elements within a protected execution environment
+			to ensure the authenticity of the parties and the transactions.</h:li>
+		<h:li>Establishes secure communications channels between the parties to ensure the integrity and
+			confidentiality of the transactions.</h:li>
+		<h:li>Securely erases data objects when no longer needed.</h:li>
+		<h:li>Ensures its own integrity and authenticity prior to execution.</h:li></h:ul>
+		DSCs are implemented to satisfy the following use cases:<h:p/>
+		<usecases>
+			<usecase title="[USE CASE 1] Protected Key Store" id="uc-keystore">
+				<description>
+					A platform leveraging DSCs as a hardware-secured Private Key Store facilitates the use of
+					secure and protected storage of secret symmetric keys and private asymmetric keys for access
+					to data and services. These DSCs would provide safe use of the private and secret keys inside
+					the protected hardware boundary.
+				</description>
+			</usecase>
+			<usecase title="[USE CASE 2] User / Platform Authentication to Enterprise Managed Resources"
+				 id="uc-platform-auth">
+				<description>
+					A platform leveraging DSCs for a hardware-secured ID facilitates the use of the platform as a
+					secure and reliable form of authentication for authorized access to highly sensitive local or
+					remote data and services.
+				</description>
+			</usecase>
+			<usecase title="[USE CASE 3] Mobile Commerce" id="uc-mobile-cmrce">
+				<description>
+					A platform that uses DSCs facilitates secure storage and protected use of credentials for
+					financial transactions between trusted and authorized users, platforms, merchants and financial
+					institutions. These DSCs would provide safe use of the credentials inside the protected
+					hardware boundary. The use of certified hardware-isolated credential stores on smart platforms
+					and only unlocking their use with authenticated authorization provides confidence that the
+					transaction was indeed authorized by the approved ‘platform holder’.
+				</description>
+			</usecase>
+		</usecases>
+	    </section>	<!-- TOE Use Cases -->
+	<section title="Key Reference Model" id="sec-keyrefmod">
+		The Key Reference Model abstraction draws inspiration from several different DSC products. The
+		products distinguish themselves from one another in the types of keys supported, how they are
+		protected, the types of applications supported, the number of layers of key, and the number of keys
+		at each layer.</h:p>
+		The following paragraphs describe the relationships between elements of the DSC.<h:p/>
+		<section title="Roles" id="sec-roles">
+			There are two main roles that come into play with any platform, including the DSC. These are
+			administrator and client applications. The DSC is often a component within a larger system or
+			platform that is referred to as a platform from this point forward. Often the platform supports
+			different roles as well. At times, these roles may coincide with the roles supported in the DSC,
+			even on purpose. <h:p/>
+			The administrator may, among other things, accept responsibility for providing timely updates to
+			the DSC, both feature updates and security updates. It may also be responsible for managing the
+			pre-installed SDOs and the initial configuration of the DSC. Different administrators may have
+			different authorities to manage the TSF; for example, one administrator may be responsible for
+			controlling firmware updates while another may take an active part in managing the contents of
+			the DSC installed post-manufacture.<h:p/>
+			An administrator may manage the contents of the DSC, including user content. A DSC
+			administrator is not necessarily the owner of a given SDO. Although the DSC administrator may
+			possibly own one or more SDOs, not all SDOs allow a DSC administrator direct control of it. In
+			some cases, a DSC administrator may also be in a position to grant or deny another administrator
+			access to what it perceives as their content, namely the DSC’s firmware and possibly some keying
+			material belonging to the manufacturer. A DSC manufacturer’s choice of allowing an
+			administrator of the DSC this kind of latitude is a feature of its product.<h:p/>
+			The CA role may also be further divided into multiple users. CAs can include:<h:ul>
+			<h:li>An application vendor acting on its own behalf to update software on the platform.</h:li>
+			<h:li>A content provider controlling access to its content through an application.</h:li>
+			<h:li>A human entity using the platform who has an identity that they use to authenticate
+			themselves to the content provider through a CA.</h:li>
+			<h:li>An original equipment manufacturer (OEM) that designed and manufactured a more
+			complex system with the DSC as a component (assuming that the DSC manufacturer and
+			the manufacturer of the more complex system using the DSC as a component are different
+				entities).</h:li></h:ul>
+			In some cases, the DSC may allow the OEM to provision and manage its own content in the DSC
+			for its own purpose, such as managing their firmware or software installed on the platform. In this
+			case, the OEM is considered to be another CA under the control of the administrator. The role of
+			administrator is not ascribed to the OEM since it likely does not control the manufacturer’s
+			firmware or key material and thus does not control the behavior of the DSC. Nor would the other
+			CAs on the platform tolerate OEM control of their content stored in the DSC. Even so, there should
+			be some separation between the administrator-owner and the other roles of the platform in terms
+			of authorizing use of the contents assigned to each of the roles. For example, administrator-owners
+			may deny access to contents, either temporarily or permanently (e.g., through cryptographic erase).
+			However, they cannot themselves access their contents for their own use or to gain access to things
+			they are not otherwise authorized to access.
+				    </section> <!-- Roles -->
+			
+		
+    </section> <!-- Key Reference Model -->
+							
 		
     </section>
 	
