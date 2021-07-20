@@ -300,7 +300,7 @@
 		    </section> <!-- DSC Characteristics -->
 	    </section> <!-- Security Data Objects -->
 	
-	<section title="TOE Use Cases" id="sec-usecases">
+	<section title="Use Cases" id="usecases">
 		DSCs are used in platforms to support mobile commerce, to manage platform credentials, manage
 		user access to sensitive resources such as enterprise data centers or entertainment content servers,
 		to manage and protect data-in-transit such as through secure channels or VPN tunnels, and to
@@ -356,7 +356,7 @@
 		The Key Reference Model abstraction draws inspiration from several different DSC products. The
 		products distinguish themselves from one another in the types of keys supported, how they are
 		protected, the types of applications supported, the number of layers of key, and the number of keys
-		at each layer.</h:p>
+		at each layer.<h:p/>
 		The following paragraphs describe the relationships between elements of the DSC.<h:p/>
 		<section title="Roles" id="sec-roles">
 			There are two main roles that come into play with any platform, including the DSC. These are
