@@ -205,11 +205,11 @@
 	    </section>
 	    <section title="DSC Characteristics" id="sec-dsc-char">
 		    The security functional requirements rely on the following characteristics of the DSC:<h:ul>
-			    <h:li>Users<h:li>
-			    <h:li>Subjects<h:li>
-			    <h:li>Objects<h:li>
-			    <h:li>Security Attributes<h:li>
-			    <h:li>Operations<h:li></h:ul>
+			    <h:li>Users</h:li>
+			    <h:li>Subjects</h:li>
+			    <h:li>Objects</h:li>
+			    <h:li>Security Attributes</h:li>
+			    <h:li>Operations</h:li></h:ul>
 		    Users: The entities using the DSC will be client applications on the platform. They may be acting
 			as proxies for users or may have identities of their own. The DSC will not be able to distinguish
 			the difference; therefore, the cPP will recognize an entity known as the Client Application (CA),
