@@ -142,7 +142,6 @@
 		with confidentiality and integrity of the SDO protected by a cryptographic key-based operation),
 		or if it is transmitted over a secure channel (protecting confidentiality, integrity and optionally
 		authenticity of the receiving endpoint). <h:p/>
-	    </section>
 	    <section title="Services" id="sec-services">
 		    <!-- Insert Figire 4 here: Services Provided by the TOE -->
 		    The labels in Figure 4 refer to the following:<h:ul>
